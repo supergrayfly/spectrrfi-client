@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spectrr Finance [TEST]</title>
+    <link rel="icon" type="image/x-icon" href="./assets/pics/gost.png" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./css/pico-master/css/pico.slim.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./css/index.scss" />
+    <script type="module" src="./js/index.js" defer="defer"></script>
+  </head>
+  <body>
+    <div
+      id="overlay"
+      style="
+        background: #000;
+        opacity: 0.5;
+        position: fixed;
+        z-index: 1;
+        display: none;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      "
+    ></div>
+    <div id="prompt-box-confirm">
+      <div id="prompt-box-confirm-content"></div>
+      <div>
+        <button class="secondary" type="button" id="prompt-box-confirm-btn">
+          Confirm
+        </button>
+        <button class="secondary" type="button" id="prompt-box-cancel-btn">
+          Cancel
+        </button>
+      </div>
+    </div>
+    <div id="prompt-box-response">
+      <div id="prompt-box-response-content" style="padding: 25px"></div>
+      <button
+        class="secondary"
+        type="button"
+        id="prompt-box-response-close-btn"
+      >
+        Close
+      </button>
+    </div>
+    <header
+      class="container"
+      style="display: grid; grid-template-rows: 50% 50% 50%"
+    >
+      <section
+        style="
+          display: grid;
+          grid-template-columns: 20% 20% 20% 20% 20%;
+          column-gap: 10px;
+          margin-bottom: 0px;
+        "
+      >
+        <button class="secondary" id="goto-home">Home</button>
+        <button class="secondary" id="goto-browse">Browse</button>
+        <button class="secondary" id="goto-create">Create/Cancel</button>
+        <button class="secondary" id="goto-accept">Accept/Forfeit</button>
+        <button class="secondary" id="goto-repay">Repay/Add Collateral</button>
+      </section>
+      <section
+        style="
+          display: grid;
+          grid-template-columns: 20% 20% 20% 20% 20%;
+          column-gap: 10px;
+          margin-bottom: 0px;
+        "
+      >
+        <button class="secondary" id="goto-liquidate">Liquidate</button>
+        <button class="secondary" id="goto-dashboard">Dashboard</button>
+        <button class="secondary" id="goto-change-addr">Change Address</button>
+        <button class="secondary" id="goto-approve">Approve</button>
+        <button class="contrast">Guide</button>
+      </section>
+      <section
+        class="container"
+        id="wallet"
+        style="display: flex; gap: 10px; margin-bottom: 0px"
+      >
+        <button class="primary" id="connect-wallet">Connect Wallet</button>
+        <!--
+        <button class="primary" id="switch-network-mumbai">
+          Switch Network
+        </button>
+				-->
+        <button id="connect-ftm-opera">Fantom Opera</button>
+        <button id="connect-mumbai-testnet">Mumbai Testnet</button>
+      </section>
+    </header>
+    <section class="container">
+      <ul id="info">
+        <li>Wallet: <a id="info-wallet"></a></li>
+        <li>RPC Status: <a id="info-rpc-status"></a></li>
+        <li>Network: <a id="info-network"></a></li>
+      </ul>
+      <ul id="prices">
+        <li>FTM: <a></a>$</li>
+        <li>BTC: <a></a>$</li>
+        <li>ETH: <a></a>$</li>
+        <li>USDT: <a></a>$</li>
+      </ul>
+    </section>
+    <main class="container">
+      <div id="home" style="display: none">
+        <figure>
+          <table role="grid">
+            <caption>
+              Latest Created Sale Offers
+            </caption>
+            <thead>
+              <tr>
+                <th>Offer Id</th>
+                <th>Selling</th>
+                <th>For</th>
+                <th>Repay In</th>
+                <th>Status</th>
+                <th>Collateralization Ratio</th>
+                <th>Liquidable</th>
+                <th>Exchange Rate</th>
+              </tr>
+            </thead>
+            <tbody id="home-offers-sale"></tbody>
+          </table>
+        </figure>
+        <figure>
+          <table role="grid">
+            <caption>
+              Latest Created Buy Offers
+            </caption>
+            <thead>
+              <tr>
+                <th>Offer Id</th>
+                <th>Buying</th>
+                <th>For</th>
+                <th>Repay In</th>
+                <th>Status</th>
+                <th>Collateralization Ratio</th>
+                <th>Liquidable</th>
+                <th>Exchange Rate</th>
+              </tr>
+            </thead>
+            <tbody id="home-offers-buy"></tbody>
+          </table>
+        </figure>
+      </div>
+      <div id="browse" style="display: none">
+        <section
+          id="browse-offer-type-switch"
+          class="switch-offer-type"
+          style="display: flex; gap: 10px; margin-bottom: 0px"
+        >
+          <button id="browse-switch-sale-offer-btn" class="contrast">
+            Sale Offers
+          </button>
+          <button id="browse-switch-buy-offer-btn" class="contrast">
+            Buy Offers
+          </button>
+        </section>
+        <section class="container" id="browse-offers-sale">
+          <figure>
+            <table role="grid">
+              <caption>
+                Latest Created Sale Offers
+              </caption>
+              <thead>
+                <tr>
+                  <th>Offer Id</th>
+                  <th>Selling</th>
+                  <th>For</th>
+                  <th>Repay In</th>
+                  <th>Status</th>
+                  <th>Collateralization Ratio</th>
+                  <th>Liquidable</th>
+                  <th>Exchange Rate</th>
+                </tr>
+              </thead>
+              <tbody id="browse-offers-sale-tbl"></tbody>
+            </table>
+            <section
+              class="container offers-table-nav"
+              style="display: flex; gap: 10px; margin-bottom: 0px"
+              id="nav-browse-offers-sale"
+            >
+              <button class="secondary">Previous</button>
+              <button class="secondary">Next</button>
+            </section>
+          </figure>
+        </section>
+        <section class="container" id="browse-offers-buy" style="display: none">
+          <figure>
+            <table role="grid">
+              <caption>
+                Latest Created Buy Offers
+              </caption>
+              <thead>
+                <tr>
+                  <th>Offer Id</th>
+                  <th>Buying</th>
+                  <th>For</th>
+                  <th>Repay In</th>
+                  <th>Status</th>
+                  <th>Collateralization Ratio</th>
+                  <th>Liquidable</th>
+                  <th>Exchange Rate</th>
+                </tr>
+              </thead>
+              <tbody id="browse-offers-buy-tbl"></tbody>
+            </table>
+            <section
+              class="container offers-table-nav"
+              style="display: flex; gap: 10px; margin-bottom: 0px"
+              id="nav-browse-offers-buy"
+            >
+              <button class="secondary">Previous</button>
+              <button class="secondary">Next</button>
+            </section>
+          </figure>
+        </section>
+      </div>
+      <div id="create">
+        <article class="container applet">
+          <section style="display: flex; gap: 10px; margin-bottom: 0px">
+            <button class="secondary">Create Sale Offer</button>
+            <button class="secondary">Create Buy Offer</button>
+          </section>
+          <div id="applet-create-sale">
+            <section class="divide-two">
+              <input type="text" placeholder="Selling Amount" />
+              <input type="text" placeholder="Token" />
+            </section>
+            <section class="divide-two">
+              <input type="text" placeholder="Selling For" />
+              <input type="text" placeholder="Token" />
+            </section>
+            <section class="divide-two">
+              <input type="text" placeholder="Repaying In" />
+              <input type="text" placeholder="Time Format" />
+            </section>
+            <button type="button" class="contrast">Create</button>
+          </div>
+          <div id="applet-create-buy" style="display: none">
+            <section class="divide-two">
+              <input type="text" placeholder="Buying Amount" />
+              <input type="text" placeholder="Token" />
+            </section>
+            <section class="divide-two">
+              <input type="text" placeholder="Buying For" />
+              <input type="text" placeholder="Token" />
+            </section>
+            <input type="text" placeholder="Collateral" />
+            <section class="divide-two">
+              <input type="text" placeholder="Repaying In" />
+              <input type="text" placeholder="Time Format" />
+            </section>
+            <button type="button" class="contrast">Create</button>
+          </div>
+        </article>
+      </div>
+      <div id="accept" style="display: none">
+        <article class="container applet">
+          <section style="display: flex; gap: 10px; margin-bottom: 0px">
+            <button class="secondary">Accept Sale Offer</button>
+            <button class="secondary">Accept Buy Offer</button>
+          </section>
+          <div id="applet-accept-sale">
+            <section class="divide-two">
+              <input type="text" placeholder="Offer Id" />
+              <input type="text" placeholder="Collateral" />
+            </section>
+            <button type="button" class="contrast">Accept</button>
+          </div>
+        </article>
+        <article class="container applet">
+          <div id="applet-accept-buy">
+            <input type="text" placeholder="Offer Id" />
+            <button type="button" class="contrast">Accept</button>
+          </div>
+        </article>
+      </div>
+      <div id="repay" style="display: none"></div>
+      <div id="liquidate" style="display: none">
+        <section
+          id="liquidate-offer-type-switch"
+          class="switch-offer-type"
+          style="display: flex; gap: 10px; margin-bottom: 0px"
+        >
+          <button id="liquidate-switch-sale-offer-btn" class="contrast">
+            Sale Offers
+          </button>
+          <button id="liquidate-switch-buy-offer-btn" class="contrast">
+            Buy Offers
+          </button>
+        </section>
+        <section class="container" id="liquidate-offers-sale">
+          <figure>
+            <table role="grid">
+              <caption>
+                Latest Accepted Sale Offers
+              </caption>
+              <thead>
+                <tr>
+                  <th>Offer Id</th>
+                  <th>Selling</th>
+                  <th>For</th>
+                  <th>Repay In</th>
+                  <th>Status</th>
+                  <th>Collateralization Ratio</th>
+                  <th>Liquidable</th>
+                  <th>Exchange Rate</th>
+                </tr>
+              </thead>
+              <tbody id="liquidate-offers-sale-tbl"></tbody>
+            </table>
+            <section
+              class="container offers-table-nav"
+              style="display: flex; gap: 10px; margin-bottom: 0px"
+              id="nav-liquidate-offers-sale"
+            >
+              <button class="secondary">Previous</button>
+              <button class="secondary">Next</button>
+            </section>
+          </figure>
+        </section>
+        <section
+          class="container"
+          id="liquidate-offers-buy"
+          style="display: none"
+        >
+          <figure>
+            <table role="grid">
+              <caption>
+                Latest Accepted Buy Offers
+              </caption>
+              <thead>
+                <tr>
+                  <th>Offer Id</th>
+                  <th>Buying</th>
+                  <th>For</th>
+                  <th>Repay In</th>
+                  <th>Status</th>
+                  <th>Collateralization Ratio</th>
+                  <th>Liquidable</th>
+                  <th>Exchange Rate</th>
+                </tr>
+              </thead>
+              <tbody id="liquidate-offers-buy-tbl"></tbody>
+            </table>
+            <section
+              class="container offers-table-nav"
+              style="display: flex; gap: 10px; margin-bottom: 0px"
+              id="nav-liquidate-offers-buy"
+            >
+              <button class="secondary">Previous</button>
+              <button class="secondary">Next</button>
+            </section>
+          </figure>
+        </section>
+      </div>
+      <div id="dashboard" style="display: none">
+        <section
+          id="dashboard-offer-type-switch"
+          class="switch-offer-type"
+          style="display: flex; gap: 10px; margin-bottom: 0px"
+        >
+          <button id="dashboard-switch-sale-offer-btn" class="contrast">
+            Sale Offers
+          </button>
+          <button id="dashboard-switch-buy-offer-btn" class="contrast">
+            Buy Offers
+          </button>
+        </section>
+        <section
+          id="dashboard-toggle-offer-type-sale"
+          style="display: flex; gap: 10px; margin-bottom: 0px"
+        >
+          <button
+            id="dashboard-switch-posted-offers-sale"
+            style="width: 20%"
+            class="secondary"
+          >
+            Posted Offers
+          </button>
+          <button
+            id="dashboard-switch-accepted-offers-sale"
+            style="width: 20%"
+            class="secondary"
+          >
+            Accepted Offers
+          </button>
+        </section>
+        <section
+          id="dashboard-toggle-offer-type-buy"
+          style="display: none; gap: 10px; margin-bottom: 0px"
+        >
+          <button
+            id="dashboard-switch-posted-offers-buy"
+            style="width: 20%"
+            class="secondary"
+          >
+            Posted Offers
+          </button>
+          <button
+            id="dashboard-switch-accepted-offers-buy"
+            style="width: 20%"
+            class="secondary"
+          >
+            Accepted Offers
+          </button>
+        </section>
+        <section class="container" id="dashboard-offers-sale">
+          <figure>
+            <table role="grid">
+              <caption>
+                Latest Posted Sale Offers
+              </caption>
+              <thead>
+                <tr>
+                  <th>Offer Id</th>
+                  <th>Selling</th>
+                  <th>For</th>
+                  <th>Repay In</th>
+                  <th>Status</th>
+                  <th>Collateralization Ratio</th>
+                  <th>Liquidable</th>
+                  <th>Exchange Rate</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-offers-posted-tbl-sale"></tbody>
+            </table>
+            <section
+              class="container offers-table-nav"
+              style="display: flex; gap: 10px; margin-bottom: 0px"
+              id="nav-posted-offers-sale"
+            >
+              <button class="secondary">Previous</button>
+              <button class="secondary">Next</button>
+            </section>
+          </figure>
+          <figure style="display: none">
+            <table role="grid">
+              <caption>
+                Latest Accepted Sale Offers
+              </caption>
+              <thead>
+                <tr>
+                  <th>Offer Id</th>
+                  <th>Selling</th>
+                  <th>For</th>
+                  <th>Repay In</th>
+                  <th>Status</th>
+                  <th>Collateralization Ratio</th>
+                  <th>Liquidable</th>
+                  <th>Exchange Rate</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-offers-accepted-tbl-sale"></tbody>
+            </table>
+            <section
+              class="container offers-table-nav"
+              style="display: flex; gap: 10px; margin-bottom: 0px"
+              id="nav-accepted-offers-sale"
+            >
+              <button class="secondary">Previous</button>
+              <button class="secondary">Next</button>
+            </section>
+          </figure>
+        </section>
+        <section
+          class="container"
+          id="dashboard-offers-buy"
+          style="display: none"
+        >
+          <figure>
+            <table role="grid">
+              <caption>
+                Latest Posted Buy Offers
+              </caption>
+              <thead>
+                <tr>
+                  <th>Offer Id</th>
+                  <th>Buying</th>
+                  <th>For</th>
+                  <th>Repay In</th>
+                  <th>Status</th>
+                  <th>Collateralization Ratio</th>
+                  <th>Liquidable</th>
+                  <th>Exchange Rate</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-offers-posted-tbl-buy"></tbody>
+            </table>
+            <section
+              class="container offers-table-nav"
+              style="display: flex; gap: 10px; margin-bottom: 0px"
+              id="nav-posted-offers-buy"
+            >
+              <button class="secondary">Previous</button>
+              <button class="secondary">Next</button>
+            </section>
+          </figure>
+          <figure style="display: none">
+            <table role="grid">
+              <caption>
+                Latest Accepted Buy Offers
+              </caption>
+              <thead>
+                <tr>
+                  <th>Offer Id</th>
+                  <th>Selling</th>
+                  <th>For</th>
+                  <th>Repay In</th>
+                  <th>Status</th>
+                  <th>Collateralization Ratio</th>
+                  <th>Liquidable</th>
+                  <th>Exchange Rate</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-offers-accepted-tbl-buy"></tbody>
+            </table>
+            <section
+              class="container offers-table-nav"
+              style="display: flex; gap: 10px; margin-bottom: 0px"
+              id="nav-accepted-offers-buy"
+            >
+              <button class="secondary">Previous</button>
+              <button class="secondary">Next</button>
+            </section>
+          </figure>
+        </section>
+      </div>
+      <div id="change-addr" style="display: none"></div>
+      <div id="approve" style="display: none"></div>
+    </main>
+    <footer class="container">
+      <small>
+        <a>Website Source Code</a>
+        <a>|</a>
+        <a>Smart Contracts Source Code</a>
+        <a>|</a>
+        <a>Copyright &copy; Supergrayfly</a>
+      </small>
+    </footer>
+  </body>
+</html>

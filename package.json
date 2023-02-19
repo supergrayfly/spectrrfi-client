@@ -1,0 +1,35 @@
+{
+  "name": "spectrrfi-client",
+  "version": "0.0.2",
+  "description": "Spectrr Finance web client",
+  "scripts": {
+    "server": "node ./server.js",
+    "pretty": "prettier --write src/*",
+    "parcel": "parcel src/index.html",
+    "build": "echo -n '' > src/js/index.js && cat src/js/modules/data.js src/js/modules/router.js src/js/modules/init.js src/js/modules/query_subgraph.js src/js/modules/dApp.js src/js/modules/dApp-utils.js src/js/modules/utils.js src/js/modules/prompt.js >> src/js/index.js && parcel build ./src/index.html --reporter @parcel/reporter-bundle-analyzer --log-level warn --no-source-maps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/spectrrfi/client.git"
+  },
+  "author": "Supergrayfly",
+  "license": "BSD-3-Clause-Attribution",
+  "bugs": {
+    "url": "https://gitlab.com/spectrrfi/client/issues"
+  },
+  "homepage": "https://gitlab.com/spectrrfi/client#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@parcel/reporter-bundle-analyzer": "^2.8.3",
+    "@parcel/transformer-sass": "^2.8.3",
+    "axios": "^1.2.4",
+    "buffer": "^5.7.1",
+    "ethers": "^5.7.2",
+    "markdown-styles": "^3.2.0",
+    "parcel": "^2.8.3",
+    "prettier": "^2.8.3",
+    "process": "^0.11.10"
+  }
+}
