@@ -3,5 +3,5 @@ node_modules
 # dist
 parcel-bundle-reports
 .parcel-cache
-# TODO
+TODO.txt
 
