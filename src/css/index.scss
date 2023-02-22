@@ -1,6 +1,16 @@
+@media (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+}
+
 @media (min-width: 1200px) {
   .actions-dropdown {
     position: absolute;
+  }
+
+  .container {
+    max-width: 1250px;
   }
 }
 
@@ -17,6 +27,10 @@ td {
   padding: calc(var(--spacing) / 3) var(--spacing);
 }
 
+table {
+  font-family: "Courier New", Courier, monospace;
+}
+
 :not(thead, tfoot) > * > td {
   --font-size: 0.85rem;
 }
@@ -25,14 +39,27 @@ aside {
   display: grid;
   grid-template-rows: 50% 50%;
 
-  & section {
+  & section,
+  & ul {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     column-gap: 10px;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
   }
 
-  & > section > button {
-    line-height: 1px;
+  & > ul > li > button {
+    margin-bottom: 0;
+  }
+}
+
+.apps {
+  display: flex;
+  justify-content: center;
+
+  & > div {
+    width: 900px;
   }
 }
 
@@ -206,7 +233,6 @@ input:invalid {
   column-gap: 10px;
   margin-bottom: 0px;
   grid-template-columns: 50% 50%;
-  padding: 10px;
 }
 
 .applet {
@@ -253,7 +279,8 @@ input:invalid {
   height: 100%;
   display: grid;
   grid-template-rows: 50% 50%;
-  background-color: #596b78;
+  background-color: var(--contrast);
+  font-family: "Courier New", Courier, monospace;
 }
 
 .token-dropdown {
@@ -287,6 +314,7 @@ input:invalid {
   display: grid;
   grid-template-columns: 50% 50%;
   align-items: center;
+  padding: 5px;
 
   & img {
     height: 25px;
@@ -302,6 +330,7 @@ input:invalid {
 
   & img {
     width: 18px;
+    height: 20px;
   }
 }
 
@@ -312,9 +341,7 @@ input:invalid {
   column-gap: 10px;
 
   & a {
-    display: flex;
     text-align: center;
-    width: 100%;
     text-decoration: none;
   }
 

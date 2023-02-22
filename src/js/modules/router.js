@@ -275,7 +275,7 @@ gotoHomeBtn.addEventListener("click", async () => {
 });
 
 gotoOffersBtn.addEventListener("click", async () => {
-  displaySection(create, "25% auto", 1);
+  displaySection(create, "100px 700px", 1);
 
   document.querySelectorAll(".offer-actions").forEach((item) => {
     item.classList.remove("contrast");

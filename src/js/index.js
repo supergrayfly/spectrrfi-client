@@ -554,7 +554,7 @@ gotoHomeBtn.addEventListener("click", async () => {
 });
 
 gotoOffersBtn.addEventListener("click", async () => {
-  displaySection(create, "25% auto", 1);
+  displaySection(create, "100px 700px", 1);
 
   document.querySelectorAll(".offer-actions").forEach((item) => {
     item.classList.remove("contrast");
@@ -1380,7 +1380,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           "0px 0px 3px 3px #f4f4f4";
       }
     } else {
-      createResponsePrompt("Unlock or Connect Wallet To Use Spectrr Finance!");
+      createResponsePrompt(
+        "Unlock or Connect Your Wallet To Use Spectrr Finance!"
+      );
       document.getElementById("connect-wallet").style.zIndex = "2";
       document.getElementById("connect-wallet").style.boxShadow =
         "0px 0px 3px 3px #f4f4f4";
@@ -1592,6 +1594,9 @@ function appendOffersSaleHomeToHTML(
   actionsMarkup,
   appendTo
 ) {
+  let marketRate = getExchangeRate(offerAmountId, offerAmountForId);
+  let rateDiff = getRateDiff(toEther(offerExchangeRate), marketRate)[0];
+
   document
     .getElementById(`${appendTo}`)
     .insertAdjacentHTML(
@@ -1620,6 +1625,7 @@ function appendOffersSaleHomeToHTML(
         tokenIdToName(offerAmountForId) +
         "/" +
         tokenIdToName(offerAmountId) +
+        ` (${rateDiff})` +
         `</td><td>${actionsMarkup}</td></tr>`
     );
 }
@@ -1637,6 +1643,9 @@ function appendOffersBuyHomeToHTML(
   actionsMarkup,
   appendTo
 ) {
+  let marketRate = getExchangeRate(offerAmountId, offerAmountForId);
+  let rateDiff = getRateDiff(toEther(offerExchangeRate), marketRate)[0];
+
   document
     .getElementById(`${appendTo}`)
     .insertAdjacentHTML(
@@ -1672,6 +1681,7 @@ function appendOffersBuyHomeToHTML(
         tokenIdToName(offerAmountForId) +
         "/" +
         tokenIdToName(offerAmountId) +
+        ` (${rateDiff})` +
         `</td><td>${actionsMarkup}</td></tr>`
     );
 }
@@ -1751,6 +1761,9 @@ function appendOffersToHTML(
   actionsMarkup,
   appendTo
 ) {
+  let marketRate = getExchangeRate(offerAmountId, offerAmountForId);
+  let rateDiff = getRateDiff(toEther(offerExchangeRate), marketRate)[0];
+
   const collateralRatioMarkup =
     offerCollateralId != null
       ? `<a>(<img src='${tokenIdToLogo(
@@ -1795,6 +1808,7 @@ function appendOffersToHTML(
         tokenIdToName(offerAmountForId) +
         "/" +
         tokenIdToName(offerAmountId) +
+        ` (${rateDiff})` +
         `</td><td>${actionsMarkup}</td></tr>`
     );
 }
@@ -1965,20 +1979,33 @@ document
         ).toString();
       }
 
-      if ((await checkAllowance(sellingId, sellingAmount)) == false) {
+      if (sellingId == sellForId) {
+        createResponsePrompt(
+          "Selling and Selling For token can not be the same..."
+        );
+        return;
+      }
+
+      let fee = getFee(sellingAmount);
+
+      if (
+        (await checkBalance(sellingId, Number(sellingAmount) + fee)) == false
+      ) {
+        createResponsePrompt(
+          `Insufficient balance for ${tokenIdToName(sellingAmount)}`
+        );
+        return;
+      }
+
+      if (
+        (await checkAllowance(sellingId, Number(sellingAmount) + fee)) == false
+      ) {
         await approveAllowance(
           sellingId,
           "",
           `Insufficient allowance for ${tokenIdToName(
             sellingId
           )}, please approve following transaction to continue...`
-        );
-        return;
-      }
-
-      if (sellingId == sellForId) {
-        createResponsePrompt(
-          "Selling and Selling For token can not be the same..."
         );
         return;
       }
@@ -2005,9 +2032,7 @@ document
         )} ${tokenIdToName(sellForId)}/${tokenIdToName(sellingId)}</p>
         <p>Rate ${rateDiff[0]} ${rateDiff[1]} market</p>
 			  <p>---------------------------------</p>
-		    <p>Fee: ${formatAmount(getFee(sellingAmount))} ${tokenIdToName(
-        sellingId
-      )}</p>
+		    <p>Fee: ${formatAmount(fee)} ${tokenIdToName(sellingId)}</p>
 		`;
 
       if (
@@ -2084,17 +2109,6 @@ document
         ).toString();
       }
 
-      if ((await checkAllowance(collateralId, collateralAmount)) == false) {
-        await approveAllowance(
-          collateralId,
-          "",
-          `Insufficient allowance for ${tokenIdToName(
-            collateralId
-          )}, please approve following transaction to continue...`
-        );
-        return;
-      }
-
       if (buyingId == buyForId) {
         createResponsePrompt(
           "Buying and Buying For token can not be the same..."
@@ -2105,6 +2119,28 @@ document
       if (buyingId == collateralId) {
         createResponsePrompt(
           "Buying and Collateral token can not be the same..."
+        );
+        return;
+      }
+
+      let fee = getFee(collateralAmount);
+
+      if ((await checkBalance(collateralId, collateralAmount + fee)) == false) {
+        createResponsePrompt(
+          `Insufficient balance for ${tokenIdToName(collateralId)}`
+        );
+        return;
+      }
+
+      if (
+        (await checkAllowance(collateralId, collateralAmount + fee)) == false
+      ) {
+        await approveAllowance(
+          collateralId,
+          "",
+          `Insufficient allowance for ${tokenIdToName(
+            collateralId
+          )}, please approve following transaction to continue...`
         );
         return;
       }
@@ -2135,9 +2171,7 @@ document
       )}/${tokenIdToName(buyingId)}</p>
       <p>Rate ${rateDiff[0]} ${rateDiff[1]} market</p>
 			<p>---------------------------------</p>
-		  <p>Fee: ${formatAmount(getFee(collateralAmount))} ${tokenIdToName(
-        collateralId
-      )}</p>
+		  <p>Fee: ${formatAmount(fee)} ${tokenIdToName(collateralId)}</p>
 		`;
 
       if (
@@ -2196,16 +2230,16 @@ document
           return;
         }
 
-        if (collateralId == offer.sellingId) {
+        if (offer.seller == sender) {
           createResponsePrompt(
-            "Collateral and Selling token can not be the same..."
+            `You are the seller of sale offer #${offerId}...`
           );
           return;
         }
 
-        if (offer.seller == sender) {
+        if (collateralId == offer.sellingId) {
           createResponsePrompt(
-            `You are the seller of sale offer #${offerId}...`
+            "Collateral and Selling token can not be the same..."
           );
           return;
         }
@@ -2216,7 +2250,20 @@ document
           collateralId
         );
 
-        if ((await checkAllowance(collateralId, collateralAmount)) == false) {
+        let fee = getFee(collateralAmount);
+
+        if (
+          (await checkBalance(collateralId, collateralAmount + fee)) == false
+        ) {
+          createResponsePrompt(
+            `Insufficient balance for ${tokenIdToName(collateralId)}`
+          );
+          return;
+        }
+
+        if (
+          (await checkAllowance(collateralId, collateralAmount + fee)) == false
+        ) {
           await approveAllowance(
             collateralId,
             "",
@@ -2264,9 +2311,7 @@ document
         <p>Rate ${rateDiff[0]} ${rateDiff[1]} market</p>        
 		    <p>Seller: ${formatAddress(offer.seller)}</p>
 			  <p>---------------------------------</p>
-		    <p>Fee: ${formatAmount(getFee(collateralAmount))} ${tokenIdToName(
-          collateralId
-        )}</p>
+		    <p>Fee: ${formatAmount(fee)} ${tokenIdToName(collateralId)}</p>
 		  `;
       } else if (offer == false) {
         createResponsePrompt(`<p>Sale Offer #${offerId} does not exist</p>`);
@@ -2322,8 +2367,25 @@ document
           return;
         }
 
+        let fee = getFee(toEther(offer.buying));
+
         if (
-          (await checkAllowance(offer.buyingId, toEther(offer.buying))) == false
+          (await checkBalance(
+            offer.buyingId,
+            Number(toEther(offer.buying)) + fee
+          )) == false
+        ) {
+          createResponsePrompt(
+            `Insufficient balance for ${tokenIdToName(offer.buyingId)}`
+          );
+          return;
+        }
+
+        if (
+          (await checkAllowance(
+            offer.buyingId,
+            Number(toEther(offer.buying)) + fee
+          )) == false
         ) {
           await approveAllowance(
             offer.buyingId,
@@ -2371,9 +2433,7 @@ document
         <p>Rate ${rateDiff[0]} ${rateDiff[1]} market</p>		    
 		    <p>Buyer: ${formatAddress(offer.buyer)}</p>
 				<p>---------------------------------</p>
-		    <p>Fee: ${formatAmount(getFee(toEther(offer.buying)))} ${tokenIdToName(
-          offer.buyingId
-        )}</p>
+		    <p>Fee: ${formatAmount(fee)} ${tokenIdToName(offer.buyingId)}</p>
 		  `;
       } else if (offer == false) {
         createResponsePrompt(`<p>Buy Offer #${offerId} does not exist</p>`);
@@ -2636,17 +2696,26 @@ document
           return;
         }
 
+        let ratio = Number(
+          getRatio(
+            toEther(offer.collateral),
+            offer.collateralId,
+            toEther(offer.sellFor),
+            offer.sellForId
+          )
+        ).toPrecision(4);
+
+        if (ratio < 1) {
+          createResponsePrompt(
+            "Collateral to debt ratio is below 1%, this trnsaction will incur a loss to the seller...aborting"
+          );
+          return;
+        }
+
         markup = `
 					<p>Forfeiting Sale Offer: #${offer.id}</p>
 					<p>---------------------------------</p>
-		      <p>Collateral Ratio: ${Number(
-            getRatio(
-              toEther(offer.collateral),
-              offer.collateralId,
-              toEther(offer.sellFor),
-              offer.sellForId
-            )
-          ).toPrecision(4)}%</p>
+		      <p>Collateral Ratio: ${ratio}%</p>
 		      <p>Repayment In: ${getOfferRepayDeadline(
             offer.timeAccepted,
             offer.repayInSec
@@ -2720,17 +2789,26 @@ document
           return;
         }
 
+        let ratio = Number(
+          getRatio(
+            toEther(offer.collateral),
+            offer.collateralId,
+            toEther(offer.buyFor),
+            offer.buyForId
+          )
+        ).toPrecision(4);
+
+        if (ratio < 1) {
+          createResponsePrompt(
+            "Collateral to debt ratio is below 1%, this trnsaction will incur a loss to the seller...aborting"
+          );
+          return;
+        }
+
         markup = `
 					<p>Forfeiting Buy Offer: #${offer.id}</p>
 					<p>---------------------------------</p>
-		      <p>Collateral Ratio: ${Number(
-            getRatio(
-              toEther(offer.collateral),
-              offer.collateralId,
-              toEther(offer.buyFor),
-              offer.buyForId
-            )
-          ).toPrecision(4)}%</p>
+		      <p>Collateral Ratio: ${ratio}%</p>
 		      <p>Repayment In: ${getOfferRepayDeadline(
             offer.timeAccepted,
             offer.repayInSec
@@ -2789,7 +2867,6 @@ document
       let sender = await getSenderAddr();
       let offer = await getSaleOfferInfo(offerId);
       let markup;
-      let repayData;
 
       const getRepayData = (_repayAmount, offerSellFor) => {
         if (_repayAmount == "") {
@@ -2820,18 +2897,7 @@ document
           return;
         }
 
-        repayData = getRepayData(repayAmount, offer.sellFor);
-
-        if ((await checkAllowance(offer.sellForId, offer.sellFor)) == false) {
-          await approveAllowance(
-            offer.sellForId,
-            "",
-            `Insufficient allowance for ${tokenIdToName(
-              offer.sellForId
-            )}, please approve following transaction to continue...`
-          );
-          return;
-        }
+        let repayData = getRepayData(repayAmount, offer.sellFor);
 
         markup = `
 		      <p>Repaying Sale Offer: #${offer.id}</p>
@@ -2866,6 +2932,24 @@ document
 		      <p>Seller: ${formatAddress(offer.seller)}</p>
 		      <p>Buyer: ${formatAddress(offer.buyer)}</p>
         `;
+
+        if ((await checkBalance(offer.sellForId, repayData[0])) == false) {
+          createResponsePrompt(
+            `Insufficient balance for ${tokenIdToName(offer.sellForId)}`
+          );
+          return;
+        }
+
+        if ((await checkAllowance(offer.sellForId, repayData[0])) == false) {
+          await approveAllowance(
+            offer.sellForId,
+            "",
+            `Insufficient allowance for ${tokenIdToName(
+              offer.sellForId
+            )}, please approve following transaction to continue...`
+          );
+          return;
+        }
       } else if (offer == false) {
         createResponsePrompt(`<p>Sale Offer #${offerId} does not exist</p>`);
         return;
@@ -2920,7 +3004,7 @@ document
           if (offerBuyFor == "") {
             return [offerBuyFor, "(Full Amount)"];
           } else {
-            return [toEther(offerBuyFor), "(Full Amount)e"];
+            return [toEther(offerBuyFor), "(Full Amount)"];
           }
         } else {
           return [_repayAmount, ""];
@@ -2943,17 +3027,6 @@ document
         }
 
         repayData = getRepayData(repayAmount, offer.buyFor);
-
-        if ((await checkAllowance(offer.buyForId, offer.buyFor)) == false) {
-          await approveAllowance(
-            offer.buyForId,
-            "",
-            `Insufficient allowance for ${tokenIdToName(
-              offer.buyForId
-            )}, please approve following transaction to continue...`
-          );
-          return;
-        }
 
         markup = `
 		      <p>Repaying Buy Offer: #${offer.id}</p>
@@ -2986,6 +3059,23 @@ document
 		      <p>Buyer: ${formatAddress(offer.buyer)}</p>
 		      <p>Seller: ${formatAddress(offer.seller)}</p>
         `;
+        if ((await checkBalance(offer.buyForId, repayData[0])) == false) {
+          createResponsePrompt(
+            `Insufficient balance for ${tokenIdToName(offer.buyForId)}`
+          );
+          return;
+        }
+
+        if ((await checkAllowance(offer.buyForId, repayData[0])) == false) {
+          await approveAllowance(
+            offer.buyForId,
+            "",
+            `Insufficient allowance for ${tokenIdToName(
+              offer.buyForId
+            )}, please approve following transaction to continue...`
+          );
+          return;
+        }
       } else if (offer == false) {
         createResponsePrompt(`<p>Buy Offer #${offerId} does not exist</p>`);
         return;
@@ -3049,6 +3139,13 @@ document
         if (sender != offer.buyer) {
           createResponsePrompt(
             `You are not the buyer of sale offer #${offerId}`
+          );
+          return;
+        }
+
+        if ((await checkBalance(offer.collateralId, amountAdd)) == false) {
+          createResponsePrompt(
+            `Insufficient balance for ${tokenIdToName(offer.collateralId)}`
           );
           return;
         }
@@ -3117,7 +3214,6 @@ document
     			<p>Amount Adding: ${amountAdd}</p>
     		`;
       }
-
       if (
         (await addCollateralSaleOffer(markup, offerId, toWei(amountAdd))) ==
         true
@@ -3161,6 +3257,13 @@ document
         if (sender != offer.buyer) {
           createResponsePrompt(
             `You are not the buyer of buy offer #${offerId}`
+          );
+          return;
+        }
+
+        if ((await checkBalance(offer.collateralId, amountAdd)) == false) {
+          createResponsePrompt(
+            `Insufficient balance for ${tokenIdToName(offer.collateralId)}`
           );
           return;
         }
@@ -3458,7 +3561,19 @@ document
         }
 
         if (((await getSenderAddr()) == offer.seller) == false) {
-          if ((await checkAllowance(offer.sellForId, offer.sellFor)) == false) {
+          if (
+            (await getBalance(offer.sellForId, toEther(offer.sellFor))) == false
+          ) {
+            createResponsePrompt(
+              `Insufficient balance for ${tokenIdToName(offer.sellForId)}`
+            );
+            return;
+          }
+
+          if (
+            (await checkAllowance(offer.sellForId, toEther(offer.sellFor))) ==
+            false
+          ) {
             await approveAllowance(
               offer.sellForId,
               "",
@@ -3576,7 +3691,19 @@ document
         }
 
         if (((await getSenderAddr()) == offer.seller) == false) {
-          if ((await checkAllowance(offer.buyForId, offer.buyFor)) == false) {
+          if (
+            (await getBalance(offer.buyForId, toEther(offer.buyFor))) == false
+          ) {
+            createResponsePrompt(
+              `Insufficient balance for ${tokenIdToName(offer.buyForId)}`
+            );
+            return;
+          }
+
+          if (
+            (await checkAllowance(offer.buyForId, toEther(offer.buyFor))) ==
+            false
+          ) {
             await approveAllowance(
               offer.buyForId,
               "",
@@ -3945,7 +4072,14 @@ async function checkAllowance(tokenId, amount) {
     return;
   }
 
-	let allowance = await ((tokenIdToContract(tokenId)).allowance(await getSenderAddr(), addrSpectrr));
+  amount = amount == "" ? 1000000 : amount;
+
+  let allowance = toEther(
+    await tokenIdToContract(tokenId).allowance(
+      await getSenderAddr(),
+      addrSpectrr
+    )
+  );
 
   if (amount > allowance) {
     return false;
@@ -3958,14 +4092,16 @@ async function checkBalance(tokenId, amount) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
-	
-	let balance = await ((tokenIdToContract(tokenId)).balanceOf(await getSenderAddr()));
 
-	if (amount > balance) {
-		return false;
-	} else {
-		return true;
-	}
+  let balance = toEther(
+    await tokenIdToContract(tokenId).balanceOf(await getSenderAddr())
+  );
+
+  if (amount > balance) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 async function handleTx(markup, fn, args) {
@@ -4383,9 +4519,9 @@ function getRateDiff(rate1, rate2) {
   let diff = ((rate1 - rate2) / rate1) * 100;
 
   if (diff > 0) {
-    return [`+${formatAmount(diff)}%`, "above"];
+    return [`+${formatAmount(diff.toPrecision(3))}%`, "above"];
   } else {
-    return [`${formatAmount(diff)}%`, "below"];
+    return [`${formatAmount(diff.toPrecision(3))}%`, "below"];
   }
 }
 

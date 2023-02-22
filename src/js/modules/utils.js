@@ -326,9 +326,9 @@ function getRateDiff(rate1, rate2) {
   let diff = ((rate1 - rate2) / rate1) * 100;
 
   if (diff > 0) {
-    return [`+${formatAmount(diff)}%`, "above"];
+    return [`+${formatAmount(diff.toPrecision(3))}%`, "above"];
   } else {
-    return [`${formatAmount(diff)}%`, "below"];
+    return [`${formatAmount(diff.toPrecision(3))}%`, "below"];
   }
 }
 

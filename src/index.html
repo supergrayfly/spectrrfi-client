@@ -138,32 +138,88 @@
         display: grid;
         grid-template-rows: 100%;
         padding-top: 0;
-        min-height: 600px;
+        min-height: 650px;
       "
     >
       <aside style="display: none">
-        <section style="margin-bottom: 0">
-          <button id="goto-create" class="offer-actions contrast">
-            Create
-          </button>
-          <button id="goto-accept" class="offer-actions">Accept</button>
-          <button id="goto-repay" class="offer-actions">Repay</button>
-          <button id="goto-liquidate-applet" class="offer-actions">
-            Liquidate
-          </button>
-        </section>
-        <section style="margin-bottom: 0">
-          <button id="goto-cancel" class="offer-actions">Cancel</button>
-          <button id="goto-forfeit" class="offer-actions">Forfeit</button>
-          <button id="goto-add-collateral" class="offer-actions">
-            Add Collateral
-          </button>
-          <button id="goto-change-addr" class="offer-actions">
-            Change Address
-          </button>
-        </section>
+        <ul>
+          <li>
+            <button
+              id="goto-create"
+              class="offer-actions contrast"
+              data-tooltip="Sell and Buy tokens"
+            >
+              Create
+            </button>
+          </li>
+          <li>
+            <button
+              id="goto-accept"
+              class="offer-actions"
+              data-tooltip="Accept an offer"
+            >
+              Accept
+            </button>
+          </li>
+          <li>
+            <button
+              id="goto-repay"
+              class="offer-actions"
+              data-tooltip="Repay your debt"
+            >
+              Repay
+            </button>
+          </li>
+          <li>
+            <button
+              id="goto-liquidate-applet"
+              class="offer-actions"
+              data-tooltip="Liquidate the buyer of an offer"
+            >
+              Liquidate
+            </button>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <button
+              id="goto-cancel"
+              class="offer-actions"
+              data-tooltip="Cancel an offer you created"
+            >
+              Cancel
+            </button>
+          </li>
+          <li>
+            <button
+              id="goto-forfeit"
+              class="offer-actions"
+              data-tooltip="Forfeit an offer you accepted"
+            >
+              Forfeit
+            </button>
+          </li>
+          <li>
+            <button
+              id="goto-add-collateral"
+              class="offer-actions"
+              data-tooltip="Add collateral to avoid liquidation"
+            >
+              Add Collateral
+            </button>
+          </li>
+          <li>
+            <button
+              id="goto-change-addr"
+              class="offer-actions"
+              data-tooltip="Change the address of an offer"
+            >
+              Change Address
+            </button>
+          </li>
+        </ul>
       </aside>
-      <div class="container" style="padding: 10px">
+      <div class="container apps">
         <div id="home">
           <figure>
             <table role="grid">
@@ -194,7 +250,7 @@
                   <th>Buying</th>
                   <th>For</th>
                   <th>Repay In</th>
-                  <th>Collateralization Ratio</th>
+                  <th>Collat/Debt</th>
                   <th>Exchange Rate</th>
                   <th>Actions</th>
                 </tr>
@@ -229,7 +285,7 @@
                     <th>For</th>
                     <th>Repay In</th>
                     <th>Status</th>
-                    <th>Collateralization Ratio</th>
+                    <th>Collat/Debt</th>
                     <th>Liquidable</th>
                     <th>Exchange Rate</th>
                     <th>Actions</th>
@@ -264,7 +320,7 @@
                     <th>For</th>
                     <th>Repay In</th>
                     <th>Status</th>
-                    <th>Collateralization Ratio</th>
+                    <th>Collat/Debt</th>
                     <th>Liquidable</th>
                     <th>Exchange Rate</th>
                     <th>Actions</th>
@@ -283,7 +339,7 @@
             </figure>
           </section>
         </div>
-        <div id="create" style="display: none; height: 500px">
+        <div id="create" style="display: none">
           <article class="container applet">
             <section
               class="toggle-sale-buy"
@@ -311,13 +367,13 @@
                   </summary>
                   <div role="listbox" class="token-dropdown-wrapper">
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/fantom-ftm-logo.svg"
                           class="ftm chain-logo"
                         />wFTM
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/wrapped-bitcoin-wbtc.svg"
                           class="btc"
@@ -325,13 +381,13 @@
                       </button>
                     </div>
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/ethereum-eth-logo.svg"
                           class="eth"
                         />wETH
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/usd-coin-usdc-logo.svg"
                           class="usdt"
@@ -359,13 +415,13 @@
                   </summary>
                   <div role="listbox" class="token-dropdown-wrapper">
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/fantom-ftm-logo.svg"
                           class="ftm chain-logo"
                         />wFTM
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/wrapped-bitcoin-wbtc.svg"
                           class="btc"
@@ -373,13 +429,13 @@
                       </button>
                     </div>
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/ethereum-eth-logo.svg"
                           class="eth"
                         />wETH
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/usd-coin-usdc-logo.svg"
                           class="usdt"
@@ -435,13 +491,13 @@
                   </summary>
                   <div role="listbox" class="token-dropdown-wrapper">
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/fantom-ftm-logo.svg"
                           class="ftm chain-logo"
                         />wFTM
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/wrapped-bitcoin-wbtc.svg"
                           class="btc"
@@ -449,13 +505,13 @@
                       </button>
                     </div>
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/ethereum-eth-logo.svg"
                           class="eth"
                         />wETH
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/usd-coin-usdc-logo.svg"
                           class="usdt"
@@ -483,13 +539,13 @@
                   </summary>
                   <div role="listbox" class="token-dropdown-wrapper">
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/fantom-ftm-logo.svg"
                           class="ftm chain-logo"
                         />wFTM
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/wrapped-bitcoin-wbtc.svg"
                           class="btc"
@@ -497,13 +553,13 @@
                       </button>
                     </div>
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/ethereum-eth-logo.svg"
                           class="eth"
                         />wETH
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/usd-coin-usdc-logo.svg"
                           class="usdt"
@@ -518,24 +574,19 @@
                   aria-haspopup="listbox"
                   role="button"
                   class="secondary token-choice"
-                  style="margin-bottom: 15px"
                   id="create-buy-collateral-id"
                 >
                   Collateral Token
                 </summary>
-                <div
-                  role="listbox"
-                  class="token-dropdown-wrapper"
-                  style="margin-top: -15px"
-                >
+                <div role="listbox" class="token-dropdown-wrapper">
                   <div class="token-dropdown-content">
-                    <button class="secondary token">
+                    <button class="contrast token">
                       <img
                         src="./assets/pics/fantom-ftm-logo.svg"
                         class="ftm chain-logo"
                       />wFTM
                     </button>
-                    <button class="secondary token">
+                    <button class="contrast token">
                       <img
                         src="./assets/pics/wrapped-bitcoin-wbtc.svg"
                         class="btc"
@@ -543,13 +594,13 @@
                     </button>
                   </div>
                   <div class="token-dropdown-content">
-                    <button class="secondary token">
+                    <button class="contrast token">
                       <img
                         src="./assets/pics/ethereum-eth-logo.svg"
                         class="eth"
                       />wETH
                     </button>
-                    <button class="secondary token">
+                    <button class="contrast token">
                       <img
                         src="./assets/pics/usd-coin-usdc-logo.svg"
                         class="usdt"
@@ -581,7 +632,7 @@
             </form>
           </article>
         </div>
-        <div id="cancel" style="display: none; height: 500px">
+        <div id="cancel" style="display: none">
           <article class="container applet">
             <section
               style="display: flex; gap: 10px; margin-bottom: 0px"
@@ -622,7 +673,7 @@
             </form>
           </article>
         </div>
-        <div id="accept" style="display: none; height: 500px">
+        <div id="accept" style="display: none">
           <article class="container applet">
             <section
               class="toggle-sale-buy"
@@ -650,13 +701,13 @@
                   </summary>
                   <div role="listbox" class="token-dropdown-wrapper">
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/fantom-ftm-logo.svg"
                           class="ftm chain-logo"
                         />wFTM
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/wrapped-bitcoin-wbtc.svg"
                           class="btc"
@@ -664,13 +715,13 @@
                       </button>
                     </div>
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/ethereum-eth-logo.svg"
                           class="eth"
                         />wETH
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/usd-coin-usdc-logo.svg"
                           class="usdt"
@@ -697,7 +748,7 @@
             </form>
           </article>
         </div>
-        <div id="repay" style="display: none; height: 500px">
+        <div id="repay" style="display: none">
           <article class="container applet">
             <section
               class="toggle-sale-buy"
@@ -746,7 +797,7 @@
             </form>
           </article>
         </div>
-        <div id="add-collateral" style="display: none; height: 500px">
+        <div id="add-collateral" style="display: none">
           <article class="container applet">
             <section
               class="toggle-sale-buy"
@@ -803,7 +854,7 @@
             </form>
           </article>
         </div>
-        <div id="forfeit" style="display: none; height: 500px">
+        <div id="forfeit" style="display: none">
           <article class="container applet">
             <section
               class="toggle-sale-buy"
@@ -870,7 +921,7 @@
                     <th>For</th>
                     <th>Repay In</th>
                     <th>Status</th>
-                    <th>Collateralization Ratio</th>
+                    <th>Collat/Debt</th>
                     <th>Liquidable</th>
                     <th>Exchange Rate</th>
                     <th>Actions</th>
@@ -905,7 +956,7 @@
                     <th>For</th>
                     <th>Repay In</th>
                     <th>Status</th>
-                    <th>Collateralization Ratio</th>
+                    <th>Collat/Debt</th>
                     <th>Liquidable</th>
                     <th>Exchange Rate</th>
                     <th>Actions</th>
@@ -979,7 +1030,7 @@
             <figure>
               <table role="grid">
                 <caption>
-                  Sale Offers You Posted
+                  My Created Sale Offers
                 </caption>
                 <thead>
                   <tr>
@@ -988,7 +1039,7 @@
                     <th>For</th>
                     <th>Repay In</th>
                     <th>Status</th>
-                    <th>Collateralization Ratio</th>
+                    <th>Collat/Debt</th>
                     <th>Liquidable</th>
                     <th>Exchange Rate</th>
                     <th>Actions</th>
@@ -1008,7 +1059,7 @@
             <figure style="display: none">
               <table role="grid">
                 <caption>
-                  Sale Offers You Accepted
+                  My Accepted Sale Offers
                 </caption>
                 <thead>
                   <tr>
@@ -1017,7 +1068,7 @@
                     <th>For</th>
                     <th>Repay In</th>
                     <th>Status</th>
-                    <th>Collateralization Ratio</th>
+                    <th>Collat/Debt</th>
                     <th>Liquidable</th>
                     <th>Exchange Rate</th>
                     <th>Actions</th>
@@ -1043,7 +1094,7 @@
             <figure>
               <table role="grid">
                 <caption>
-                  Buy Offers You Posted
+                  My Posted Buy Offers
                 </caption>
                 <thead>
                   <tr>
@@ -1052,7 +1103,7 @@
                     <th>For</th>
                     <th>Repay In</th>
                     <th>Status</th>
-                    <th>Collateralization Ratio</th>
+                    <th>Collat/Debt</th>
                     <th>Liquidable</th>
                     <th>Exchange Rate</th>
                     <th>Actions</th>
@@ -1072,7 +1123,7 @@
             <figure style="display: none">
               <table role="grid">
                 <caption>
-                  Buy Offers You Accepted
+                  My Accepted Buy Offers
                 </caption>
                 <thead>
                   <tr>
@@ -1081,7 +1132,7 @@
                     <th>For</th>
                     <th>Repay In</th>
                     <th>Status</th>
-                    <th>Collateralization Ratio</th>
+                    <th>Collat/Debt</th>
                     <th>Liquidable</th>
                     <th>Exchange Rate</th>
                     <th>Actions</th>
@@ -1100,7 +1151,7 @@
             </figure>
           </section>
         </div>
-        <div id="change-addr" style="display: none; height: 500px">
+        <div id="change-addr" style="display: none">
           <article class="container applet">
             <section
               class="toggle-sale-buy"
@@ -1157,7 +1208,7 @@
             </form>
           </article>
         </div>
-        <div id="liquidate-applet" style="display: none; height: 500px">
+        <div id="liquidate-applet" style="display: none">
           <article class="container applet">
             <section
               class="toggle-sale-buy"
@@ -1198,7 +1249,7 @@
             </form>
           </article>
         </div>
-        <div id="approve" style="display: none; height: 500px">
+        <div id="approve" style="display: none">
           <article class="container applet">
             <section
               class="toggle-sale-buy"
@@ -1220,13 +1271,13 @@
                   </summary>
                   <div role="listbox" class="token-dropdown-wrapper">
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/fantom-ftm-logo.svg"
                           class="ftm chain-logo"
                         />wFTM
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/wrapped-bitcoin-wbtc.svg"
                           class="btc"
@@ -1234,13 +1285,13 @@
                       </button>
                     </div>
                     <div class="token-dropdown-content">
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/ethereum-eth-logo.svg"
                           class="eth"
                         />wETH
                       </button>
-                      <button class="secondary token">
+                      <button class="contrast token">
                         <img
                           src="./assets/pics/usd-coin-usdc-logo.svg"
                           class="usdt"
@@ -1270,7 +1321,6 @@
                   aria-haspopup="listbox"
                   role="button"
                   class="secondary token-choice"
-                  style="margin-bottom: 15px"
                   id="revoke-token-id"
                 >
                   Token to Revoke
@@ -1281,13 +1331,13 @@
                   style="margin-top: -15px"
                 >
                   <div class="token-dropdown-content">
-                    <button class="secondary token">
+                    <button class="contrast token">
                       <img
                         src="./assets/pics/fantom-ftm-logo.svg"
                         class="ftm chain-logo"
                       />wFTM
                     </button>
-                    <button class="secondary token">
+                    <button class="contrast token">
                       <img
                         src="./assets/pics/wrapped-bitcoin-wbtc.svg"
                         class="btc"
@@ -1295,13 +1345,13 @@
                     </button>
                   </div>
                   <div class="token-dropdown-content">
-                    <button class="secondary token">
+                    <button class="contrast token">
                       <img
                         src="./assets/pics/ethereum-eth-logo.svg"
                         class="eth"
                       />wETH
                     </button>
-                    <button class="secondary token">
+                    <button class="contrast token">
                       <img
                         src="./assets/pics/usd-coin-usdc-logo.svg"
                         class="usdt"
@@ -1322,13 +1372,13 @@
         </div>
       </div>
     </main>
-    <footer style="border-top: 2px solid #f0f8ff; padding: 10px; height: 90px">
+    <footer style="border-top: 2px solid #f0f8ff; padding: 10px">
       <small>
         <p style="margin-bottom: 0">
           Theme:
-          <a id="dark" class="secondary">Dark</a>
+          <a id="dark" class="secondary" style="cursor: pointer">Dark</a>
           <a class="contrast">|</a>
-          <a id="light" class="secondary">Light</a>
+          <a id="light" class="secondary" style="cursor: pointer">Light</a>
         </p>
         <a
           class="secondary"
@@ -1343,7 +1393,8 @@
           href="https://gitlab.com/spectrrfi/contracts"
           >Smart Contracts Source Code</a
         >
-        <p>&copy; 2023 Supergrayfly</p>
+        <p style="margin-bottom: 0">Contact: supergrayfly@proton.me</p>
+        <p style="margin-bottom: 0">&copy; 2023 Supergrayfly</p>
       </small>
     </footer>
   </body>

@@ -199,6 +199,9 @@ function appendOffersSaleHomeToHTML(
   actionsMarkup,
   appendTo
 ) {
+  let marketRate = getExchangeRate(offerAmountId, offerAmountForId);
+  let rateDiff = getRateDiff(toEther(offerExchangeRate), marketRate)[0];
+
   document
     .getElementById(`${appendTo}`)
     .insertAdjacentHTML(
@@ -227,6 +230,7 @@ function appendOffersSaleHomeToHTML(
         tokenIdToName(offerAmountForId) +
         "/" +
         tokenIdToName(offerAmountId) +
+        ` (${rateDiff})` +
         `</td><td>${actionsMarkup}</td></tr>`
     );
 }
@@ -244,6 +248,9 @@ function appendOffersBuyHomeToHTML(
   actionsMarkup,
   appendTo
 ) {
+  let marketRate = getExchangeRate(offerAmountId, offerAmountForId);
+  let rateDiff = getRateDiff(toEther(offerExchangeRate), marketRate)[0];
+
   document
     .getElementById(`${appendTo}`)
     .insertAdjacentHTML(
@@ -279,6 +286,7 @@ function appendOffersBuyHomeToHTML(
         tokenIdToName(offerAmountForId) +
         "/" +
         tokenIdToName(offerAmountId) +
+        ` (${rateDiff})` +
         `</td><td>${actionsMarkup}</td></tr>`
     );
 }
@@ -358,6 +366,9 @@ function appendOffersToHTML(
   actionsMarkup,
   appendTo
 ) {
+  let marketRate = getExchangeRate(offerAmountId, offerAmountForId);
+  let rateDiff = getRateDiff(toEther(offerExchangeRate), marketRate)[0];
+
   const collateralRatioMarkup =
     offerCollateralId != null
       ? `<a>(<img src='${tokenIdToLogo(
@@ -402,6 +413,7 @@ function appendOffersToHTML(
         tokenIdToName(offerAmountForId) +
         "/" +
         tokenIdToName(offerAmountId) +
+        ` (${rateDiff})` +
         `</td><td>${actionsMarkup}</td></tr>`
     );
 }

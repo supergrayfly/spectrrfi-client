@@ -296,7 +296,14 @@ async function checkAllowance(tokenId, amount) {
     return;
   }
 
-	let allowance = await ((tokenIdToContract(tokenId)).allowance(await getSenderAddr(), addrSpectrr));
+  amount = amount == "" ? 1000000 : amount;
+
+  let allowance = toEther(
+    await tokenIdToContract(tokenId).allowance(
+      await getSenderAddr(),
+      addrSpectrr
+    )
+  );
 
   if (amount > allowance) {
     return false;
@@ -309,14 +316,16 @@ async function checkBalance(tokenId, amount) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
-	
-	let balance = await ((tokenIdToContract(tokenId)).balanceOf(await getSenderAddr()));
 
-	if (amount > balance) {
-		return false;
-	} else {
-		return true;
-	}
+  let balance = toEther(
+    await tokenIdToContract(tokenId).balanceOf(await getSenderAddr())
+  );
+
+  if (amount > balance) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 async function handleTx(markup, fn, args) {

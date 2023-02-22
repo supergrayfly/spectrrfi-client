@@ -56,7 +56,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           "0px 0px 3px 3px #f4f4f4";
       }
     } else {
-      createResponsePrompt("Unlock or Connect Wallet To Use Spectrr Finance!");
+      createResponsePrompt(
+        "Unlock or Connect Your Wallet To Use Spectrr Finance!"
+      );
       document.getElementById("connect-wallet").style.zIndex = "2";
       document.getElementById("connect-wallet").style.boxShadow =
         "0px 0px 3px 3px #f4f4f4";
