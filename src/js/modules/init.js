@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         overlay.setAttribute("aria-busy", "false");
       } else {
         createResponsePrompt(
-          "Spectrr Finance is only supported on the Fantom Opera (Mainnet) and Polygon Mumbai (Testnet) Networks!"
+          "<p>Spectrr Finance is only supported on the Fantom Opera (Mainnet) and Polygon Mumbai (Testnet) Networks!</p><p>Please change the chain from your wallet.</p>"
         );
         document.getElementsByClassName("dropdown")[0].style.zIndex = "2";
         document.getElementsByClassName("dropdown")[0].style.boxShadow =
