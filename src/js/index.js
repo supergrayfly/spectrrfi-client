@@ -1373,7 +1373,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         overlay.setAttribute("aria-busy", "false");
       } else {
         createResponsePrompt(
-          "Spectrr Finance is only supported on the Fantom Opera (Mainnet) and Polygon Mumbai (Testnet) Networks!"
+          "<p>Spectrr Finance is only supported on the Fantom Opera (Mainnet) and Polygon Mumbai (Testnet) Networks!</p><p>Please change the chain from your wallet.</p>"
         );
         document.getElementsByClassName("dropdown")[0].style.zIndex = "2";
         document.getElementsByClassName("dropdown")[0].style.boxShadow =
@@ -3562,7 +3562,7 @@ document
 
         if (((await getSenderAddr()) == offer.seller) == false) {
           if (
-            (await getBalance(offer.sellForId, toEther(offer.sellFor))) == false
+            (await checkBalance(offer.sellForId, toEther(offer.sellFor))) == false
           ) {
             createResponsePrompt(
               `Insufficient balance for ${tokenIdToName(offer.sellForId)}`
@@ -3692,7 +3692,7 @@ document
 
         if (((await getSenderAddr()) == offer.seller) == false) {
           if (
-            (await getBalance(offer.buyForId, toEther(offer.buyFor))) == false
+            (await checkBalance(offer.buyForId, toEther(offer.buyFor))) == false
           ) {
             createResponsePrompt(
               `Insufficient balance for ${tokenIdToName(offer.buyForId)}`
@@ -3753,7 +3753,7 @@ document
             offer.timeAccepted,
             offer.repayInSec
           )}</p>
-				  <p>Seller: ${formatAddress(offer.buyer)}</p>
+				  <p>Seller: ${formatAddress(offer.seller)}</p>
 				  <p>Buyer: ${formatAddress(offer.buyer)}</p>
 				`;
       } else if (offer == false) {
