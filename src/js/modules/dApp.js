@@ -1623,7 +1623,7 @@ document
 
         if (((await getSenderAddr()) == offer.seller) == false) {
           if (
-            (await getBalance(offer.sellForId, toEther(offer.sellFor))) == false
+            (await checkBalance(offer.sellForId, toEther(offer.sellFor))) == false
           ) {
             createResponsePrompt(
               `Insufficient balance for ${tokenIdToName(offer.sellForId)}`
@@ -1753,7 +1753,7 @@ document
 
         if (((await getSenderAddr()) == offer.seller) == false) {
           if (
-            (await getBalance(offer.buyForId, toEther(offer.buyFor))) == false
+            (await checkBalance(offer.buyForId, toEther(offer.buyFor))) == false
           ) {
             createResponsePrompt(
               `Insufficient balance for ${tokenIdToName(offer.buyForId)}`
