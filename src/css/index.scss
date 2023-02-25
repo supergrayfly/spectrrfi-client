@@ -58,7 +58,7 @@ aside {
   display: flex;
   justify-content: center;
 
-  & > div {
+  & > div:not(#home, #browse, #liquidate, #approve, #dashboard) {
     width: 900px;
   }
 }
