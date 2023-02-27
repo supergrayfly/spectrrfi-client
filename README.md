@@ -62,7 +62,7 @@ Pull requests, comments, and emails are all appreciated.
 
 ## Disclaimer
 
-- "SOFTWARE PROVIDED AS IS", No Warranty or Liability Whatsoever (See LICENSE.md file).
+- "SOFTWARE PROVIDED AS IS", No Warranty or Liability Whatsoever (See LICENSE.txt file).
 - Trading Cryptocurrencies is Very Risky.
 - Webpage hosted on
   <a href="https://docs.ipfs.tech/concepts/what-is-ipfs/"
