@@ -13,9 +13,9 @@ This guide aims to give a tour of the functionalities of the Spectrr Finance web
 - On Spectrr.fi, you cannot sell a token for the same token plus interest.
   For example, selling 1 BTC for 1.1 BTC.
 - Likewise, you cannot buy a token and repay the same token plus interest.
-  For instance, buying 1000 USDT, and repaying 1100 USDT.
+  For instance, buying 1,000 USDT, and repaying 1,100 USDT.
 - When creating a buy offer or accepting a sale offer,
-you need to provide 1.5 times the amount you are buying.
+you need to provide 1.5 times the amount you are buying in collateral.
 - Also, in the case of accepting a sale offer, the collateral token cannot
   be the same as the token you are buying. Otherwise, if a liquidation occurs,
   the seller would have sold a token for the same token plus interest.
