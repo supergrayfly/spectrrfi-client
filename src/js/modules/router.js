@@ -258,9 +258,13 @@ function listenAcceptedTable(offerType) {
 document.querySelectorAll(".token").forEach((item) => {
   item.addEventListener("click", (evt) => {
     evt.preventDefault();
-    item.parentElement.parentElement.previousElementSibling.innerHTML =
+    /*
+		item.parentElement.parentElement.previousElementSibling.innerHTML =
       item.innerHTML;
     item.parentElement.parentElement.parentElement.removeAttribute("open");
+		*/
+		item.closest('details').firstElementChild.innerHTML = item.innerHTML;
+		item.closest('details').removeAttribute("open");
   });
 });
 
@@ -658,7 +662,7 @@ gotoPreviousBrowseOffersSale.addEventListener("click", async () => {
     "status: 0"
   );
 
-  listenAcceptSale(0);
+  listenAcceptOffer(0);
 });
 
 gotoNextBrowseOffersSale.addEventListener("click", async () => {
@@ -671,7 +675,7 @@ gotoNextBrowseOffersSale.addEventListener("click", async () => {
     "status: 0"
   );
 
-  listenAcceptSale(0);
+  listenAcceptOffer(0);
 });
 
 gotoPreviousBrowseOffersBuy.addEventListener("click", async () => {
@@ -684,7 +688,7 @@ gotoPreviousBrowseOffersBuy.addEventListener("click", async () => {
     "status: 0"
   );
 
-  listenAcceptSale(1);
+  listenAcceptOffer(1);
 });
 
 gotoNextBrowseOffersBuy.addEventListener("click", async () => {
@@ -697,7 +701,7 @@ gotoNextBrowseOffersBuy.addEventListener("click", async () => {
     "status: 0"
   );
 
-  listenAcceptSale(1);
+  listenAcceptOffer(1);
 });
 
 gotoPreviousLiquidateOffersSale.addEventListener("click", async () => {
@@ -997,7 +1001,6 @@ async function gotoNextOffers(
   numOffers,
   actionsMarkup,
   appendTo,
-  buttonClass,
   offerType,
   xtraArgs
 ) {
@@ -1025,7 +1028,6 @@ async function gotoPreviousOffers(
   numOffers,
   actionsMarkup,
   appendTo,
-  buttonClass,
   offerType,
   xtraArgs
 ) {

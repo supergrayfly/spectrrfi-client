@@ -53,7 +53,7 @@ document
         (await checkBalance(sellingId, Number(sellingAmount) + fee)) == false
       ) {
         createResponsePrompt(
-          `Insufficient balance for ${tokenIdToName(sellingAmount)}`
+          `Insufficient balance for ${tokenIdToName(sellingId)}`
         );
         return;
       }
@@ -85,13 +85,13 @@ document
         )} ${tokenIdToName(sellForId)}</p>
 				<p>Repayment in: ${formatSeconds(repayInSeconds)}</p>
 				<p>---------------------------------</p>
-				<p>Exchange Rate: ${exchangeRate} ${tokenIdToName(sellForId)}/${tokenIdToName(
+				<p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(sellForId)}/${tokenIdToName(
         sellingId
       )}</p>
 				<p>Market Rate: ${formatAmount(
           getExchangeRate(sellingId, sellForId)
         )} ${tokenIdToName(sellForId)}/${tokenIdToName(sellingId)}</p>
-        <p>Rate ${rateDiff[0]} ${rateDiff[1]} market</p>
+        <p>Rate: ${rateDiff[0]} ${rateDiff[1]} market</p>
 			  <p>---------------------------------</p>
 		    <p>Fee: ${formatAmount(fee)} ${tokenIdToName(sellingId)}</p>
 		`;
@@ -224,13 +224,13 @@ document
       )}
 		  </p>
 			<p>---------------------------------</p>
-		  <p>Exchange Rate: ${exchangeRate} ${tokenIdToName(buyForId)}/${tokenIdToName(
+		  <p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(buyForId)}/${tokenIdToName(
         buyingId
       )}</p>
 		  <p>Market Rate: ${formatAmount(marketExchangeRate)} ${tokenIdToName(
         buyForId
       )}/${tokenIdToName(buyingId)}</p>
-      <p>Rate ${rateDiff[0]} ${rateDiff[1]} market</p>
+      <p>Rate: ${rateDiff[0]} ${rateDiff[1]} market</p>
 			<p>---------------------------------</p>
 		  <p>Fee: ${formatAmount(fee)} ${tokenIdToName(collateralId)}</p>
 		`;
@@ -369,7 +369,7 @@ document
 		    <p>Market Rate: ${formatAmount(marketExchangeRate)} ${tokenIdToName(
           offer.sellForId
         )}/${tokenIdToName(offer.sellingId)}</p>
-        <p>Rate ${rateDiff[0]} ${rateDiff[1]} market</p>        
+        <p>Rate: ${rateDiff[0]} ${rateDiff[1]} market</p>        
 		    <p>Seller: ${formatAddress(offer.seller)}</p>
 			  <p>---------------------------------</p>
 		    <p>Fee: ${formatAmount(fee)} ${tokenIdToName(collateralId)}</p>
@@ -491,7 +491,7 @@ document
 		    <p>Market Rate: ${formatAmount(marketExchangeRate)} ${tokenIdToName(
           offer.buyForId
         )}/${tokenIdToName(offer.buyingId)}</p>
-        <p>Rate ${rateDiff[0]} ${rateDiff[1]} market</p>		    
+        <p>Rate: ${rateDiff[0]} ${rateDiff[1]} market</p>		    
 		    <p>Buyer: ${formatAddress(offer.buyer)}</p>
 				<p>---------------------------------</p>
 		    <p>Fee: ${formatAmount(fee)} ${tokenIdToName(offer.buyingId)}</p>
@@ -971,10 +971,10 @@ document
             offer.repayInSec
           )}</p>
 		      <p>---------------------------------</p>
-		      <p>Selling: ${formatEther(offer.selling)} ${tokenIdToName(
+		      <p>Amount Selling: ${formatEther(offer.selling)} ${tokenIdToName(
           offer.sellingId
         )}</p>
-		      <p>Selling For: ${formatEther(offer.sellFor)} ${tokenIdToName(
+		      <p>Amount Selling For: ${formatEther(offer.sellFor)} ${tokenIdToName(
           offer.sellForId
         )}</p>
 		    <p>Exchange Rate: ${formatAmount(
@@ -1247,10 +1247,10 @@ document
             offer.repayInSec
           )}</p>
     			<p>---------------------------------</p>
-		      <p>Selling: ${formatEther(offer.selling)} ${tokenIdToName(
+		      <p>Amount Selling: ${formatEther(offer.selling)} ${tokenIdToName(
           offer.sellingId
         )}</p>
-		      <p>Selling For: ${formatEther(offer.sellFor)} ${tokenIdToName(
+		      <p>Amount Selling For: ${formatEther(offer.sellFor)} ${tokenIdToName(
           offer.sellForId
         )}</p>
 		    <p>Exchange Rate: ${formatAmount(
@@ -1423,7 +1423,7 @@ document
       let addrType;
       let markup;
 
-      if (offer == true) {
+      if (offer) {
         if (offer.status == 2) {
           createResponsePrompt(
             `<p>Sale Offer #${offerId} is already ${formatOfferStatus(
@@ -1453,10 +1453,10 @@ document
           )}</p>
     			<p>New Address: ${newAddr}</p>
       		<p>---------------------------------</p>
-		      <p>Selling: ${formatEther(offer.selling)} ${tokenIdToName(
+		      <p>Amount Selling: ${formatEther(offer.selling)} ${tokenIdToName(
           offer.sellingId
         )}</p>
-		      <p>Selling For: ${formatEther(offer.sellFor)} ${tokenIdToName(
+		      <p>Amount Selling For: ${formatEther(offer.sellFor)} ${tokenIdToName(
           offer.sellForId
         )}</p>
 		    <p>Exchange Rate: ${formatAmount(
@@ -1475,7 +1475,7 @@ document
         return;
       } else {
         markup = `
-				  <p>Changing ${formatTypeSender(addrType)} for Offer #${offerId}</p>
+				  <p>Changing address for Offer #${offerId}:</p>
 				  <p>New Address: ${newAddr}</p>
     		`;
       }
@@ -1559,7 +1559,7 @@ document
         return;
       } else {
         markup = `
-				  <p>Changing ${formatTypeSender(addrType)} for Offer #${offerId}</p>
+				  <p>Changing address for Offer #${offerId}</p>
 				  <p>New Address: ${newAddr}</p>
     		`;
       }

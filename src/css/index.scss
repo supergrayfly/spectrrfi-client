@@ -212,7 +212,8 @@ input:invalid {
 
 #prices {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  // grid-template-columns: auto auto auto auto auto;
+	grid-auto-flow: column;
   place-items: center;
 
   & a {

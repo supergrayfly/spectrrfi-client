@@ -399,7 +399,9 @@ function tokenChoiceToId(tokenChoice) {
     return "3";
   } else if (tokenChoice[0] == "usdt") {
     return "4";
-  } else {
+  } else if (tokenChoice[0] == 'bnb') {
+		return "5"
+	} else {
     throw "Invalid Choice";
   }
 }

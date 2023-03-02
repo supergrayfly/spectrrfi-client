@@ -14,6 +14,11 @@ async function initPageFromChain() {
     document.querySelectorAll(".chain-logo").forEach((item) => {
       item.parentElement.innerHTML = `<img src='${chainLogo}' class="matic"/>w${data.CHAIN_NAME}`;
     });
+document.querySelectorAll('.bnb').forEach((item) => {
+    item.parentElement.style.display = 'none'
+})
+document.getElementById('prices').lastElementChild.remove();
+prices.pop()
   } else {
     data = dataFtm;
     chainLogo = new URL(
@@ -227,7 +232,7 @@ async function updateBlockTimestamp() {
 }
 
 function updatePricesOnHTML() {
-  [priceEther, priceBtc, priceEth, priceUsdc].forEach((item, index) => {
+  prices.forEach((item, index) => {
     document.getElementById("prices").children[index].children[0].innerText =
       formatAmount(Number(round(item, 100000, 3)));
   });
@@ -269,11 +274,10 @@ async function getPrices() {
   }
 
   try {
-    priceEther = toEther((await spectrr.tokenIdToPrice("1")).toString());
-    priceBtc = toEther((await spectrr.tokenIdToPrice("2")).toString());
-    priceEth = toEther((await spectrr.tokenIdToPrice("3")).toString());
-    priceUsdc = toEther((await spectrr.tokenIdToPrice("4")).toString());
-
+  	for (var i = 0; i < prices.length; i++) {
+  		prices[i] = toEther((await spectrr.tokenIdToPrice(`${i + 1}`)).toString());
+  	}
+  	
     updatePricesOnHTML();
   } catch (err) {
     console.log(err);
@@ -454,6 +458,20 @@ function unixToUtc(unixSeconds) {
   return new Date(unixSeconds * 1000).toUTCString();
 }
 
+/*
+function getExactTime(time) {
+	return `${padZero(time.getDate())}/${padZero(time.getDay())}/${time.getFullYear()} at ${time.toLocaleTimeString()}`
+}
+
+function padZero(num) {
+	if (num <= 9) {
+		return `0${num}`;
+	} else {
+		return num;
+	} 
+}
+*/
+
 function chainIdToName(_chainId) {
   if (_chainId == "0xfa") {
     return "Fantom Opera";
@@ -479,7 +497,9 @@ function tokenIdToContract(tokenId) {
     return eth;
   } else if (tokenId == 4) {
     return usdc;
-  } else {
+  }  else if (tokenId == 5) {
+		return bnb;
+	} else {
     throw "Invalid Id";
   }
 }
@@ -493,7 +513,9 @@ function tokenIdToName(tokenId) {
     return "wETH";
   } else if (tokenId == 4) {
     return "USDC";
-  } else {
+  }  else if (tokenId == 5) {
+		return "fBNB"
+	} else {
     throw "Invalid Id";
   }
 }
@@ -507,6 +529,8 @@ function tokenIdToNameLong(tokenId) {
     return "Ethereum";
   } else if (tokenId == 4) {
     return "USDC";
+	} else if (tokenId == 5) {
+		return "Bnb"
   } else {
     throw "Invalid Id";
   }
@@ -514,14 +538,16 @@ function tokenIdToNameLong(tokenId) {
 
 function tokenIdToPrice(tokenId) {
   if (tokenId == 1) {
-    return priceEther;
+    return prices[0];
   } else if (tokenId == 2) {
-    return priceBtc;
+    return prices[1];
   } else if (tokenId == 3) {
-    return priceEth;
+    return prices[2];
   } else if (tokenId == 4) {
-    return priceUsdc;
-  } else {
+    return prices[3];
+  } else if (tokenId == 5) {
+		return prices[4];
+	} else {
     throw "Invalid token Id";
   }
 }
@@ -535,7 +561,9 @@ function tokenIdToLogo(tokenId) {
     return ethLogo;
   } else if (tokenId == 4) {
     return usdcLogo;
-  } else {
+  } else if (tokenId == 5) {
+		return priceBnb
+	} else {
     throw "Invalid token Id";
   }
 }

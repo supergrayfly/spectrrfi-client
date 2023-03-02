@@ -15,6 +15,10 @@ const btcLogo = new URL(
   "./../assets/pics/wrapped-bitcoin-wbtc.svg",
   import.meta.url
 );
+const bnbLogo = new URL(
+  "./../assets/pics/bnb-bnb-logo.svg",
+  import.meta.url
+);
 const usdcLogo = new URL(
   "./../assets/pics/usd-coin-usdc-logo.svg",
   import.meta.url
@@ -273,7 +277,8 @@ var skip1 = 0,
   skip7 = 0,
   skip8 = 0;
 var chainScanUrl, chainRpcUrl, subgraphApiUrl;
-var addrEther, addrBtc, addrUsdc, addrEth, addrSpectrr;
+var addrEther, addrBtc, addrUsdc, addrEth, addrBnb, addrSpectrr;
 var chainId, chainName, chainNameLong, chainLogo;
-var spectrr, ether, btc, eth, usdc;
-var priceEther, priceBtc, priceEth, priceUsdc;
+var spectrr, ether, btc, eth, usdc, bnb;
+// var priceEther, priceBtc, priceEth, priceUsdc, priceBnb;
+var prices = [0, 0, 0, 0, 0]

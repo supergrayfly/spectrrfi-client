@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   subgraphApiUrl = data.SUBGRAPH_API_URL;
   chainId = data.CHAIN_ID;
   addrEther = data.ADDR_ETHER;
-  addrBtc = data.ADDR_BTC;
+	addrBtc = data.ADDR_BTC;
+  addrBnb = data.ADDR_BNB;
   addrUsdc = data.ADDR_USDC;
   addrEth = data.ADDR_ETH;
   addrSpectrr = data.ADDR_SPECTRR;
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ether = new contracts.Contract(addrEther, abiERC20, signer);
         usdc = new contracts.Contract(addrUsdc, abiERC20, signer);
         btc = new contracts.Contract(addrBtc, abiERC20, signer);
+        bnb = new contracts.Contract(addrBnb, abiERC20, signer);
         eth = new contracts.Contract(addrEth, abiERC20, signer);
 
         console.log(spectrr);
