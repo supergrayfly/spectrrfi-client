@@ -269,7 +269,7 @@ This tab revokes a previously allocated allowance to Spectrr.fi. In other words,
 
 Clicking on this tab will redirect you this page.
 Alternatively, this guide, source code of the Spectrr.fi website, and Smart contracts, can also be found
-<a href="https://gitlab.com/spectrrfi/" target="_blank">here</a>.
+<a href="https://gitlab.com/spectrrfi/client/-/blob/master/src/guide/guide.md" target="_blank">here</a>.
 
 ## Disclaimer
 
