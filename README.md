@@ -1,10 +1,7 @@
 # Spectrr Finance Web Client
 
 Web client for Spectrr Finance, designed to interact with Spectrr Finance smart contracts. 
-This webpage will be available at the following Ethereum Name Service domains:
-
-- spectrr.eth (For mainnet on Fantom Opera)
-- test.spectrr.eth (For testnet on Polygon Mumbai)
+This webpage will be available at the spectrr.eth Ethereum Name Service domain.
 
 ## Overview
 
@@ -49,7 +46,7 @@ you need to install the development dependencies:
 
 - Spectrr Finance ONLY officially runs on the following two chains:
   - Fantom Opera (Mainnet)
-  - Polygon Mumbai (Testing)
+  - Fantom Mumbai (Testing)
 - A simple usage guide is available on the webpage, 
 by clicking on the 'Guide' button located in the upper menu.
 Alternatively, it is also available in the ./src/guide directory.

@@ -391,7 +391,7 @@ async function tryTx(fn, args) {
 }
 
 function tokenChoiceToId(tokenChoice) {
-  if (tokenChoice.contains(chainName.toLowerCase())) {
+  if (tokenChoice[0] == "ftm") {
     return "1";
   } else if (tokenChoice[0] == "btc") {
     return "2";
@@ -399,8 +399,10 @@ function tokenChoiceToId(tokenChoice) {
     return "3";
   } else if (tokenChoice[0] == "usdt") {
     return "4";
-  } else if (tokenChoice[0] == 'bnb') {
+  } else if (tokenChoice[0] == 'link') {
 		return "5"
+	} else if (tokenChoice[0] == 'bnb') {
+		return "6"
 	} else {
     throw "Invalid Choice";
   }

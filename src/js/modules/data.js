@@ -6,13 +6,21 @@ const utils = require("@ethersproject/units");
 const providers = require("@ethersproject/providers");
 const axios = require("./../../node_modules/axios/dist/axios.min");
 const dataFtm = require("./modules/data_ftm_opera.js");
-const dataMumbai = require("./modules/data_mumbai.js");
+const dataFtmTestnet = require("./modules/data_ftm_testnet.js");
 const abiERC20 = require("./../assets/abis/IERC20.json");
 const abiSpectrr = require("./../assets/abis/SpectrrCore.json");
 
 // Tokens logos
+const chainLogo = new URL(
+      "./../assets/pics/fantom-ftm-logo.svg",
+      import.meta.url
+);
 const btcLogo = new URL(
   "./../assets/pics/wrapped-bitcoin-wbtc.svg",
+  import.meta.url
+);
+const linkLogo = new URL(
+  "./../assets/pics/chainlink-link-logo.svg",
   import.meta.url
 );
 const bnbLogo = new URL(
@@ -91,8 +99,8 @@ const gotoApproveBtn = document.getElementById("goto-approve");
 
 // Wallet Buttons
 const connectWalletBtn = document.getElementById("connect-wallet");
-const connectToMumbaiTestnet = document.getElementById(
-  "connect-mumbai-testnet"
+const connectToFantomTestnet = document.getElementById(
+  "connect-ftm-testnet"
 );
 const connectToFtmOpera = document.getElementById("connect-ftm-opera");
 
@@ -277,8 +285,7 @@ var skip1 = 0,
   skip7 = 0,
   skip8 = 0;
 var chainScanUrl, chainRpcUrl, subgraphApiUrl;
-var addrEther, addrBtc, addrUsdc, addrEth, addrBnb, addrSpectrr;
-var chainId, chainName, chainNameLong, chainLogo;
-var spectrr, ether, btc, eth, usdc, bnb;
-// var priceEther, priceBtc, priceEth, priceUsdc, priceBnb;
-var prices = [0, 0, 0, 0, 0]
+var addrEther, addrBtc, addrUsdc, addrEth, addrBnb, addrLink, addrSpectrr;
+var chainId, chainName, chainNameLong
+var spectrr, ether, btc, eth, usdc, bnb, link;
+var prices = [0, 0, 0, 0, 0, 0]

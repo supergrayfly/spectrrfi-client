@@ -280,7 +280,7 @@ input:invalid {
   height: 100%;
   display: grid;
   grid-template-rows: 50% 50%;
-  background-color: var(--contrast);
+  // background-color: var(--contrast);
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -316,6 +316,7 @@ input:invalid {
   grid-template-columns: 50% 50%;
   align-items: center;
   padding: 5px;
+	border-radius: 0;
 
   & img {
     height: 25px;

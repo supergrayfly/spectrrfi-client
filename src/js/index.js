@@ -6,13 +6,21 @@ const utils = require("@ethersproject/units");
 const providers = require("@ethersproject/providers");
 const axios = require("./../../node_modules/axios/dist/axios.min");
 const dataFtm = require("./modules/data_ftm_opera.js");
-const dataMumbai = require("./modules/data_mumbai.js");
+const dataFtmTestnet = require("./modules/data_ftm_testnet.js");
 const abiERC20 = require("./../assets/abis/IERC20.json");
 const abiSpectrr = require("./../assets/abis/SpectrrCore.json");
 
 // Tokens logos
+const chainLogo = new URL(
+      "./../assets/pics/fantom-ftm-logo.svg",
+      import.meta.url
+);
 const btcLogo = new URL(
   "./../assets/pics/wrapped-bitcoin-wbtc.svg",
+  import.meta.url
+);
+const linkLogo = new URL(
+  "./../assets/pics/chainlink-link-logo.svg",
   import.meta.url
 );
 const bnbLogo = new URL(
@@ -91,8 +99,8 @@ const gotoApproveBtn = document.getElementById("goto-approve");
 
 // Wallet Buttons
 const connectWalletBtn = document.getElementById("connect-wallet");
-const connectToMumbaiTestnet = document.getElementById(
-  "connect-mumbai-testnet"
+const connectToFantomTestnet = document.getElementById(
+  "connect-ftm-testnet"
 );
 const connectToFtmOpera = document.getElementById("connect-ftm-opera");
 
@@ -277,11 +285,10 @@ var skip1 = 0,
   skip7 = 0,
   skip8 = 0;
 var chainScanUrl, chainRpcUrl, subgraphApiUrl;
-var addrEther, addrBtc, addrUsdc, addrEth, addrBnb, addrSpectrr;
-var chainId, chainName, chainNameLong, chainLogo;
-var spectrr, ether, btc, eth, usdc, bnb;
-// var priceEther, priceBtc, priceEth, priceUsdc, priceBnb;
-var prices = [0, 0, 0, 0, 0]
+var addrEther, addrBtc, addrUsdc, addrEth, addrBnb, addrLink, addrSpectrr;
+var chainId, chainName, chainNameLong
+var spectrr, ether, btc, eth, usdc, bnb, link;
+var prices = [0, 0, 0, 0, 0, 0]
 // toggle offer actions button color when clicked
 // reset colors when offers buttin is clicked
 document.querySelectorAll(".offer-actions").forEach((item, index, arr) => {
@@ -713,13 +720,13 @@ connectWalletBtn.addEventListener("click", async () => {
   await connectWallet();
 });
 
-connectToMumbaiTestnet.addEventListener("click", async () => {
+connectToFantomTestnet.addEventListener("click", async () => {
   await connectNetwork(
-    dataMumbai.CHAIN_ID,
-    dataMumbai.CHAIN_NAME_LONG,
-    dataMumbai.CHAIN_NAME,
-    dataMumbai.CHAIN_SCAN_URL,
-    dataMumbai.CHAIN_RPC_URL
+    dataFtmTestnet.CHAIN_ID,
+    dataFtmTestnet.CHAIN_NAME_LONG,
+    dataFtmTestnet.CHAIN_NAME,
+    dataFtmTestnet.CHAIN_SCAN_URL,
+    dataFtmTestnet.CHAIN_RPC_URL
   );
 });
 
@@ -1382,7 +1389,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         overlay.setAttribute("aria-busy", "false");
       } else {
         createResponsePrompt(
-          "<p>Spectrr Finance is only supported on the Fantom Opera (Mainnet) and Polygon Mumbai (Testnet) Networks!</p><p>Please change the chain from your wallet.</p>"
+          "<p>Spectrr Finance is only supported on the Fantom Opera and Fantom Testnet Networks!</p><p>Please change the chain from your wallet.</p>"
         );
         document.getElementsByClassName("dropdown")[0].style.zIndex = "2";
         document.getElementsByClassName("dropdown")[0].style.boxShadow =
@@ -4176,7 +4183,7 @@ async function tryTx(fn, args) {
 }
 
 function tokenChoiceToId(tokenChoice) {
-  if (tokenChoice.contains(chainName.toLowerCase())) {
+  if (tokenChoice[0] == "ftm") {
     return "1";
   } else if (tokenChoice[0] == "btc") {
     return "2";
@@ -4184,8 +4191,10 @@ function tokenChoiceToId(tokenChoice) {
     return "3";
   } else if (tokenChoice[0] == "usdt") {
     return "4";
-  } else if (tokenChoice[0] == 'bnb') {
+  } else if (tokenChoice[0] == 'link') {
 		return "5"
+	} else if (tokenChoice[0] == 'bnb') {
+		return "6"
 	} else {
     throw "Invalid Choice";
   }
@@ -4204,31 +4213,15 @@ async function checkEthereumAndWallet() {
 }
 // Utils functions
 async function initPageFromChain() {
-  let _chainId = await getChainId();
-
-  if (_chainId == dataMumbai.CHAIN_ID) {
-    data = dataMumbai;
-    chainLogo = new URL(
-      "./../assets/pics/polygon-matic-logo.svg",
-      import.meta.url
-    );
-    document.getElementById(
-      "prices"
-    ).children[0].childNodes[0].data = `${data.CHAIN_NAME}: `;
-    document.querySelectorAll(".chain-logo").forEach((item) => {
-      item.parentElement.innerHTML = `<img src='${chainLogo}' class="matic"/>w${data.CHAIN_NAME}`;
-    });
-document.querySelectorAll('.bnb').forEach((item) => {
-    item.parentElement.style.display = 'none'
-})
-document.getElementById('prices').lastElementChild.remove();
-prices.pop()
+  if ((await getChainId()) == dataFtmTestnet.CHAIN_ID) {
+    data = dataFtmTestnet;
+		prices.pop()
+		document.querySelectorAll('.bnb').forEach((item) => {
+    	item.parentElement.style.display = 'none'
+		})
+		document.getElementById('prices').lastElementChild.remove();
   } else {
     data = dataFtm;
-    chainLogo = new URL(
-      "./../assets/pics/fantom-ftm-logo.svg",
-      import.meta.url
-    );
   }
 }
 
@@ -4294,6 +4287,7 @@ async function connectNetwork(
       });
 
       createResponsePrompt(`Switched to ${_chainNameLong} Network.`);
+			window.location.reload()
     } catch (err) {
       if (err.code == 4902) {
         await addNetwork(
@@ -4702,6 +4696,8 @@ function tokenIdToContract(tokenId) {
   } else if (tokenId == 4) {
     return usdc;
   }  else if (tokenId == 5) {
+		return link;
+	} else if (tokenId == 6) {
 		return bnb;
 	} else {
     throw "Invalid Id";
@@ -4710,7 +4706,7 @@ function tokenIdToContract(tokenId) {
 
 function tokenIdToName(tokenId) {
   if (tokenId == 1) {
-    return `w${chainName}`;
+    return `wFTM`;
   } else if (tokenId == 2) {
     return "wBTC";
   } else if (tokenId == 3) {
@@ -4718,6 +4714,8 @@ function tokenIdToName(tokenId) {
   } else if (tokenId == 4) {
     return "USDC";
   }  else if (tokenId == 5) {
+		return "LINK"
+	} else if (tokenId == 6) {
 		return "fBNB"
 	} else {
     throw "Invalid Id";
@@ -4728,13 +4726,15 @@ function tokenIdToNameLong(tokenId) {
   if (tokenId == 1) {
     return chainNameLong;
   } else if (tokenId == 2) {
-    return "Bitcoin";
+    return "wBitcoin";
   } else if (tokenId == 3) {
-    return "Ethereum";
+    return "wEthereum";
   } else if (tokenId == 4) {
     return "USDC";
-	} else if (tokenId == 5) {
-		return "Bnb"
+  } else if (tokenId == 5) {
+		return "Chainlink"
+	} else if (tokenId == 6) {
+		return "fBnb"
   } else {
     throw "Invalid Id";
   }
@@ -4751,6 +4751,8 @@ function tokenIdToPrice(tokenId) {
     return prices[3];
   } else if (tokenId == 5) {
 		return prices[4];
+	} else if (tokenId == 6) {
+		return prices[5];
 	} else {
     throw "Invalid token Id";
   }
@@ -4766,7 +4768,9 @@ function tokenIdToLogo(tokenId) {
   } else if (tokenId == 4) {
     return usdcLogo;
   } else if (tokenId == 5) {
-		return priceBnb
+		return linkLogo;
+	} else if (tokenId == 6) {
+		return bnbLogo;
 	} else {
     throw "Invalid token Id";
   }

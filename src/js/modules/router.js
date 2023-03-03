@@ -429,13 +429,13 @@ connectWalletBtn.addEventListener("click", async () => {
   await connectWallet();
 });
 
-connectToMumbaiTestnet.addEventListener("click", async () => {
+connectToFantomTestnet.addEventListener("click", async () => {
   await connectNetwork(
-    dataMumbai.CHAIN_ID,
-    dataMumbai.CHAIN_NAME_LONG,
-    dataMumbai.CHAIN_NAME,
-    dataMumbai.CHAIN_SCAN_URL,
-    dataMumbai.CHAIN_RPC_URL
+    dataFtmTestnet.CHAIN_ID,
+    dataFtmTestnet.CHAIN_NAME_LONG,
+    dataFtmTestnet.CHAIN_NAME,
+    dataFtmTestnet.CHAIN_SCAN_URL,
+    dataFtmTestnet.CHAIN_RPC_URL
   );
 });
 

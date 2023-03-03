@@ -1,30 +1,14 @@
 // Utils functions
 async function initPageFromChain() {
-  let _chainId = await getChainId();
-
-  if (_chainId == dataMumbai.CHAIN_ID) {
-    data = dataMumbai;
-    chainLogo = new URL(
-      "./../assets/pics/polygon-matic-logo.svg",
-      import.meta.url
-    );
-    document.getElementById(
-      "prices"
-    ).children[0].childNodes[0].data = `${data.CHAIN_NAME}: `;
-    document.querySelectorAll(".chain-logo").forEach((item) => {
-      item.parentElement.innerHTML = `<img src='${chainLogo}' class="matic"/>w${data.CHAIN_NAME}`;
-    });
-document.querySelectorAll('.bnb').forEach((item) => {
-    item.parentElement.style.display = 'none'
-})
-document.getElementById('prices').lastElementChild.remove();
-prices.pop()
+  if ((await getChainId()) == dataFtmTestnet.CHAIN_ID) {
+    data = dataFtmTestnet;
+		prices.pop()
+		document.querySelectorAll('.bnb').forEach((item) => {
+    	item.parentElement.style.display = 'none'
+		})
+		document.getElementById('prices').lastElementChild.remove();
   } else {
     data = dataFtm;
-    chainLogo = new URL(
-      "./../assets/pics/fantom-ftm-logo.svg",
-      import.meta.url
-    );
   }
 }
 
@@ -90,6 +74,7 @@ async function connectNetwork(
       });
 
       createResponsePrompt(`Switched to ${_chainNameLong} Network.`);
+			window.location.reload()
     } catch (err) {
       if (err.code == 4902) {
         await addNetwork(
@@ -498,6 +483,8 @@ function tokenIdToContract(tokenId) {
   } else if (tokenId == 4) {
     return usdc;
   }  else if (tokenId == 5) {
+		return link;
+	} else if (tokenId == 6) {
 		return bnb;
 	} else {
     throw "Invalid Id";
@@ -506,7 +493,7 @@ function tokenIdToContract(tokenId) {
 
 function tokenIdToName(tokenId) {
   if (tokenId == 1) {
-    return `w${chainName}`;
+    return `wFTM`;
   } else if (tokenId == 2) {
     return "wBTC";
   } else if (tokenId == 3) {
@@ -514,6 +501,8 @@ function tokenIdToName(tokenId) {
   } else if (tokenId == 4) {
     return "USDC";
   }  else if (tokenId == 5) {
+		return "LINK"
+	} else if (tokenId == 6) {
 		return "fBNB"
 	} else {
     throw "Invalid Id";
@@ -524,13 +513,15 @@ function tokenIdToNameLong(tokenId) {
   if (tokenId == 1) {
     return chainNameLong;
   } else if (tokenId == 2) {
-    return "Bitcoin";
+    return "wBitcoin";
   } else if (tokenId == 3) {
-    return "Ethereum";
+    return "wEthereum";
   } else if (tokenId == 4) {
     return "USDC";
-	} else if (tokenId == 5) {
-		return "Bnb"
+  } else if (tokenId == 5) {
+		return "Chainlink"
+	} else if (tokenId == 6) {
+		return "fBnb"
   } else {
     throw "Invalid Id";
   }
@@ -547,6 +538,8 @@ function tokenIdToPrice(tokenId) {
     return prices[3];
   } else if (tokenId == 5) {
 		return prices[4];
+	} else if (tokenId == 6) {
+		return prices[5];
 	} else {
     throw "Invalid token Id";
   }
@@ -562,7 +555,9 @@ function tokenIdToLogo(tokenId) {
   } else if (tokenId == 4) {
     return usdcLogo;
   } else if (tokenId == 5) {
-		return priceBnb
+		return linkLogo;
+	} else if (tokenId == 6) {
+		return bnbLogo;
 	} else {
     throw "Invalid token Id";
   }

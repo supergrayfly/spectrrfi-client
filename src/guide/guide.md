@@ -8,22 +8,6 @@ Welcome to Spectrr Finance! An interest-free lending and borrowing like decentra
 Here, you can make *offers*, where you sell or buy tokens at an exchange rate and repayment period of your choice.
 This guide aims to give a tour of the functionalities of the Spectrr Finance website.
 
-## Trading Rules
-
-- On Spectrr.fi, you cannot sell a token for the same token plus interest.
-  For example, selling 1 BTC for 1.1 BTC.
-- Likewise, you cannot buy a token and repay the same token plus interest.
-  For instance, buying 1,000 USDT, and repaying 1,100 USDT.
-- When creating a buy offer or accepting a sale offer,
-you need to provide 1.5 times the amount you are buying in collateral.
-- Also, in the case of accepting a sale offer, the collateral token cannot
-  be the same as the token you are buying. Otherwise, if a liquidation occurs,
-  the seller would have sold a token for the same token plus interest.
-- Accordingly, in the case of creating a buy offer, the collateral token
-  cannot be the same as the buying token. Because of the same reasons
-  cited previously.
-- There is a 0.1% fee taken whenever an offer is created and accepted.
-
 ## Accessing The Spectrr Finance Website
 
 There are three ways to access the Spectrr.fi website:
@@ -42,9 +26,26 @@ To do so, you may install [metamask](https://metamask.io/), [exodus](https://www
 
 - Wrapped Fantom or <a target="_blank" href="https://ftmscan.com/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83">wFTM</a> 
 - Multichain Wrapped Bitcoin or <a target="_blank" href="https://ftmscan.com/token/0x321162cd933e2be498cd2267a90534a804051b11">wBTC</a> 
-- Multichain Wrapped or Ether <a target="_blank" href="https://ftmscan.com/token/0x74b23882a30290451A17c44f4F05243b6b58C76d">wETH</a>
-- Fantom Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45">fBNB</a> 
+- Multichain Wrapped Ether or Ether <a target="_blank" href="https://ftmscan.com/token/0x74b23882a30290451A17c44f4F05243b6b58C76d">wETH</a>
 - USD Coin or <a target="_blank" href="https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75">USDC</a>
+- Multichain Wrapped Chainlink or <a target="_blank" href="https://ftmscan.com/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8">LINK</a>
+- Fantom Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45">fBNB</a> 
+
+## Trading Rules
+
+- On Spectrr.fi, you cannot sell a token for the same token plus interest.
+  For example, selling 1 BTC for 1.1 BTC.
+- Likewise, you cannot buy a token and repay the same token plus interest.
+  For instance, buying 1,000 USDT, and repaying 1,100 USDT.
+- When creating a buy offer or accepting a sale offer,
+you need to provide 1.5 times the amount you are buying in collateral.
+- Also, in the case of accepting a sale offer, the collateral token cannot
+  be the same as the token you are buying. Otherwise, if a liquidation occurs,
+  the seller would have sold a token for the same token plus interest.
+- Accordingly, in the case of creating a buy offer, the collateral token
+  cannot be the same as the buying token. Because of the same reasons
+  cited previously.
+- There is a 0.1% fee taken whenever an offer is created and accepted.
 
 ---
 
