@@ -46,7 +46,7 @@ you need to install the development dependencies:
 
 - Spectrr Finance ONLY officially runs on the following two chains:
   - Fantom Opera (Mainnet)
-  - Fantom Mumbai (Testing)
+  - Fantom testnet (Testing)
 - A simple usage guide is available on the webpage, 
 by clicking on the 'Guide' button located in the upper menu.
 Alternatively, it is also available in the ./src/guide directory.
