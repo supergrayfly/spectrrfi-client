@@ -85,9 +85,9 @@ document
         )} ${tokenIdToName(sellForId)}</p>
 				<p>Repayment in: ${formatSeconds(repayInSeconds)}</p>
 				<p>---------------------------------</p>
-				<p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(sellForId)}/${tokenIdToName(
-        sellingId
-      )}</p>
+				<p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(
+        sellForId
+      )}/${tokenIdToName(sellingId)}</p>
 				<p>Market Rate: ${formatAmount(
           getExchangeRate(sellingId, sellForId)
         )} ${tokenIdToName(sellForId)}/${tokenIdToName(sellingId)}</p>
@@ -224,9 +224,9 @@ document
       )}
 		  </p>
 			<p>---------------------------------</p>
-		  <p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(buyForId)}/${tokenIdToName(
-        buyingId
-      )}</p>
+		  <p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(
+        buyForId
+      )}/${tokenIdToName(buyingId)}</p>
 		  <p>Market Rate: ${formatAmount(marketExchangeRate)} ${tokenIdToName(
         buyForId
       )}/${tokenIdToName(buyingId)}</p>
@@ -1623,7 +1623,8 @@ document
 
         if (((await getSenderAddr()) == offer.seller) == false) {
           if (
-            (await checkBalance(offer.sellForId, toEther(offer.sellFor))) == false
+            (await checkBalance(offer.sellForId, toEther(offer.sellFor))) ==
+            false
           ) {
             createResponsePrompt(
               `Insufficient balance for ${tokenIdToName(offer.sellForId)}`

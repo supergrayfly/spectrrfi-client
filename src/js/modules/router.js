@@ -263,8 +263,8 @@ document.querySelectorAll(".token").forEach((item) => {
       item.innerHTML;
     item.parentElement.parentElement.parentElement.removeAttribute("open");
 		*/
-		item.closest('details').firstElementChild.innerHTML = item.innerHTML;
-		item.closest('details').removeAttribute("open");
+    item.closest("details").firstElementChild.innerHTML = item.innerHTML;
+    item.closest("details").removeAttribute("open");
   });
 });
 

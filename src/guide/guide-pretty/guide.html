@@ -1,212 +1,597 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimal-ui"
+    />
     <title>Spectrr Finance How To Guide</title>
-    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css">
-    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="assets/css/github-markdown.css"
+    />
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="assets/css/hljs-github.min.css"
+    />
   </head>
   <body>
-    <article class="markdown-body"><h1 id="spectrr-finance-how-to-guide"><a class="header-link" href="#spectrr-finance-how-to-guide"></a>Spectrr Finance How to Guide</h1>
-<p>Welcome to Spectrr Finance! An interest-free lending and borrowing like decentralised platform.
-Here, you can make <em>offers</em>, where you sell or buy tokens at an exchange rate and repayment period of your choice.
-This guide aims to give a tour of the functionalities of the Spectrr Finance website.</p>
-<h2 id="accessing-the-spectrr-finance-website"><a class="header-link" href="#accessing-the-spectrr-finance-website"></a>Accessing The Spectrr Finance Website</h2>
-<p>There are three ways to access the Spectrr.fi website:</p>
-<ol class="list">
-<li>Using a browser supporting ipfs (brave &amp; opera), you can just search for: <a href="http://spectrr.eth" target="_blank"><i>spectrrfi.eth</i></a></li>
-<li>Using other browsers (firefox, chrome...), search for: 
-<a target="_blank" href="https://spectrr.eth.limo"><i>spectrr.eth.limo</i></a> <strong>or</strong> 
-<a href="https://spectrr.eth.link" target="_blank"><i>spectrr.eth.link</i></a></li>
-<li>Clone the git repo from <a href="https://gitlab.com/spectrrfi/client">https://gitlab.com/spectrrfi/client</a> to run a server at localhost</li>
-</ol>
-<h2 id="getting-a-web3-wallet"><a class="header-link" href="#getting-a-web3-wallet"></a>Getting a web3 Wallet</h2>
-<p>To interact with the Spectrr.fi Smart Contracts on the blockchain, you first need to have a web3 wallet browser extension.
-To do so, you may install <a href="https://metamask.io/">metamask</a>, <a href="https://www.exodus.com/web3-wallet/">exodus</a> (chrome &amp; brave only), or any other major web3 provider.</p>
-<h2 id="supported-tokens-fantom-opera"><a class="header-link" href="#supported-tokens-fantom-opera"></a>Supported Tokens (Fantom Opera)</h2>
-<ul class="list">
-<li>Wrapped Fantom or <a target="_blank" href="https://ftmscan.com/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83">wFTM</a> </li>
-<li>Multichain Wrapped Bitcoin or <a target="_blank" href="https://ftmscan.com/token/0x321162cd933e2be498cd2267a90534a804051b11">wBTC</a> </li>
-<li>Multichain Wrapped Ether or Ether <a target="_blank" href="https://ftmscan.com/token/0x74b23882a30290451A17c44f4F05243b6b58C76d">wETH</a></li>
-<li>USD Coin or <a target="_blank" href="https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75">USDC</a></li>
-<li>Multichain Wrapped Chainlink or <a target="_blank" href="https://ftmscan.com/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8">LINK</a></li>
-<li>Fantom Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45">fBNB</a> </li>
-</ul>
-<h2 id="trading-rules"><a class="header-link" href="#trading-rules"></a>Trading Rules</h2>
-<ul class="list">
-<li>On Spectrr.fi, you cannot sell a token for the same token plus interest.
-For example, selling 1 BTC for 1.1 BTC.</li>
-<li>Likewise, you cannot buy a token and repay the same token plus interest.
-For instance, buying 1,000 USDT, and repaying 1,100 USDT.</li>
-<li>When creating a buy offer or accepting a sale offer,
-you need to provide 1.5 times the amount you are buying in collateral.</li>
-<li>Also, in the case of accepting a sale offer, the collateral token cannot
-be the same as the token you are buying. Otherwise, if a liquidation occurs,
-the seller would have sold a token for the same token plus interest.</li>
-<li>Accordingly, in the case of creating a buy offer, the collateral token
-cannot be the same as the buying token. Because of the same reasons
-cited previously.</li>
-<li>There is a 0.1% fee taken whenever an offer is created and accepted.</li>
-</ul>
-<hr>
-<h2 id="home"><a class="header-link" href="#home"></a>Home</h2>
-<p>The home tab displays two tables, showing data on the latest
-open (not accepted or closed) sale and buy offers.</p>
-<p class="img-container"><img src="./../pics/home.webp" alt="Spectrr.fi Home Page"></p>
-<h2 id="offers"><a class="header-link" href="#offers"></a>Offers</h2>
-<p>On the offers tab, the user can directly interact with the Spectrr.fi Smart Contracts. 
-The picture below presents the different possible actions:</p>
-<p class="img-container"><img src="./../pics/offers.webp" alt="Offers Actions"></p>
-<h3 id="create"><a class="header-link" href="#create"></a>Create</h3>
-<p>The create action simply creates a sale/buy offer based on the user&#39;s input.</p>
-<h4 id="sale-offer"><a class="header-link" href="#sale-offer"></a>Sale Offer</h4>
-<p>In the picture below, we are creating a <strong>sale offer</strong>, where we are <em>selling 0.01 wBTC</em> at an <em>exchange rate of 24,000 USD/wBTC</em>, in <em>exchange of USDC</em>. Also, we specify a <em>repayament period of 2 days</em>.</p>
-<p class="img-container"><img src="./../pics/createSaleOffer.webp" alt="Creating a Sale Offer"></p>
-<p>Before sending tokens from your wallet, you firstly have to approve an allowance for Spectrr Finance:</p>
-<p class="img-container"><img src="./../pics/approveAllowanceCreateSale.webp" alt="Approve Allowance"></p>
-<p class="img-container"><img src="./../pics/approveAllowanceCreateSaleWallet.webp" alt="Approve Allowance"></p>
-<p>After the transaction has been confirmed on the blockchain, the following prompt will be presented after clicking on the confirm button again:</p>
-<p class="img-container"><img src="./../pics/createSaleOfferConfirm.webp" alt="Confirm Creating a Sale Offer"></p>
-<p>Clicking the &#39;Create Buy Offfer&#39; button will prompt you to confirm the transaction in your wallet. 
-After its confirmation, your offer will be open and visible to others!</p>
-<h4 id="buy-offer"><a class="header-link" href="#buy-offer"></a>Buy Offer</h4>
-<p>The process of creating a <strong>buy offer</strong> is similar to creating a sale offer.
-The buy offer template look like so:</p>
-<p class="img-container"><img src="./../pics/createBuyOfferTemplate.webp" alt="Create Buy Offer Template"></p>
-<p>Let us create an offer were we want to buy <em>1000 USDC</em> at an <em>exchange rate of 0.000645 USDC/wETH</em>. 
-We will collateralize the offer with wETH, and specify a repayment period of 30 minutes.</p>
-<p class="img-container"><img src="./../pics/createBuyOffer.webp" alt="Creating a Buy Offer"></p>
-<p>If the approve allowance prompt pops out, you will have to approve the transactions in order to continue:</p>
-<p class="img-container"><img src="./../pics/approveAllowanceCreateBuy.webp" alt="Approve Allowance"></p>
-<p>We will then have the following prompt summarizing the offer:</p>
-<p class="img-container"><img src="./../pics/createBuyOfferConfirm.webp" alt="Confirm Creating a Buy offer"></p>
-<p>Clicking the &#39;Create Buy Offer&#39; button will prompt you to confirm the transaction in your wallet. 
-After its confirmation, your offer will be open and visible to others!</p>
-<h3 id="cancel"><a class="header-link" href="#cancel"></a>Cancel</h3>
-<p>Cancel an offer, given that it not accepted yet, by entering its Id in the input box.
-For example, to cancel <strong>sale offer</strong> #3, we will do the following:</p>
-<p class="img-container"><img src="./../pics/cancelSaleOffer.webp" alt="Cancel a Sale Offer"></p>
-<p>After clicking &#39;Cancel Sale Offer&#39;:</p>
-<p class="img-container"><img src="./../pics/cancelSaleOfferConfirm.webp" alt="Confirm Cancel Sale Offer"></p>
-<p>Cancelling a <strong>buy offer</strong> follows the same exact procedure presented above.</p>
-<h3 id="accept"><a class="header-link" href="#accept"></a>Accept</h3>
-<p>Accept an offer by entering its Id in the input box.</p>
-<h4 id="sale-offer-1"><a class="header-link" href="#sale-offer-1"></a>Sale Offer</h4>
-<p>To accept a sale offer, you first need to select the token you want to collateralize the offer with.
-The value of this collateral is 1.5 times the value of the amount buying.
-Also, this collateral will be stored on the address of the Smart Contract</p>
-<p>Here we will accept sale offer #4, and provide a USDC collateral:</p>
-<p class="img-container"><img src="./../pics/acceptSaleOffer.webp" alt="Accept Sale Offer"></p>
-<p>After confirming, an may need to approve an allowance in order to continue.</p>
-<p>After clicking &#39;Accept Sale Offer&#39;:</p>
-<p class="img-container"><img src="./../pics/acceptSaleOfferConfirm.webp" alt="Confirm Accept Sale Offer"></p>
-<h4 id="buy-offer-1"><a class="header-link" href="#buy-offer-1"></a>Buy Offer</h4>
-<p>Accept a buy offer by just entering its Id in the input box.</p>
-<p>Accepting <em>buy offer</em> #1 will like:</p>
-<p class="img-container"><img src="./../pics/acceptBuyOffer.webp" alt="Accept Buy Offer"></p>
-<p>After confirming, an may need to approve an allowance in order to continue.</p>
-<p class="img-container"><img src="./../pics/acceptBuyOfferConfirm.webp" alt="Confirm Accept Buy Offer"></p>
-<h3 id="forfeit"><a class="header-link" href="#forfeit"></a>Forfeit</h3>
-<p>Forfeit an offer by entering its Id in the input box, given that the the collateral value is not below that of the debt.
-For example, to forfeit <strong>sale offer</strong> #4, we will do the following:</p>
-<p class="img-container"><img src="./../pics/forfeitSaleOffer.webp" alt="Forfeit a Sale Offer"></p>
-<p>After clicking &#39;Forfeit Sale Offer&#39;:</p>
-<p class="img-container"><img src="./../pics/forfeitSaleOfferConfirm.webp" alt="Confirm Forfeit Sale Offer"></p>
-<p>Forfeiting a <strong>buy offer</strong> follows the same exact procedure presented above.</p>
-<h3 id="repay"><a class="header-link" href="#repay"></a>Repay</h3>
-<p>Repay an offer by entering its Id in the input box. 
-If no repayment amount is specified, it assumed that the full debt is being repaid.</p>
-<p>Let us partly repay 100 USDC of <strong>sale offer</strong> #2:</p>
-<p><img src="./../pics/repaySaleOffer.webp" alt="Repay a Sale Offer">
-<img src="./../pics/repaySaleOfferConfirm.webp" alt="COnfirm Repay Sale Offer"></p>
-<p>Repaying a <strong>buy offer</strong> follows the same procedure above.</p>
-<h3 id="add-collateral"><a class="header-link" href="#add-collateral"></a>Add Collateral</h3>
-<p>Add collateral to an offer by entering its Id and the amount being added.
-Adding collateral to an offer raises the collateral to debt ratio, 
-and thus distances the buyer from a potential liquidation
-<em>Note</em>: Liquidation can occur when collateral to debt ratio is less than 1.25)</p>
-<p>Below, we are adding 0.5 wETH of collateral to <strong>sale offer</strong> #2:</p>
-<p><img src="./../pics/addCollateralSaleOffer.webp" alt="Add Collateral Sale Offer">
-<img src="./../pics/addCollateralSaleOfferConfirm.webp" alt="Confirm Add Collateral Sale Offer"></p>
-<p>Adding collateral to a <strong>buy offer</strong> follows the same above procedure.</p>
-<h3 id="liquidate"><a class="header-link" href="#liquidate"></a>Liquidate</h3>
-<p>Liquidate an offer by entering its Id in the input box.
-<em>Note</em>: You can liquidate an offer if the collateral to debt ratio is less than 1.25 <strong>or</strong> if the repayment deadline has passed.</p>
-<p>In the pictures below, we are liquidating <strong>buy offer</strong> #1. 
-As it can be seen, the offer is liquidable because the repayment period has expired.
-Also, the repayment amount is 0 USDC, since the sender of the transaction is the seller of the offer.</p>
-<p><img src="./../pics/liquidateBuyOffer.webp" alt="Liquidate Buy Offer">
-<img src="./../pics/liquidateBuyOfferConfirm.webp" alt="Confirm Liquidate Buy Offer"></p>
-<p>Liquidating a <strong>sale offer</strong> follows the same above procedure.</p>
-<h3 id="change-address"><a class="header-link" href="#change-address"></a>Change address</h3>
-<p>If you are the seller/buyer of an offer, you can change the initial address you used to create/accept the offer.
-To do so, simply enter the Id of the offer in question, and the new address that you want to set.</p>
-<p><strong>Warning</strong>: If the user enters an invalid address, control of the funds
-on the offer will be completly relinquished to that address with no turning back.</p>
-<p>Here, we will change the seller address of <strong>sale offer</strong> #1;</p>
-<p><img src="./../pics/changeAddressSaleOffer.webp" alt="Change Address Sale Offer">
-<img src="./../pics/changeAddressSaleOfferConfirm.webp" alt="Confirm Change Address Sale Offer"></p>
-<p>Changing the address of a <strong>buy offer</strong> follows the same above procedure.</p>
-<h2 id="browse"><a class="header-link" href="#browse"></a>Browse</h2>
-<p>The browse tab tabulates data on the latest open and accepted sale offers. 
-The latest buy offers can be shown by clicking on the &#39;Buy Offers&#39; tab, above the table caption.
-Offers can also be accepted from the browse tab by clicking on the accept button:</p>
-<p class="img-container"><img src="./../pics/acceptAction.webp" alt="Accept Action Button"></p>
-<h2 id="liquidate-1"><a class="header-link" href="#liquidate-1"></a>Liquidate</h2>
-<p>This tab displays information on offers that are accepted, and thus potentially liquidable.
-Also, you can liquidate offers by clicking on the liquidate button.</p>
-<p class="img-container"><img src="./../pics/actionLiquidate.webp" alt="Liquidate Action Button"></p>
-<h2 id="dashboard"><a class="header-link" href="#dashboard"></a>Dashboard</h2>
-<p>The dashboard can show data on the offers posted and accepted by the user.
-From there, you can also cancel, liquidate, and change the seller/buyer address of an offer:</p>
-<p class="img-container"><img src="./../pics/dashboardActions.webp" alt="Dashboard Action Buttons"></p>
-<h2 id="allowance"><a class="header-link" href="#allowance"></a>Allowance</h2>
-<h3 id="approve"><a class="header-link" href="#approve"></a>Approve</h3>
-<p>The approve tab basically allows the Spectrr.fi Smart Contracts 
-(i.e., The Spectrr.fi website) to use the tokens in your wallet.
-By default, it allocates an allowance of 1,000,000 tokens. 
-An optional amount can be specified in the Approve Amount box.</p>
-<p>Clicking on the confirm button will directly open your wallet,
-which will then ask you for confirmation.</p>
-<p>In the picture below we are approving an allowance of 0.05 wBTC:</p>
-<p class="img-container"><img src="./../pics/approveAllowance.webp" alt="Approving Allowance of 0.05 wBTC"></p>
-<h3 id="revoke"><a class="header-link" href="#revoke"></a>Revoke</h3>
-<p>This tab revokes a previously allocated allowance to Spectrr.fi. In other words, one will not be able to send tokens through the Spectrr.fi Smart Contracts.</p>
-<p class="img-container"><img src="./../pics/revokeAllowance.webp" alt="Revoke Allowance wBTC"></p>
-<h2 id="guide"><a class="header-link" href="#guide"></a>Guide</h2>
-<p>Clicking on this tab will redirect you this page.
-Alternatively, this guide, source code of the Spectrr.fi website, and Smart contracts, can also be found
-<a href="https://gitlab.com/spectrrfi/client/-/blob/master/src/guide/guide.md" target="_blank">here</a>.</p>
-<h2 id="disclaimer"><a class="header-link" href="#disclaimer"></a>Disclaimer</h2>
-<ul class="list">
-<li>&quot;SOFTWARE PROVIDED AS IS&quot;, No Warranty or Liability Whatsoever.</li>
-<li>Trading cryptocurrencies is <strong>very</strong> risky, do not invest in what you can <strong>not</strong> afford to lose.</li>
-<li>Webpage hosted on
-<a href="https://docs.ipfs.tech/concepts/what-is-ipfs/"
-target="_blank">IPFS (InterPlanetary file system)</a>
-, unless you run it locally on your machine.</li>
-<li>Using
-<a href="https://thegraph.com/docs/en/deploying/hosted-service/"
-target="_blank">The Graph Decentralized Network (hosted service)</a>
-to query all info about offers, if the service is down,
-the webpage will not be able to fetch any info on any offers.</li>
-<li>Prices used by the Smart Contracts are currently provided by Chainlink Oracles Price Feeds.</li>
-</ul>
-<h2 id="contact"><a class="header-link" href="#contact"></a>Contact</h2>
-<ul class="list">
-<li>email: <a href="mailto:&#x73;&#117;&#x70;&#101;&#x72;&#103;&#x72;&#x61;&#x79;&#x66;&#108;&#121;&#x40;&#112;&#114;&#x6f;&#x74;&#111;&#110;&#46;&#x6d;&#x65;">&#x73;&#117;&#x70;&#101;&#x72;&#103;&#x72;&#x61;&#x79;&#x66;&#108;&#121;&#x40;&#112;&#114;&#x6f;&#x74;&#111;&#110;&#46;&#x6d;&#x65;</a></li>
-<li>gpg pub key: <a href="https://gitlab.com/supergrayfly.gpg">https://gitlab.com/supergrayfly.gpg</a></li>
-</ul>
-<h2 id="license"><a class="header-link" href="#license"></a>License</h2>
-<p>BSD-3-Clause</p>
-<hr>
-<center>
-Generated with
-<a href="https://github.com/mixu/markdown-styles"
-target="_blank">mixu/markdown-styles</a> | Copyright &copy; Supergrayfly
-</center>
+    <article class="markdown-body">
+      <h1 id="spectrr-finance-how-to-guide">
+        <a class="header-link" href="#spectrr-finance-how-to-guide"></a>Spectrr
+        Finance How to Guide
+      </h1>
+      <p>
+        Welcome to Spectrr Finance! An interest-free lending and borrowing like
+        decentralised platform. Here, you can make <em>offers</em>, where you
+        sell or buy tokens at an exchange rate and repayment period of your
+        choice. This guide aims to give a tour of the functionalities of the
+        Spectrr Finance website.
+      </p>
+      <h2 id="accessing-the-spectrr-finance-website">
+        <a class="header-link" href="#accessing-the-spectrr-finance-website"></a
+        >Accessing The Spectrr Finance Website
+      </h2>
+      <p>There are three ways to access the Spectrr.fi website:</p>
+      <ol class="list">
+        <li>
+          Using a browser supporting ipfs (brave &amp; opera), you can just
+          search for:
+          <a href="http://spectrr.eth" target="_blank"><i>spectrrfi.eth</i></a>
+        </li>
+        <li>
+          Using other browsers (firefox, chrome...), search for:
+          <a target="_blank" href="https://spectrr.eth.limo"
+            ><i>spectrr.eth.limo</i></a
+          >
+          <strong>or</strong>
+          <a href="https://spectrr.eth.link" target="_blank"
+            ><i>spectrr.eth.link</i></a
+          >
+        </li>
+        <li>
+          Clone the git repo from
+          <a href="https://gitlab.com/spectrrfi/client"
+            >https://gitlab.com/spectrrfi/client</a
+          >
+          to run a server at localhost
+        </li>
+      </ol>
+      <h2 id="getting-a-web3-wallet">
+        <a class="header-link" href="#getting-a-web3-wallet"></a>Getting a web3
+        Wallet
+      </h2>
+      <p>
+        To interact with the Spectrr.fi Smart Contracts on the blockchain, you
+        first need to have a web3 wallet browser extension. To do so, you may
+        install <a href="https://metamask.io/">metamask</a>,
+        <a href="https://www.exodus.com/web3-wallet/">exodus</a> (chrome &amp;
+        brave only), or any other major web3 provider.
+      </p>
+      <h2 id="supported-tokens-fantom-opera">
+        <a class="header-link" href="#supported-tokens-fantom-opera"></a
+        >Supported Tokens (Fantom Opera)
+      </h2>
+      <ul class="list">
+        <li>
+          Wrapped Fantom or
+          <a
+            target="_blank"
+            href="https://ftmscan.com/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83"
+            >wFTM</a
+          >
+        </li>
+        <li>
+          Multichain Wrapped Bitcoin or
+          <a
+            target="_blank"
+            href="https://ftmscan.com/token/0x321162cd933e2be498cd2267a90534a804051b11"
+            >wBTC</a
+          >
+        </li>
+        <li>
+          Multichain Wrapped Ether or Ether
+          <a
+            target="_blank"
+            href="https://ftmscan.com/token/0x74b23882a30290451A17c44f4F05243b6b58C76d"
+            >wETH</a
+          >
+        </li>
+        <li>
+          USD Coin or
+          <a
+            target="_blank"
+            href="https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75"
+            >USDC</a
+          >
+        </li>
+        <li>
+          Multichain Wrapped Chainlink or
+          <a
+            target="_blank"
+            href="https://ftmscan.com/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8"
+            >LINK</a
+          >
+        </li>
+        <li>
+          Fantom Binance Coin or
+          <a
+            target="_blank"
+            href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45"
+            >fBNB</a
+          >
+        </li>
+      </ul>
+      <h2 id="trading-rules">
+        <a class="header-link" href="#trading-rules"></a>Trading Rules
+      </h2>
+      <ul class="list">
+        <li>
+          On Spectrr.fi, you cannot sell a token for the same token plus
+          interest. For example, selling 1 BTC for 1.1 BTC.
+        </li>
+        <li>
+          Likewise, you cannot buy a token and repay the same token plus
+          interest. For instance, buying 1,000 USDT, and repaying 1,100 USDT.
+        </li>
+        <li>
+          When creating a buy offer or accepting a sale offer, you need to
+          provide 1.5 times the amount you are buying in collateral.
+        </li>
+        <li>
+          Also, in the case of accepting a sale offer, the collateral token
+          cannot be the same as the token you are buying. Otherwise, if a
+          liquidation occurs, the seller would have sold a token for the same
+          token plus interest.
+        </li>
+        <li>
+          Accordingly, in the case of creating a buy offer, the collateral token
+          cannot be the same as the buying token. Because of the same reasons
+          cited previously.
+        </li>
+        <li>
+          There is a 0.1% fee taken whenever an offer is created and accepted.
+        </li>
+      </ul>
+      <hr />
+      <h2 id="home"><a class="header-link" href="#home"></a>Home</h2>
+      <p>
+        The home tab displays two tables, showing data on the latest open (not
+        accepted or closed) sale and buy offers.
+      </p>
+      <p class="img-container">
+        <img src="./../pics/home.webp" alt="Spectrr.fi Home Page" />
+      </p>
+      <h2 id="offers"><a class="header-link" href="#offers"></a>Offers</h2>
+      <p>
+        On the offers tab, the user can directly interact with the Spectrr.fi
+        Smart Contracts. The picture below presents the different possible
+        actions:
+      </p>
+      <p class="img-container">
+        <img src="./../pics/offers.webp" alt="Offers Actions" />
+      </p>
+      <h3 id="create"><a class="header-link" href="#create"></a>Create</h3>
+      <p>
+        The create action simply creates a sale/buy offer based on the
+        user&#39;s input.
+      </p>
+      <h4 id="sale-offer">
+        <a class="header-link" href="#sale-offer"></a>Sale Offer
+      </h4>
+      <p>
+        In the picture below, we are creating a <strong>sale offer</strong>,
+        where we are <em>selling 0.01 wBTC</em> at an
+        <em>exchange rate of 24,000 USD/wBTC</em>, in <em>exchange of USDC</em>.
+        Also, we specify a <em>repayament period of 2 days</em>.
+      </p>
+      <p class="img-container">
+        <img src="./../pics/createSaleOffer.webp" alt="Creating a Sale Offer" />
+      </p>
+      <p>
+        Before sending tokens from your wallet, you firstly have to approve an
+        allowance for Spectrr Finance:
+      </p>
+      <p class="img-container">
+        <img
+          src="./../pics/approveAllowanceCreateSale.webp"
+          alt="Approve Allowance"
+        />
+      </p>
+      <p class="img-container">
+        <img
+          src="./../pics/approveAllowanceCreateSaleWallet.webp"
+          alt="Approve Allowance"
+        />
+      </p>
+      <p>
+        After the transaction has been confirmed on the blockchain, the
+        following prompt will be presented after clicking on the confirm button
+        again:
+      </p>
+      <p class="img-container">
+        <img
+          src="./../pics/createSaleOfferConfirm.webp"
+          alt="Confirm Creating a Sale Offer"
+        />
+      </p>
+      <p>
+        Clicking the &#39;Create Buy Offfer&#39; button will prompt you to
+        confirm the transaction in your wallet. After its confirmation, your
+        offer will be open and visible to others!
+      </p>
+      <h4 id="buy-offer">
+        <a class="header-link" href="#buy-offer"></a>Buy Offer
+      </h4>
+      <p>
+        The process of creating a <strong>buy offer</strong> is similar to
+        creating a sale offer. The buy offer template look like so:
+      </p>
+      <p class="img-container">
+        <img
+          src="./../pics/createBuyOfferTemplate.webp"
+          alt="Create Buy Offer Template"
+        />
+      </p>
+      <p>
+        Let us create an offer were we want to buy <em>1000 USDC</em> at an
+        <em>exchange rate of 0.000645 USDC/wETH</em>. We will collateralize the
+        offer with wETH, and specify a repayment period of 30 minutes.
+      </p>
+      <p class="img-container">
+        <img src="./../pics/createBuyOffer.webp" alt="Creating a Buy Offer" />
+      </p>
+      <p>
+        If the approve allowance prompt pops out, you will have to approve the
+        transactions in order to continue:
+      </p>
+      <p class="img-container">
+        <img
+          src="./../pics/approveAllowanceCreateBuy.webp"
+          alt="Approve Allowance"
+        />
+      </p>
+      <p>We will then have the following prompt summarizing the offer:</p>
+      <p class="img-container">
+        <img
+          src="./../pics/createBuyOfferConfirm.webp"
+          alt="Confirm Creating a Buy offer"
+        />
+      </p>
+      <p>
+        Clicking the &#39;Create Buy Offer&#39; button will prompt you to
+        confirm the transaction in your wallet. After its confirmation, your
+        offer will be open and visible to others!
+      </p>
+      <h3 id="cancel"><a class="header-link" href="#cancel"></a>Cancel</h3>
+      <p>
+        Cancel an offer, given that it not accepted yet, by entering its Id in
+        the input box. For example, to cancel <strong>sale offer</strong> #3, we
+        will do the following:
+      </p>
+      <p class="img-container">
+        <img src="./../pics/cancelSaleOffer.webp" alt="Cancel a Sale Offer" />
+      </p>
+      <p>After clicking &#39;Cancel Sale Offer&#39;:</p>
+      <p class="img-container">
+        <img
+          src="./../pics/cancelSaleOfferConfirm.webp"
+          alt="Confirm Cancel Sale Offer"
+        />
+      </p>
+      <p>
+        Cancelling a <strong>buy offer</strong> follows the same exact procedure
+        presented above.
+      </p>
+      <h3 id="accept"><a class="header-link" href="#accept"></a>Accept</h3>
+      <p>Accept an offer by entering its Id in the input box.</p>
+      <h4 id="sale-offer-1">
+        <a class="header-link" href="#sale-offer-1"></a>Sale Offer
+      </h4>
+      <p>
+        To accept a sale offer, you first need to select the token you want to
+        collateralize the offer with. The value of this collateral is 1.5 times
+        the value of the amount buying. Also, this collateral will be stored on
+        the address of the Smart Contract
+      </p>
+      <p>Here we will accept sale offer #4, and provide a USDC collateral:</p>
+      <p class="img-container">
+        <img src="./../pics/acceptSaleOffer.webp" alt="Accept Sale Offer" />
+      </p>
+      <p>
+        After confirming, an may need to approve an allowance in order to
+        continue.
+      </p>
+      <p>After clicking &#39;Accept Sale Offer&#39;:</p>
+      <p class="img-container">
+        <img
+          src="./../pics/acceptSaleOfferConfirm.webp"
+          alt="Confirm Accept Sale Offer"
+        />
+      </p>
+      <h4 id="buy-offer-1">
+        <a class="header-link" href="#buy-offer-1"></a>Buy Offer
+      </h4>
+      <p>Accept a buy offer by just entering its Id in the input box.</p>
+      <p>Accepting <em>buy offer</em> #1 will like:</p>
+      <p class="img-container">
+        <img src="./../pics/acceptBuyOffer.webp" alt="Accept Buy Offer" />
+      </p>
+      <p>
+        After confirming, an may need to approve an allowance in order to
+        continue.
+      </p>
+      <p class="img-container">
+        <img
+          src="./../pics/acceptBuyOfferConfirm.webp"
+          alt="Confirm Accept Buy Offer"
+        />
+      </p>
+      <h3 id="forfeit"><a class="header-link" href="#forfeit"></a>Forfeit</h3>
+      <p>
+        Forfeit an offer by entering its Id in the input box, given that the the
+        collateral value is not below that of the debt. For example, to forfeit
+        <strong>sale offer</strong> #4, we will do the following:
+      </p>
+      <p class="img-container">
+        <img src="./../pics/forfeitSaleOffer.webp" alt="Forfeit a Sale Offer" />
+      </p>
+      <p>After clicking &#39;Forfeit Sale Offer&#39;:</p>
+      <p class="img-container">
+        <img
+          src="./../pics/forfeitSaleOfferConfirm.webp"
+          alt="Confirm Forfeit Sale Offer"
+        />
+      </p>
+      <p>
+        Forfeiting a <strong>buy offer</strong> follows the same exact procedure
+        presented above.
+      </p>
+      <h3 id="repay"><a class="header-link" href="#repay"></a>Repay</h3>
+      <p>
+        Repay an offer by entering its Id in the input box. If no repayment
+        amount is specified, it assumed that the full debt is being repaid.
+      </p>
+      <p>Let us partly repay 100 USDC of <strong>sale offer</strong> #2:</p>
+      <p>
+        <img src="./../pics/repaySaleOffer.webp" alt="Repay a Sale Offer" />
+        <img
+          src="./../pics/repaySaleOfferConfirm.webp"
+          alt="COnfirm Repay Sale Offer"
+        />
+      </p>
+      <p>
+        Repaying a <strong>buy offer</strong> follows the same procedure above.
+      </p>
+      <h3 id="add-collateral">
+        <a class="header-link" href="#add-collateral"></a>Add Collateral
+      </h3>
+      <p>
+        Add collateral to an offer by entering its Id and the amount being
+        added. Adding collateral to an offer raises the collateral to debt
+        ratio, and thus distances the buyer from a potential liquidation
+        <em>Note</em>: Liquidation can occur when collateral to debt ratio is
+        less than 1.25)
+      </p>
+      <p>
+        Below, we are adding 0.5 wETH of collateral to
+        <strong>sale offer</strong> #2:
+      </p>
+      <p>
+        <img
+          src="./../pics/addCollateralSaleOffer.webp"
+          alt="Add Collateral Sale Offer"
+        />
+        <img
+          src="./../pics/addCollateralSaleOfferConfirm.webp"
+          alt="Confirm Add Collateral Sale Offer"
+        />
+      </p>
+      <p>
+        Adding collateral to a <strong>buy offer</strong> follows the same above
+        procedure.
+      </p>
+      <h3 id="liquidate">
+        <a class="header-link" href="#liquidate"></a>Liquidate
+      </h3>
+      <p>
+        Liquidate an offer by entering its Id in the input box. <em>Note</em>:
+        You can liquidate an offer if the collateral to debt ratio is less than
+        1.25 <strong>or</strong> if the repayment deadline has passed.
+      </p>
+      <p>
+        In the pictures below, we are liquidating <strong>buy offer</strong> #1.
+        As it can be seen, the offer is liquidable because the repayment period
+        has expired. Also, the repayment amount is 0 USDC, since the sender of
+        the transaction is the seller of the offer.
+      </p>
+      <p>
+        <img src="./../pics/liquidateBuyOffer.webp" alt="Liquidate Buy Offer" />
+        <img
+          src="./../pics/liquidateBuyOfferConfirm.webp"
+          alt="Confirm Liquidate Buy Offer"
+        />
+      </p>
+      <p>
+        Liquidating a <strong>sale offer</strong> follows the same above
+        procedure.
+      </p>
+      <h3 id="change-address">
+        <a class="header-link" href="#change-address"></a>Change address
+      </h3>
+      <p>
+        If you are the seller/buyer of an offer, you can change the initial
+        address you used to create/accept the offer. To do so, simply enter the
+        Id of the offer in question, and the new address that you want to set.
+      </p>
+      <p>
+        <strong>Warning</strong>: If the user enters an invalid address, control
+        of the funds on the offer will be completly relinquished to that address
+        with no turning back.
+      </p>
+      <p>
+        Here, we will change the seller address of
+        <strong>sale offer</strong> #1;
+      </p>
+      <p>
+        <img
+          src="./../pics/changeAddressSaleOffer.webp"
+          alt="Change Address Sale Offer"
+        />
+        <img
+          src="./../pics/changeAddressSaleOfferConfirm.webp"
+          alt="Confirm Change Address Sale Offer"
+        />
+      </p>
+      <p>
+        Changing the address of a <strong>buy offer</strong> follows the same
+        above procedure.
+      </p>
+      <h2 id="browse"><a class="header-link" href="#browse"></a>Browse</h2>
+      <p>
+        The browse tab tabulates data on the latest open and accepted sale
+        offers. The latest buy offers can be shown by clicking on the &#39;Buy
+        Offers&#39; tab, above the table caption. Offers can also be accepted
+        from the browse tab by clicking on the accept button:
+      </p>
+      <p class="img-container">
+        <img src="./../pics/acceptAction.webp" alt="Accept Action Button" />
+      </p>
+      <h2 id="liquidate-1">
+        <a class="header-link" href="#liquidate-1"></a>Liquidate
+      </h2>
+      <p>
+        This tab displays information on offers that are accepted, and thus
+        potentially liquidable. Also, you can liquidate offers by clicking on
+        the liquidate button.
+      </p>
+      <p class="img-container">
+        <img
+          src="./../pics/actionLiquidate.webp"
+          alt="Liquidate Action Button"
+        />
+      </p>
+      <h2 id="dashboard">
+        <a class="header-link" href="#dashboard"></a>Dashboard
+      </h2>
+      <p>
+        The dashboard can show data on the offers posted and accepted by the
+        user. From there, you can also cancel, liquidate, and change the
+        seller/buyer address of an offer:
+      </p>
+      <p class="img-container">
+        <img
+          src="./../pics/dashboardActions.webp"
+          alt="Dashboard Action Buttons"
+        />
+      </p>
+      <h2 id="allowance">
+        <a class="header-link" href="#allowance"></a>Allowance
+      </h2>
+      <h3 id="approve"><a class="header-link" href="#approve"></a>Approve</h3>
+      <p>
+        The approve tab basically allows the Spectrr.fi Smart Contracts (i.e.,
+        The Spectrr.fi website) to use the tokens in your wallet. By default, it
+        allocates an allowance of 1,000,000 tokens. An optional amount can be
+        specified in the Approve Amount box.
+      </p>
+      <p>
+        Clicking on the confirm button will directly open your wallet, which
+        will then ask you for confirmation.
+      </p>
+      <p>In the picture below we are approving an allowance of 0.05 wBTC:</p>
+      <p class="img-container">
+        <img
+          src="./../pics/approveAllowance.webp"
+          alt="Approving Allowance of 0.05 wBTC"
+        />
+      </p>
+      <h3 id="revoke"><a class="header-link" href="#revoke"></a>Revoke</h3>
+      <p>
+        This tab revokes a previously allocated allowance to Spectrr.fi. In
+        other words, one will not be able to send tokens through the Spectrr.fi
+        Smart Contracts.
+      </p>
+      <p class="img-container">
+        <img src="./../pics/revokeAllowance.webp" alt="Revoke Allowance wBTC" />
+      </p>
+      <h2 id="guide"><a class="header-link" href="#guide"></a>Guide</h2>
+      <p>
+        Clicking on this tab will redirect you this page. Alternatively, this
+        guide, source code of the Spectrr.fi website, and Smart contracts, can
+        also be found
+        <a
+          href="https://gitlab.com/spectrrfi/client/-/blob/master/src/guide/guide.md"
+          target="_blank"
+          >here</a
+        >.
+      </p>
+      <h2 id="disclaimer">
+        <a class="header-link" href="#disclaimer"></a>Disclaimer
+      </h2>
+      <ul class="list">
+        <li>
+          &quot;SOFTWARE PROVIDED AS IS&quot;, No Warranty or Liability
+          Whatsoever.
+        </li>
+        <li>
+          Trading cryptocurrencies is <strong>very</strong> risky, do not invest
+          in what you can <strong>not</strong> afford to lose.
+        </li>
+        <li>
+          Webpage hosted on
+          <a
+            href="https://docs.ipfs.tech/concepts/what-is-ipfs/"
+            target="_blank"
+            >IPFS (InterPlanetary file system)</a
+          >
+          , unless you run it locally on your machine.
+        </li>
+        <li>
+          Using
+          <a
+            href="https://thegraph.com/docs/en/deploying/hosted-service/"
+            target="_blank"
+            >The Graph Decentralized Network (hosted service)</a
+          >
+          to query all info about offers, if the service is down, the webpage
+          will not be able to fetch any info on any offers.
+        </li>
+        <li>
+          Prices used by the Smart Contracts are currently provided by Chainlink
+          Oracles Price Feeds.
+        </li>
+      </ul>
+      <h2 id="contact"><a class="header-link" href="#contact"></a>Contact</h2>
+      <ul class="list">
+        <li>
+          email:
+          <a
+            href="mailto:&#x73;&#117;&#x70;&#101;&#x72;&#103;&#x72;&#x61;&#x79;&#x66;&#108;&#121;&#x40;&#112;&#114;&#x6f;&#x74;&#111;&#110;&#46;&#x6d;&#x65;"
+            >&#x73;&#117;&#x70;&#101;&#x72;&#103;&#x72;&#x61;&#x79;&#x66;&#108;&#121;&#x40;&#112;&#114;&#x6f;&#x74;&#111;&#110;&#46;&#x6d;&#x65;</a
+          >
+        </li>
+        <li>
+          gpg pub key:
+          <a href="https://gitlab.com/supergrayfly.gpg"
+            >https://gitlab.com/supergrayfly.gpg</a
+          >
+        </li>
+      </ul>
+      <h2 id="license"><a class="header-link" href="#license"></a>License</h2>
+      <p>BSD-3-Clause</p>
+      <hr />
+      <center>
+        Generated with
+        <a href="https://github.com/mixu/markdown-styles" target="_blank"
+          >mixu/markdown-styles</a
+        >
+        | Copyright &copy; Supergrayfly
+      </center>
     </article>
   </body>
 </html>

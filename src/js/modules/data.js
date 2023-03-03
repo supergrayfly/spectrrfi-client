@@ -12,8 +12,8 @@ const abiSpectrr = require("./../assets/abis/SpectrrCore.json");
 
 // Tokens logos
 const chainLogo = new URL(
-      "./../assets/pics/fantom-ftm-logo.svg",
-      import.meta.url
+  "./../assets/pics/fantom-ftm-logo.svg",
+  import.meta.url
 );
 const btcLogo = new URL(
   "./../assets/pics/wrapped-bitcoin-wbtc.svg",
@@ -23,10 +23,7 @@ const linkLogo = new URL(
   "./../assets/pics/chainlink-link-logo.svg",
   import.meta.url
 );
-const bnbLogo = new URL(
-  "./../assets/pics/bnb-bnb-logo.svg",
-  import.meta.url
-);
+const bnbLogo = new URL("./../assets/pics/bnb-bnb-logo.svg", import.meta.url);
 const usdcLogo = new URL(
   "./../assets/pics/usd-coin-usdc-logo.svg",
   import.meta.url
@@ -99,9 +96,7 @@ const gotoApproveBtn = document.getElementById("goto-approve");
 
 // Wallet Buttons
 const connectWalletBtn = document.getElementById("connect-wallet");
-const connectToFantomTestnet = document.getElementById(
-  "connect-ftm-testnet"
-);
+const connectToFantomTestnet = document.getElementById("connect-ftm-testnet");
 const connectToFtmOpera = document.getElementById("connect-ftm-opera");
 
 // Switch between sale/buy sections
@@ -286,6 +281,6 @@ var skip1 = 0,
   skip8 = 0;
 var chainScanUrl, chainRpcUrl, subgraphApiUrl;
 var addrEther, addrBtc, addrUsdc, addrEth, addrBnb, addrLink, addrSpectrr;
-var chainId, chainName, chainNameLong
+var chainId, chainName, chainNameLong;
 var spectrr, ether, btc, eth, usdc, bnb, link;
-var prices = [0, 0, 0, 0, 0, 0]
+var prices = [0, 0, 0, 0, 0, 0];

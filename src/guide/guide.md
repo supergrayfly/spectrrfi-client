@@ -2,19 +2,21 @@
 title: Spectrr Finance How To Guide
 author: Supergrayfly
 ---
+
 # Spectrr Finance How to Guide
 
 Welcome to Spectrr Finance! An interest-free lending and borrowing like decentralised platform.
-Here, you can make *offers*, where you sell or buy tokens at an exchange rate and repayment period of your choice.
+Here, you can make _offers_, where you sell or buy tokens at an exchange rate and repayment period of your choice.
 This guide aims to give a tour of the functionalities of the Spectrr Finance website.
 
 ## Accessing The Spectrr Finance Website
 
 There are three ways to access the Spectrr.fi website:
+
 1. Using a browser supporting ipfs (brave & opera), you can just search for: <a href="http://spectrr.eth" target="_blank"><i>spectrrfi.eth</i></a>
-2. Using other browsers (firefox, chrome...), search for: 
-<a target="_blank" href="https://spectrr.eth.limo"><i>spectrr.eth.limo</i></a> **or** 
-<a href="https://spectrr.eth.link" target="_blank"><i>spectrr.eth.link</i></a>
+2. Using other browsers (firefox, chrome...), search for:
+   <a target="_blank" href="https://spectrr.eth.limo"><i>spectrr.eth.limo</i></a> **or**
+   <a href="https://spectrr.eth.link" target="_blank"><i>spectrr.eth.link</i></a>
 3. Clone the git repo from https://gitlab.com/spectrrfi/client to run a server at localhost
 
 ## Getting a web3 Wallet
@@ -24,12 +26,12 @@ To do so, you may install [metamask](https://metamask.io/), [exodus](https://www
 
 ## Supported Tokens (Fantom Opera)
 
-- Wrapped Fantom or <a target="_blank" href="https://ftmscan.com/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83">wFTM</a> 
-- Multichain Wrapped Bitcoin or <a target="_blank" href="https://ftmscan.com/token/0x321162cd933e2be498cd2267a90534a804051b11">wBTC</a> 
+- Wrapped Fantom or <a target="_blank" href="https://ftmscan.com/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83">wFTM</a>
+- Multichain Wrapped Bitcoin or <a target="_blank" href="https://ftmscan.com/token/0x321162cd933e2be498cd2267a90534a804051b11">wBTC</a>
 - Multichain Wrapped Ether or Ether <a target="_blank" href="https://ftmscan.com/token/0x74b23882a30290451A17c44f4F05243b6b58C76d">wETH</a>
 - USD Coin or <a target="_blank" href="https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75">USDC</a>
 - Multichain Wrapped Chainlink or <a target="_blank" href="https://ftmscan.com/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8">LINK</a>
-- Fantom Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45">fBNB</a> 
+- Fantom Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45">fBNB</a>
 
 ## Trading Rules
 
@@ -38,7 +40,7 @@ To do so, you may install [metamask](https://metamask.io/), [exodus](https://www
 - Likewise, you cannot buy a token and repay the same token plus interest.
   For instance, buying 1,000 USDT, and repaying 1,100 USDT.
 - When creating a buy offer or accepting a sale offer,
-you need to provide 1.5 times the amount you are buying in collateral.
+  you need to provide 1.5 times the amount you are buying in collateral.
 - Also, in the case of accepting a sale offer, the collateral token cannot
   be the same as the token you are buying. Otherwise, if a liquidation occurs,
   the seller would have sold a token for the same token plus interest.
@@ -58,7 +60,7 @@ open (not accepted or closed) sale and buy offers.
 
 ## Offers
 
-On the offers tab, the user can directly interact with the Spectrr.fi Smart Contracts. 
+On the offers tab, the user can directly interact with the Spectrr.fi Smart Contracts.
 The picture below presents the different possible actions:
 
 ![Offers Actions](./../pics/offers.webp)
@@ -69,7 +71,7 @@ The create action simply creates a sale/buy offer based on the user's input.
 
 #### Sale Offer
 
-In the picture below, we are creating a **sale offer**, where we are *selling 0.01 wBTC* at an *exchange rate of 24,000 USD/wBTC*, in *exchange of USDC*. Also, we specify a *repayament period of 2 days*.
+In the picture below, we are creating a **sale offer**, where we are _selling 0.01 wBTC_ at an _exchange rate of 24,000 USD/wBTC_, in _exchange of USDC_. Also, we specify a _repayament period of 2 days_.
 
 ![Creating a Sale Offer](./../pics/createSaleOffer.webp)
 
@@ -83,7 +85,7 @@ After the transaction has been confirmed on the blockchain, the following prompt
 
 ![Confirm Creating a Sale Offer](./../pics/createSaleOfferConfirm.webp)
 
-Clicking the 'Create Buy Offfer' button will prompt you to confirm the transaction in your wallet. 
+Clicking the 'Create Buy Offfer' button will prompt you to confirm the transaction in your wallet.
 After its confirmation, your offer will be open and visible to others!
 
 #### Buy Offer
@@ -93,7 +95,7 @@ The buy offer template look like so:
 
 ![Create Buy Offer Template](./../pics/createBuyOfferTemplate.webp)
 
-Let us create an offer were we want to buy *1000 USDC* at an *exchange rate of 0.000645 USDC/wETH*. 
+Let us create an offer were we want to buy _1000 USDC_ at an _exchange rate of 0.000645 USDC/wETH_.
 We will collateralize the offer with wETH, and specify a repayment period of 30 minutes.
 
 ![Creating a Buy Offer](./../pics/createBuyOffer.webp)
@@ -106,7 +108,7 @@ We will then have the following prompt summarizing the offer:
 
 ![Confirm Creating a Buy offer](./../pics/createBuyOfferConfirm.webp)
 
-Clicking the 'Create Buy Offer' button will prompt you to confirm the transaction in your wallet. 
+Clicking the 'Create Buy Offer' button will prompt you to confirm the transaction in your wallet.
 After its confirmation, your offer will be open and visible to others!
 
 ### Cancel
@@ -146,7 +148,7 @@ After clicking 'Accept Sale Offer':
 
 Accept a buy offer by just entering its Id in the input box.
 
-Accepting *buy offer* #1 will like:
+Accepting _buy offer_ #1 will like:
 
 ![Accept Buy Offer](./../pics/acceptBuyOffer.webp)
 
@@ -169,7 +171,7 @@ Forfeiting a **buy offer** follows the same exact procedure presented above.
 
 ### Repay
 
-Repay an offer by entering its Id in the input box. 
+Repay an offer by entering its Id in the input box.
 If no repayment amount is specified, it assumed that the full debt is being repaid.
 
 Let us partly repay 100 USDC of **sale offer** #2:
@@ -182,9 +184,9 @@ Repaying a **buy offer** follows the same procedure above.
 ### Add Collateral
 
 Add collateral to an offer by entering its Id and the amount being added.
-Adding collateral to an offer raises the collateral to debt ratio, 
+Adding collateral to an offer raises the collateral to debt ratio,
 and thus distances the buyer from a potential liquidation
-*Note*: Liquidation can occur when collateral to debt ratio is less than 1.25)
+_Note_: Liquidation can occur when collateral to debt ratio is less than 1.25)
 
 Below, we are adding 0.5 wETH of collateral to **sale offer** #2:
 
@@ -196,9 +198,9 @@ Adding collateral to a **buy offer** follows the same above procedure.
 ### Liquidate
 
 Liquidate an offer by entering its Id in the input box.
-*Note*: You can liquidate an offer if the collateral to debt ratio is less than 1.25 **or** if the repayment deadline has passed.
+_Note_: You can liquidate an offer if the collateral to debt ratio is less than 1.25 **or** if the repayment deadline has passed.
 
-In the pictures below, we are liquidating **buy offer** #1. 
+In the pictures below, we are liquidating **buy offer** #1.
 As it can be seen, the offer is liquidable because the repayment period has expired.
 Also, the repayment amount is 0 USDC, since the sender of the transaction is the seller of the offer.
 
@@ -224,7 +226,7 @@ Changing the address of a **buy offer** follows the same above procedure.
 
 ## Browse
 
-The browse tab tabulates data on the latest open and accepted sale offers. 
+The browse tab tabulates data on the latest open and accepted sale offers.
 The latest buy offers can be shown by clicking on the 'Buy Offers' tab, above the table caption.
 Offers can also be accepted from the browse tab by clicking on the accept button:
 
@@ -246,11 +248,11 @@ From there, you can also cancel, liquidate, and change the seller/buyer address 
 
 ## Allowance
 
-### Approve 
+### Approve
 
-The approve tab basically allows the Spectrr.fi Smart Contracts 
+The approve tab basically allows the Spectrr.fi Smart Contracts
 (i.e., The Spectrr.fi website) to use the tokens in your wallet.
-By default, it allocates an allowance of 1,000,000 tokens. 
+By default, it allocates an allowance of 1,000,000 tokens.
 An optional amount can be specified in the Approve Amount box.
 
 Clicking on the confirm button will directly open your wallet,
@@ -297,6 +299,7 @@ Alternatively, this guide, source code of the Spectrr.fi website, and Smart cont
 BSD-3-Clause
 
 ---
+
 <center>
 Generated with
 <a href="https://github.com/mixu/markdown-styles"

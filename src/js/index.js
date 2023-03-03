@@ -12,8 +12,8 @@ const abiSpectrr = require("./../assets/abis/SpectrrCore.json");
 
 // Tokens logos
 const chainLogo = new URL(
-      "./../assets/pics/fantom-ftm-logo.svg",
-      import.meta.url
+  "./../assets/pics/fantom-ftm-logo.svg",
+  import.meta.url
 );
 const btcLogo = new URL(
   "./../assets/pics/wrapped-bitcoin-wbtc.svg",
@@ -23,10 +23,7 @@ const linkLogo = new URL(
   "./../assets/pics/chainlink-link-logo.svg",
   import.meta.url
 );
-const bnbLogo = new URL(
-  "./../assets/pics/bnb-bnb-logo.svg",
-  import.meta.url
-);
+const bnbLogo = new URL("./../assets/pics/bnb-bnb-logo.svg", import.meta.url);
 const usdcLogo = new URL(
   "./../assets/pics/usd-coin-usdc-logo.svg",
   import.meta.url
@@ -99,9 +96,7 @@ const gotoApproveBtn = document.getElementById("goto-approve");
 
 // Wallet Buttons
 const connectWalletBtn = document.getElementById("connect-wallet");
-const connectToFantomTestnet = document.getElementById(
-  "connect-ftm-testnet"
-);
+const connectToFantomTestnet = document.getElementById("connect-ftm-testnet");
 const connectToFtmOpera = document.getElementById("connect-ftm-opera");
 
 // Switch between sale/buy sections
@@ -286,9 +281,9 @@ var skip1 = 0,
   skip8 = 0;
 var chainScanUrl, chainRpcUrl, subgraphApiUrl;
 var addrEther, addrBtc, addrUsdc, addrEth, addrBnb, addrLink, addrSpectrr;
-var chainId, chainName, chainNameLong
+var chainId, chainName, chainNameLong;
 var spectrr, ether, btc, eth, usdc, bnb, link;
-var prices = [0, 0, 0, 0, 0, 0]
+var prices = [0, 0, 0, 0, 0, 0];
 // toggle offer actions button color when clicked
 // reset colors when offers buttin is clicked
 document.querySelectorAll(".offer-actions").forEach((item, index, arr) => {
@@ -554,8 +549,8 @@ document.querySelectorAll(".token").forEach((item) => {
       item.innerHTML;
     item.parentElement.parentElement.parentElement.removeAttribute("open");
 		*/
-		item.closest('details').firstElementChild.innerHTML = item.innerHTML;
-		item.closest('details').removeAttribute("open");
+    item.closest("details").firstElementChild.innerHTML = item.innerHTML;
+    item.closest("details").removeAttribute("open");
   });
 });
 
@@ -1351,10 +1346,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   subgraphApiUrl = data.SUBGRAPH_API_URL;
   chainId = data.CHAIN_ID;
   addrEther = data.ADDR_ETHER;
-	addrBtc = data.ADDR_BTC;
+  addrBtc = data.ADDR_BTC;
   addrBnb = data.ADDR_BNB;
   addrUsdc = data.ADDR_USDC;
   addrEth = data.ADDR_ETH;
+  addrLink = data.ADDR_LINK;
   addrSpectrr = data.ADDR_SPECTRR;
   chainName = data.CHAIN_NAME;
   chainNameLong = data.CHAIN_NAME_LONG;
@@ -1374,10 +1370,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         usdc = new contracts.Contract(addrUsdc, abiERC20, signer);
         btc = new contracts.Contract(addrBtc, abiERC20, signer);
         bnb = new contracts.Contract(addrBnb, abiERC20, signer);
+        link = new contracts.Contract(addrLink, abiERC20, signer);
         eth = new contracts.Contract(addrEth, abiERC20, signer);
-
-        console.log(spectrr);
-        console.log(eth);
 
         await getPrices();
 
@@ -2040,9 +2034,9 @@ document
         )} ${tokenIdToName(sellForId)}</p>
 				<p>Repayment in: ${formatSeconds(repayInSeconds)}</p>
 				<p>---------------------------------</p>
-				<p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(sellForId)}/${tokenIdToName(
-        sellingId
-      )}</p>
+				<p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(
+        sellForId
+      )}/${tokenIdToName(sellingId)}</p>
 				<p>Market Rate: ${formatAmount(
           getExchangeRate(sellingId, sellForId)
         )} ${tokenIdToName(sellForId)}/${tokenIdToName(sellingId)}</p>
@@ -2179,9 +2173,9 @@ document
       )}
 		  </p>
 			<p>---------------------------------</p>
-		  <p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(buyForId)}/${tokenIdToName(
-        buyingId
-      )}</p>
+		  <p>Exchange Rate: ${formatAmount(Number(exchangeRate))} ${tokenIdToName(
+        buyForId
+      )}/${tokenIdToName(buyingId)}</p>
 		  <p>Market Rate: ${formatAmount(marketExchangeRate)} ${tokenIdToName(
         buyForId
       )}/${tokenIdToName(buyingId)}</p>
@@ -3578,7 +3572,8 @@ document
 
         if (((await getSenderAddr()) == offer.seller) == false) {
           if (
-            (await checkBalance(offer.sellForId, toEther(offer.sellFor))) == false
+            (await checkBalance(offer.sellForId, toEther(offer.sellFor))) ==
+            false
           ) {
             createResponsePrompt(
               `Insufficient balance for ${tokenIdToName(offer.sellForId)}`
@@ -4191,11 +4186,11 @@ function tokenChoiceToId(tokenChoice) {
     return "3";
   } else if (tokenChoice[0] == "usdt") {
     return "4";
-  } else if (tokenChoice[0] == 'link') {
-		return "5"
-	} else if (tokenChoice[0] == 'bnb') {
-		return "6"
-	} else {
+  } else if (tokenChoice[0] == "link") {
+    return "5";
+  } else if (tokenChoice[0] == "bnb") {
+    return "6";
+  } else {
     throw "Invalid Choice";
   }
 }
@@ -4215,11 +4210,11 @@ async function checkEthereumAndWallet() {
 async function initPageFromChain() {
   if ((await getChainId()) == dataFtmTestnet.CHAIN_ID) {
     data = dataFtmTestnet;
-		prices.pop()
-		document.querySelectorAll('.bnb').forEach((item) => {
-    	item.parentElement.style.display = 'none'
-		})
-		document.getElementById('prices').lastElementChild.remove();
+    prices.pop();
+    document.querySelectorAll(".bnb").forEach((item) => {
+      item.parentElement.style.display = "none";
+    });
+    document.getElementById("prices").lastElementChild.remove();
   } else {
     data = dataFtm;
   }
@@ -4287,7 +4282,7 @@ async function connectNetwork(
       });
 
       createResponsePrompt(`Switched to ${_chainNameLong} Network.`);
-			window.location.reload()
+      window.location.reload();
     } catch (err) {
       if (err.code == 4902) {
         await addNetwork(
@@ -4351,27 +4346,29 @@ async function addNetwork(
 
 // Get offers and fill tables for home page
 async function getOffersHome() {
-  await getOffers(
-    0,
-    `first: ${OFFERS_TBL_SML}, where: { status: 0 }, orderDirection: desc, orderBy: timeCreated`,
-    actionsMarkupHomeSale,
-    homeSaleOffersTblBody.id,
-    ".accept-offer-sale",
-    1
-  );
+  if (home.style.display == "") {
+    await getOffers(
+      0,
+      `first: ${OFFERS_TBL_SML}, where: { status: 0 }, orderDirection: desc, orderBy: timeCreated`,
+      actionsMarkupHomeSale,
+      homeSaleOffersTblBody.id,
+      ".accept-offer-sale",
+      1
+    );
 
-  listenAcceptOffer(0);
+    listenAcceptOffer(0);
 
-  await getOffers(
-    1,
-    `first: ${OFFERS_TBL_SML}, where: { status: 0 }, orderDirection: desc, orderBy: timeCreated`,
-    actionsMarkupHomeBuy,
-    homeBuyOffersTblBody.id,
-    ".accept-offer-buy",
-    1
-  );
+    await getOffers(
+      1,
+      `first: ${OFFERS_TBL_SML}, where: { status: 0 }, orderDirection: desc, orderBy: timeCreated`,
+      actionsMarkupHomeBuy,
+      homeBuyOffersTblBody.id,
+      ".accept-offer-buy",
+      1
+    );
 
-  listenAcceptOffer(1);
+    listenAcceptOffer(1);
+  }
 }
 
 // Update data
@@ -4472,10 +4469,12 @@ async function getPrices() {
   }
 
   try {
-  	for (var i = 0; i < prices.length; i++) {
-  		prices[i] = toEther((await spectrr.tokenIdToPrice(`${i + 1}`)).toString());
-  	}
-  	
+    for (var i = 0; i < prices.length; i++) {
+      prices[i] = toEther(
+        (await spectrr.tokenIdToPrice(`${i + 1}`)).toString()
+      );
+    }
+
     updatePricesOnHTML();
   } catch (err) {
     console.log(err);
@@ -4695,11 +4694,11 @@ function tokenIdToContract(tokenId) {
     return eth;
   } else if (tokenId == 4) {
     return usdc;
-  }  else if (tokenId == 5) {
-		return link;
-	} else if (tokenId == 6) {
-		return bnb;
-	} else {
+  } else if (tokenId == 5) {
+    return link;
+  } else if (tokenId == 6) {
+    return bnb;
+  } else {
     throw "Invalid Id";
   }
 }
@@ -4713,11 +4712,11 @@ function tokenIdToName(tokenId) {
     return "wETH";
   } else if (tokenId == 4) {
     return "USDC";
-  }  else if (tokenId == 5) {
-		return "LINK"
-	} else if (tokenId == 6) {
-		return "fBNB"
-	} else {
+  } else if (tokenId == 5) {
+    return "wLINK";
+  } else if (tokenId == 6) {
+    return "wBNB";
+  } else {
     throw "Invalid Id";
   }
 }
@@ -4732,9 +4731,9 @@ function tokenIdToNameLong(tokenId) {
   } else if (tokenId == 4) {
     return "USDC";
   } else if (tokenId == 5) {
-		return "Chainlink"
-	} else if (tokenId == 6) {
-		return "fBnb"
+    return "wChainlink";
+  } else if (tokenId == 6) {
+    return "wBnb";
   } else {
     throw "Invalid Id";
   }
@@ -4750,10 +4749,10 @@ function tokenIdToPrice(tokenId) {
   } else if (tokenId == 4) {
     return prices[3];
   } else if (tokenId == 5) {
-		return prices[4];
-	} else if (tokenId == 6) {
-		return prices[5];
-	} else {
+    return prices[4];
+  } else if (tokenId == 6) {
+    return prices[5];
+  } else {
     throw "Invalid token Id";
   }
 }
@@ -4768,10 +4767,10 @@ function tokenIdToLogo(tokenId) {
   } else if (tokenId == 4) {
     return usdcLogo;
   } else if (tokenId == 5) {
-		return linkLogo;
-	} else if (tokenId == 6) {
-		return bnbLogo;
-	} else {
+    return linkLogo;
+  } else if (tokenId == 6) {
+    return bnbLogo;
+  } else {
     throw "Invalid token Id";
   }
 }
@@ -4815,12 +4814,12 @@ function timeToSeconds(time, format) {
 }
 
 // Recurring functions
-setInterval(getPrices, 30000);
-setInterval(updateBlockTimestamp, 60000);
+setInterval(getPrices, 20000);
+setInterval(updateBlockTimestamp, 30000);
 setInterval(updateChainStatus, 30000);
-setInterval(updateWalletStatus, 30000);
-setInterval(updateRpcStatus, 30000);
-// setInteval(getOffersHome, 30000)
+setInterval(updateWalletStatus, 20000);
+setInterval(updateRpcStatus, 20000);
+setInterval(getOffersHome, 30000);
 
 // Ethereum events
 if (typeof window.ethereum !== "undefined") {

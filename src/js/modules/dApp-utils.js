@@ -399,11 +399,11 @@ function tokenChoiceToId(tokenChoice) {
     return "3";
   } else if (tokenChoice[0] == "usdt") {
     return "4";
-  } else if (tokenChoice[0] == 'link') {
-		return "5"
-	} else if (tokenChoice[0] == 'bnb') {
-		return "6"
-	} else {
+  } else if (tokenChoice[0] == "link") {
+    return "5";
+  } else if (tokenChoice[0] == "bnb") {
+    return "6";
+  } else {
     throw "Invalid Choice";
   }
 }

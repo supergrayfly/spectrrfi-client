@@ -2,11 +2,11 @@
 async function initPageFromChain() {
   if ((await getChainId()) == dataFtmTestnet.CHAIN_ID) {
     data = dataFtmTestnet;
-		prices.pop()
-		document.querySelectorAll('.bnb').forEach((item) => {
-    	item.parentElement.style.display = 'none'
-		})
-		document.getElementById('prices').lastElementChild.remove();
+    prices.pop();
+    document.querySelectorAll(".bnb").forEach((item) => {
+      item.parentElement.style.display = "none";
+    });
+    document.getElementById("prices").lastElementChild.remove();
   } else {
     data = dataFtm;
   }
@@ -74,7 +74,7 @@ async function connectNetwork(
       });
 
       createResponsePrompt(`Switched to ${_chainNameLong} Network.`);
-			window.location.reload()
+      window.location.reload();
     } catch (err) {
       if (err.code == 4902) {
         await addNetwork(
@@ -138,27 +138,29 @@ async function addNetwork(
 
 // Get offers and fill tables for home page
 async function getOffersHome() {
-  await getOffers(
-    0,
-    `first: ${OFFERS_TBL_SML}, where: { status: 0 }, orderDirection: desc, orderBy: timeCreated`,
-    actionsMarkupHomeSale,
-    homeSaleOffersTblBody.id,
-    ".accept-offer-sale",
-    1
-  );
+  if (home.style.display == "") {
+    await getOffers(
+      0,
+      `first: ${OFFERS_TBL_SML}, where: { status: 0 }, orderDirection: desc, orderBy: timeCreated`,
+      actionsMarkupHomeSale,
+      homeSaleOffersTblBody.id,
+      ".accept-offer-sale",
+      1
+    );
 
-  listenAcceptOffer(0);
+    listenAcceptOffer(0);
 
-  await getOffers(
-    1,
-    `first: ${OFFERS_TBL_SML}, where: { status: 0 }, orderDirection: desc, orderBy: timeCreated`,
-    actionsMarkupHomeBuy,
-    homeBuyOffersTblBody.id,
-    ".accept-offer-buy",
-    1
-  );
+    await getOffers(
+      1,
+      `first: ${OFFERS_TBL_SML}, where: { status: 0 }, orderDirection: desc, orderBy: timeCreated`,
+      actionsMarkupHomeBuy,
+      homeBuyOffersTblBody.id,
+      ".accept-offer-buy",
+      1
+    );
 
-  listenAcceptOffer(1);
+    listenAcceptOffer(1);
+  }
 }
 
 // Update data
@@ -259,10 +261,12 @@ async function getPrices() {
   }
 
   try {
-  	for (var i = 0; i < prices.length; i++) {
-  		prices[i] = toEther((await spectrr.tokenIdToPrice(`${i + 1}`)).toString());
-  	}
-  	
+    for (var i = 0; i < prices.length; i++) {
+      prices[i] = toEther(
+        (await spectrr.tokenIdToPrice(`${i + 1}`)).toString()
+      );
+    }
+
     updatePricesOnHTML();
   } catch (err) {
     console.log(err);
@@ -482,11 +486,11 @@ function tokenIdToContract(tokenId) {
     return eth;
   } else if (tokenId == 4) {
     return usdc;
-  }  else if (tokenId == 5) {
-		return link;
-	} else if (tokenId == 6) {
-		return bnb;
-	} else {
+  } else if (tokenId == 5) {
+    return link;
+  } else if (tokenId == 6) {
+    return bnb;
+  } else {
     throw "Invalid Id";
   }
 }
@@ -500,11 +504,11 @@ function tokenIdToName(tokenId) {
     return "wETH";
   } else if (tokenId == 4) {
     return "USDC";
-  }  else if (tokenId == 5) {
-		return "LINK"
-	} else if (tokenId == 6) {
-		return "fBNB"
-	} else {
+  } else if (tokenId == 5) {
+    return "wLINK";
+  } else if (tokenId == 6) {
+    return "wBNB";
+  } else {
     throw "Invalid Id";
   }
 }
@@ -519,9 +523,9 @@ function tokenIdToNameLong(tokenId) {
   } else if (tokenId == 4) {
     return "USDC";
   } else if (tokenId == 5) {
-		return "Chainlink"
-	} else if (tokenId == 6) {
-		return "fBnb"
+    return "wChainlink";
+  } else if (tokenId == 6) {
+    return "wBnb";
   } else {
     throw "Invalid Id";
   }
@@ -537,10 +541,10 @@ function tokenIdToPrice(tokenId) {
   } else if (tokenId == 4) {
     return prices[3];
   } else if (tokenId == 5) {
-		return prices[4];
-	} else if (tokenId == 6) {
-		return prices[5];
-	} else {
+    return prices[4];
+  } else if (tokenId == 6) {
+    return prices[5];
+  } else {
     throw "Invalid token Id";
   }
 }
@@ -555,10 +559,10 @@ function tokenIdToLogo(tokenId) {
   } else if (tokenId == 4) {
     return usdcLogo;
   } else if (tokenId == 5) {
-		return linkLogo;
-	} else if (tokenId == 6) {
-		return bnbLogo;
-	} else {
+    return linkLogo;
+  } else if (tokenId == 6) {
+    return bnbLogo;
+  } else {
     throw "Invalid token Id";
   }
 }
@@ -602,12 +606,12 @@ function timeToSeconds(time, format) {
 }
 
 // Recurring functions
-setInterval(getPrices, 30000);
-setInterval(updateBlockTimestamp, 60000);
+setInterval(getPrices, 20000);
+setInterval(updateBlockTimestamp, 30000);
 setInterval(updateChainStatus, 30000);
-setInterval(updateWalletStatus, 30000);
-setInterval(updateRpcStatus, 30000);
-// setInteval(getOffersHome, 30000)
+setInterval(updateWalletStatus, 20000);
+setInterval(updateRpcStatus, 20000);
+setInterval(getOffersHome, 30000);
 
 // Ethereum events
 if (typeof window.ethereum !== "undefined") {
