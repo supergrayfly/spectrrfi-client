@@ -29,9 +29,9 @@ To do so, you may install [metamask](https://metamask.io/), [exodus](https://www
 - Wrapped Fantom or <a target="_blank" href="https://ftmscan.com/token/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83">wFTM</a>
 - Multichain Wrapped Bitcoin or <a target="_blank" href="https://ftmscan.com/token/0x321162cd933e2be498cd2267a90534a804051b11">wBTC</a>
 - Multichain Wrapped Ether or Ether <a target="_blank" href="https://ftmscan.com/token/0x74b23882a30290451A17c44f4F05243b6b58C76d">wETH</a>
-- USD Coin or <a target="_blank" href="https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75">USDC</a>
-- Multichain Wrapped Chainlink or <a target="_blank" href="https://ftmscan.com/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8">LINK</a>
-- Fantom Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45">fBNB</a>
+- Multichain Wrapped USD Coin or <a target="_blank" href="https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75">wUSDC</a>
+- Multichain Wrapped Chainlink or <a target="_blank" href="https://ftmscan.com/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8">wLINK</a>
+- Wrapped Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45">wBNB</a>
 
 ## Trading Rules
 
@@ -71,7 +71,7 @@ The create action simply creates a sale/buy offer based on the user's input.
 
 #### Sale Offer
 
-In the picture below, we are creating a **sale offer**, where we are _selling 0.01 wBTC_ at an _exchange rate of 24,000 USD/wBTC_, in _exchange of USDC_. Also, we specify a _repayament period of 2 days_.
+In the picture below, we are creating a **sale offer**, where we are _selling 0.01 wBTC_ at an _exchange rate of 24,000 USD/wBTC_, in _exchange of USDC_. Also, we specify a _repayment period of 2 days_.
 
 ![Creating a Sale Offer](./../pics/createSaleOffer.webp)
 
@@ -85,7 +85,7 @@ After the transaction has been confirmed on the blockchain, the following prompt
 
 ![Confirm Creating a Sale Offer](./../pics/createSaleOfferConfirm.webp)
 
-Clicking the 'Create Buy Offfer' button will prompt you to confirm the transaction in your wallet.
+Clicking the 'Create Buy Offer' button will prompt you to confirm the transaction in your wallet.
 After its confirmation, your offer will be open and visible to others!
 
 #### Buy Offer
@@ -122,7 +122,7 @@ After clicking 'Cancel Sale Offer':
 
 ![Confirm Cancel Sale Offer](./../pics/cancelSaleOfferConfirm.webp)
 
-Cancelling a **buy offer** follows the same exact procedure presented above.
+Canceling a **buy offer** follows the same exact procedure presented above.
 
 ### Accept
 
@@ -138,7 +138,7 @@ Here we will accept sale offer #4, and provide a USDC collateral:
 
 ![Accept Sale Offer](./../pics/acceptSaleOffer.webp)
 
-After confirming, an may need to approve an allowance in order to continue.
+After confirming, you may need to approve an allowance in order to continue.
 
 After clicking 'Accept Sale Offer':
 
@@ -152,7 +152,7 @@ Accepting _buy offer_ #1 will like:
 
 ![Accept Buy Offer](./../pics/acceptBuyOffer.webp)
 
-After confirming, an may need to approve an allowance in order to continue.
+After confirming, you may need to approve an allowance in order to continue.
 
 ![Confirm Accept Buy Offer](./../pics/acceptBuyOfferConfirm.webp)
 
@@ -177,7 +177,7 @@ If no repayment amount is specified, it assumed that the full debt is being repa
 Let us partly repay 100 USDC of **sale offer** #2:
 
 ![Repay a Sale Offer](./../pics/repaySaleOffer.webp)
-![COnfirm Repay Sale Offer](./../pics/repaySaleOfferConfirm.webp)
+![Confirm Repay Sale Offer](./../pics/repaySaleOfferConfirm.webp)
 
 Repaying a **buy offer** follows the same procedure above.
 
@@ -215,7 +215,7 @@ If you are the seller/buyer of an offer, you can change the initial address you 
 To do so, simply enter the Id of the offer in question, and the new address that you want to set.
 
 **Warning**: If the user enters an invalid address, control of the funds
-on the offer will be completly relinquished to that address with no turning back.
+on the offer will be completely relinquished to that address with no turning back.
 
 Here, we will change the seller address of **sale offer** #1;
 
@@ -278,15 +278,15 @@ Alternatively, this guide, source code of the Spectrr.fi website, and Smart cont
 
 - "SOFTWARE PROVIDED AS IS", No Warranty or Liability Whatsoever.
 - Trading cryptocurrencies is **very** risky, do not invest in what you can **not** afford to lose.
-- Webpage hosted on
+- Web page hosted on
   <a href="https://docs.ipfs.tech/concepts/what-is-ipfs/"
-  target="_blank">IPFS (InterPlanetary file system)</a>
+  target="_blank">IPFS (Interplanetary file system)</a>
   , unless you run it locally on your machine.
 - Using
   <a href="https://thegraph.com/docs/en/deploying/hosted-service/"
   target="_blank">The Graph Decentralized Network (hosted service)</a>
   to query all info about offers, if the service is down,
-  the webpage will not be able to fetch any info on any offers.
+  the web page will not be able to fetch any info on any offers.
 - Prices used by the Smart Contracts are currently provided by Chainlink Oracles Price Feeds.
 
 ## Contact

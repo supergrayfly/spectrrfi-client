@@ -63,7 +63,7 @@ Pull requests, comments, and emails are all appreciated.
 - Trading Cryptocurrencies is Very Risky.
 - Webpage hosted on
   <a href="https://docs.ipfs.tech/concepts/what-is-ipfs/"
-  target="_blank">IPFS (InterPlanetary file system)</a>
+  target="_blank">IPFS (Interplanetary file system)</a>
   , unless you run it locally on your machine.
 - Using
   <a href="https://thegraph.com/docs/en/deploying/hosted-service/"
