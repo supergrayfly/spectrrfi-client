@@ -13,10 +13,10 @@ This guide aims to give a tour of the functionalities of the Spectrr Finance web
 
 There are three ways to access the Spectrr.fi website:
 
-1. Using a browser supporting ipfs (brave & opera), you can just search for: <a href="http://spectrr.eth" target="_blank"><i>spectrrfi.eth</i></a>
+1. Using a browser supporting ipfs (brave & opera), you can just search for: <a href="https://spectrrfi.eth" target="_blank"><i>spectrrfi.eth</i></a>
 2. Using other browsers (firefox, chrome...), search for:
-   <a target="_blank" href="https://spectrr.eth.limo"><i>spectrr.eth.limo</i></a> **or**
-   <a href="https://spectrr.eth.link" target="_blank"><i>spectrr.eth.link</i></a>
+   <a target="_blank" href="https://spectrrfi.eth.limo"><i>spectrrfi.eth.limo</i></a> **or**
+   <a href="https://spectrrfi.eth.link" target="_blank"><i>spectrrfi.eth.link</i></a>
 3. Clone the git repo from https://gitlab.com/spectrrfi/client to run a server at localhost
 
 ## Getting a web3 Wallet

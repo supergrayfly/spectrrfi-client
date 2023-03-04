@@ -1,7 +1,7 @@
 # Spectrr Finance Web Client
 
 Web client for Spectrr Finance, designed to interact with Spectrr Finance smart contracts. 
-This webpage will be available at the spectrr.eth Ethereum Name Service domain.
+This webpage will be available at the spectrrfi.eth Ethereum Name Service domain.
 
 ## Overview
 
