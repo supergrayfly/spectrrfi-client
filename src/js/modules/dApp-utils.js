@@ -391,7 +391,6 @@ async function tryTx(fn, args) {
     )}...</a> `;
 
     createResponsePrompt(txMarkup);
-    console.log(tx);
     return true;
   } catch (err) {
     console.log(err);

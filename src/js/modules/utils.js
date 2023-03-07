@@ -503,7 +503,7 @@ function tokenIdToName(tokenId) {
   } else if (tokenId == 3) {
     return "wETH";
   } else if (tokenId == 4) {
-    return "USDC";
+    return "wUSDC";
   } else if (tokenId == 5) {
     return "wLINK";
   } else if (tokenId == 6) {
@@ -521,7 +521,7 @@ function tokenIdToNameLong(tokenId) {
   } else if (tokenId == 3) {
     return "wEthereum";
   } else if (tokenId == 4) {
-    return "USDC";
+    return "wUSDC";
   } else if (tokenId == 5) {
     return "wChainlink";
   } else if (tokenId == 6) {

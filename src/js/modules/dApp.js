@@ -768,7 +768,7 @@ document
 
         if (ratio < 1) {
           createResponsePrompt(
-            "Collateral to debt ratio is below 1%, this trnsaction will incur a loss to the seller...aborting"
+            "Collateral to debt ratio is below 1%, this transaction will incur a loss to the seller...aborting"
           );
           return;
         }
@@ -861,7 +861,7 @@ document
 
         if (ratio < 1) {
           createResponsePrompt(
-            "Collateral to debt ratio is below 1%, this trnsaction will incur a loss to the seller...aborting"
+            "Collateral to debt ratio is below 1%, this transaction will incur a loss to the seller...aborting"
           );
           return;
         }
@@ -875,15 +875,17 @@ document
             offer.repayInSec
           )}</p>
 					<p>---------------------------------</p>
-				  <p>Amount Selling: ${formatEther(offer.buying)} ${tokenIdToName(
+				  <p>Amount Buying: ${formatEther(offer.buying)} ${tokenIdToName(
           offer.buyingId
         )}</p>
-				  <p>Amount Selling For: ${formatEther(offer.buyFor)} ${tokenIdToName(
+				  <p>Amount Buying For: ${formatEther(offer.buyFor)} ${tokenIdToName(
           offer.buyForId
         )}</p>
-				  <p>Exchange Rate: ${formatEther(offer.exchangeRate)} ${tokenIdToName(
-          offer.buyingId
-        )}/${tokenIdToName(offer.buyForId)}</p>
+				  <p>Exchange Rate: ${formatAmount(
+            getOfferRate(toEther(offer.buying), toEther(offer.buyFor))
+          )} ${tokenIdToName(offer.buyingId)}/${tokenIdToName(
+          offer.buyForId
+        )}</p>
 				  <p>Market Rate: ${formatAmount(
             getExchangeRate(offer.buyingId, offer.buyForId)
           )} ${tokenIdToName(offer.buyForId)}/${tokenIdToName(

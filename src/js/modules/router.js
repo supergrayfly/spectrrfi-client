@@ -1,5 +1,5 @@
 // toggle offer actions button color when clicked
-// reset colors when offers buttin is clicked
+// reset colors when offers button is clicked
 document.querySelectorAll(".offer-actions").forEach((item, index, arr) => {
   item.addEventListener("click", () => {
     arr.forEach((item) => {
@@ -10,8 +10,8 @@ document.querySelectorAll(".offer-actions").forEach((item, index, arr) => {
   });
 });
 
-// toggle sale/buy offer button color when clicked
-document.querySelectorAll(".toggle-sale-buy").forEach((item, index, arr) => {
+["#dashboard-toggle-offer-type-buy", "#dashboard-toggle-offer-type-sale", '.switch-offer-type', '.toggle-sale-buy'].forEach(itm => {
+document.querySelectorAll(itm).forEach((item, index, arr) => {
   item.children[0].addEventListener("click", () => {
     item.children[0].classList.replace("secondary", "contrast");
     item.children[1].classList.replace("contrast", "secondary");
@@ -21,6 +21,7 @@ document.querySelectorAll(".toggle-sale-buy").forEach((item, index, arr) => {
     item.children[1].classList.replace("secondary", "contrast");
     item.children[0].classList.replace("contrast", "secondary");
   });
+});
 });
 
 // toggle dark & light theme
@@ -38,7 +39,6 @@ function listenAcceptOffer(offerType) {
       ".accept-offer-sale",
       "goto-accept",
       "accept-sale-offer-id",
-      0,
       ""
     );
   } else {
@@ -47,7 +47,6 @@ function listenAcceptOffer(offerType) {
       "goto-accept",
       switchAcceptBuy,
       "accept-buy-offer-id",
-      0,
       "confirm-accept-buy"
     );
   }
@@ -59,7 +58,6 @@ function listenLiquidateOffer(offerType) {
       ".liquidate-offer-sale",
       "goto-liquidate-applet",
       "liquidate-sale-offer-id",
-      0,
       "confirm-liquidate-sale-offer"
     );
   } else {
@@ -68,7 +66,6 @@ function listenLiquidateOffer(offerType) {
       "goto-liquidate-applet",
       switchLiquidateBuy,
       "liquidate-buy-offer-id",
-      0,
       "confirm-liquidate-buy-offer"
     );
   }
@@ -80,7 +77,6 @@ function listenAddCollateral(offerType) {
       ".add-collateral-offer-sale",
       "goto-add-collateral",
       "add-collateral-sale-id",
-      0,
       ""
     );
   } else {
@@ -89,7 +85,6 @@ function listenAddCollateral(offerType) {
       "goto-add-collateral",
       switchAddCollateralBuy,
       "add-collateral-buy-id",
-      0,
       ""
     );
   }
@@ -101,7 +96,6 @@ function listenForfeitOffer(offerType) {
       ".forfeit-offer-sale",
       "goto-forfeit",
       "forfeit-sale-offer-id",
-      0,
       "confirm-forfeit-sale-offer"
     );
   } else {
@@ -110,7 +104,6 @@ function listenForfeitOffer(offerType) {
       "goto-forfeit",
       switchForfeitBuy,
       "forfeit-buy-offer-id",
-      0,
       "confirm-forfeit-buy-offer"
     );
   }
@@ -122,22 +115,7 @@ function listenCancelOffer(offerType) {
       ".cancel-offer-sale",
       "goto-cancel",
       "cancel-sale-offer-id",
-      1,
       "confirm-cancel-sale-offer"
-    );
-    addEventListenerToBtnSale(
-      ".liquidate-offer-sale",
-      "goto-liquidate-applet",
-      "liquidate-sale-offer-id",
-      1,
-      "confirm-liquidate-sale-offer"
-    );
-    addEventListenerToBtnSale(
-      ".change-addr-offer-sale",
-      "goto-change-addr",
-      "change-addr-sale-id",
-      1,
-      ""
     );
   } else {
     addEventListenerToBtnBuy(
@@ -145,24 +123,7 @@ function listenCancelOffer(offerType) {
       "goto-cancel",
       switchCancelBuy,
       "cancel-buy-offer-id",
-      1,
       "confirm-cancel-buy-offer"
-    );
-    addEventListenerToBtnBuy(
-      ".liquidate-offer-buy",
-      "goto-liquidate-applet",
-      switchLiquidateBuy,
-      "liquidate-buy-offer-id",
-      1,
-      "confirm-liquidate-buy-offer"
-    );
-    addEventListenerToBtnBuy(
-      ".change-addr-offer-buy",
-      "goto-change-addr",
-      switchChangeAddrBuy,
-      "change-addr-buy-id",
-      1,
-      ""
     );
   }
 }
@@ -173,7 +134,6 @@ function listenRepayOffer(offerType) {
       ".repay-offer-sale",
       "goto-repay",
       "repay-sale-offer-id",
-      0,
       ""
     );
   } else {
@@ -182,76 +142,55 @@ function listenRepayOffer(offerType) {
       "goto-repay",
       switchRepayBuy,
       "repay-buy-offer-id",
-      0,
       ""
     );
   }
 }
 
-function listenAcceptedTable(offerType) {
+function listenChangeAddr(offerType) {
   if (offerType === 0) {
-    addEventListenerToBtnSale(
-      ".repay-offer-sale",
-      "goto-repay",
-      "repay-sale-offer-id",
-      1,
-      ""
-    );
-    addEventListenerToBtnSale(
-      ".add-collateral-offer-sale",
-      "goto-add-collateral",
-      "add-collateral-sale-id",
-      1,
-      ""
-    );
-    addEventListenerToBtnSale(
-      ".forfeit-offer-sale",
-      "goto-forfeit",
-      "forfeit-sale-offer-id",
-      1,
-      "confirm-forfeit-sale-offer"
-    );
     addEventListenerToBtnSale(
       ".change-addr-offer-sale",
       "goto-change-addr",
       "change-addr-sale-id",
-      1,
       ""
     );
   } else {
-    addEventListenerToBtnBuy(
-      ".repay-offer-buy",
-      "goto-repay",
-      switchRepayBuy,
-      "repay-buy-offer-id",
-      1,
-      ""
-    );
-    addEventListenerToBtnBuy(
-      ".add-collateral-offer-buy",
-      "goto-add-collateral",
-      switchAddCollateralBuy,
-      "add-collateral-buy-id",
-      1,
-      ""
-    );
-    addEventListenerToBtnBuy(
-      ".forfeit-offer-buy",
-      "goto-forfeit",
-      switchForfeitBuy,
-      "forfeit-buy-offer-id",
-      1,
-      "confirm-forfeit-buy-offer"
-    );
     addEventListenerToBtnBuy(
       ".change-addr-offer-buy",
       "goto-change-addr",
       switchChangeAddrBuy,
       "change-addr-buy-id",
-      1,
       ""
     );
   }
+}
+
+function listenPostedSale() {
+  listenCancelOffer(0);
+  listenLiquidateOffer(0);
+  listenChangeAddr(0);
+}
+
+function listenPostedBuy() {
+  listenRepayOffer(1);
+  listenCancelOffer(1);
+  listenForfeitOffer(1);
+  listenAddCollateral(1);
+  listenChangeAddr(1);
+}
+
+function listenAcceptedSale() {
+  listenRepayOffer(0);
+  listenForfeitOffer(0);
+  listenAddCollateral(0);
+  listenChangeAddr(0);
+}
+
+function listenAcceptedBuy() {
+  listenCancelOffer(1);
+  listenLiquidateOffer(1);
+  listenChangeAddr(1);
 }
 
 // Fill token selection with token name after clicking
@@ -352,7 +291,7 @@ gotoDashboardBtn.addEventListener("click", async () => {
         0
       );
 
-      listenCancelOffer(0);
+      listenPostedSale();
     } else {
       await getOffers(
         0,
@@ -362,7 +301,7 @@ gotoDashboardBtn.addEventListener("click", async () => {
         0
       );
 
-      listenAcceptedTable(0);
+      listenAcceptedSale();
     }
   } else {
     if (dashboardBuyPostedOffersTbl.style.display == "") {
@@ -374,7 +313,7 @@ gotoDashboardBtn.addEventListener("click", async () => {
         0
       );
 
-      listenCancelOffer(1);
+      listenPostedBuy();
     } else {
       await getOffers(
         1,
@@ -384,7 +323,7 @@ gotoDashboardBtn.addEventListener("click", async () => {
         0
       );
 
-      listenAcceptedTable(1);
+      listenAcceptedBuy();
     }
   }
 });
@@ -535,7 +474,7 @@ dashboardSwitchSaleOfferBtn.addEventListener("click", async () => {
         0
       );
 
-      listenCancelOffer(0);
+      listenPostedSale();
     } else {
       await getOffers(
         0,
@@ -545,7 +484,7 @@ dashboardSwitchSaleOfferBtn.addEventListener("click", async () => {
         0
       );
 
-      listenAcceptedTable(0);
+      listenAcceptedSale();
     }
   }
 });
@@ -568,7 +507,7 @@ dashboardSwitchBuyOfferBtn.addEventListener("click", async () => {
         0
       );
 
-      listenCancelOffer(1);
+      listenPostedBuy();
     } else {
       await getOffers(
         1,
@@ -578,7 +517,7 @@ dashboardSwitchBuyOfferBtn.addEventListener("click", async () => {
         0
       );
 
-      listenAcceptedTable(1);
+      listenAcceptedBuy();
     }
   }
 });
@@ -597,7 +536,7 @@ dashboardSwitchToPostedSale.addEventListener("click", async () => {
     0
   );
 
-  listenCancelOffer(0);
+  listenPostedSale();
 });
 
 dashboardSwitchToAcceptedSale.addEventListener("click", async () => {
@@ -614,7 +553,7 @@ dashboardSwitchToAcceptedSale.addEventListener("click", async () => {
     0
   );
 
-  listenAcceptedTable(0);
+  listenAcceptedSale();
 });
 
 dashboardSwitchToPostedBuy.addEventListener("click", async () => {
@@ -631,7 +570,7 @@ dashboardSwitchToPostedBuy.addEventListener("click", async () => {
     0
   );
 
-  listenAcceptedTable(1);
+  listenPostedBuy();
 });
 
 dashboardSwitchToAcceptedBuy.addEventListener("click", async () => {
@@ -648,7 +587,7 @@ dashboardSwitchToAcceptedBuy.addEventListener("click", async () => {
     0
   );
 
-  listenAcceptedTable(1);
+  listenAcceptedBuy();
 });
 
 // Navigate through offers in tables
@@ -768,7 +707,7 @@ gotoPreviousPostedOffersSale.addEventListener("click", async () => {
     `status_not: 2, seller: "${sender}"`
   );
 
-  listenCancelOffer(0);
+  listenPostedSale();
 });
 
 gotoNextPostedOffersSale.addEventListener("click", async () => {
@@ -783,7 +722,7 @@ gotoNextPostedOffersSale.addEventListener("click", async () => {
     `status_not: 2, seller: "${sender}"`
   );
 
-  listenCancelOffer(0);
+  listenPostedSale();
 });
 
 gotoPreviousPostedOffersBuy.addEventListener("click", async () => {
@@ -798,7 +737,7 @@ gotoPreviousPostedOffersBuy.addEventListener("click", async () => {
     `status_not: 2, buyer: "${sender}"`
   );
 
-  listenCancelOffer(1);
+  listenPostedBuy();
 });
 
 gotoNextPostedOffersBuy.addEventListener("click", async () => {
@@ -813,7 +752,7 @@ gotoNextPostedOffersBuy.addEventListener("click", async () => {
     `status_not: 2, buyer: "${sender}"`
   );
 
-  listenCancelOffer(1);
+  listenPostedBuy();
 });
 
 gotoPreviousAcceptedOffersSale.addEventListener("click", async () => {
@@ -828,7 +767,7 @@ gotoPreviousAcceptedOffersSale.addEventListener("click", async () => {
     `status_not: 2, buyer: "${sender}"`
   );
 
-  listenAcceptedTable(0);
+  listenAcceptedSale();
 });
 
 gotoNextOffersAcceptedOffersSale.addEventListener("click", async () => {
@@ -843,7 +782,7 @@ gotoNextOffersAcceptedOffersSale.addEventListener("click", async () => {
     `status_not: 2, buyer: "${sender}"`
   );
 
-  listenAcceptedTable(0);
+  listenAcceptedSale();
 });
 
 gotoPreviousOffersAcceptedOffersBuy.addEventListener("click", async () => {
@@ -858,7 +797,7 @@ gotoPreviousOffersAcceptedOffersBuy.addEventListener("click", async () => {
     `status_not: 2, seller: "${sender}"`
   );
 
-  listenAcceptedTable(1);
+  listenAcceptedBuy();
 });
 
 gotoNextOffersAcceptedOffersBuy.addEventListener("click", async () => {
@@ -873,7 +812,7 @@ gotoNextOffersAcceptedOffersBuy.addEventListener("click", async () => {
     `status_not: 2, seller: "${sender}"`
   );
 
-  listenAcceptedTable(1);
+  listenAcceptedBuy();
 });
 
 // Navigate through sale and buy applets

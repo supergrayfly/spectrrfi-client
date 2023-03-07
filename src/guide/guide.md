@@ -5,7 +5,7 @@ author: Supergrayfly
 
 # Spectrr Finance How to Guide
 
-Welcome to <a target="_blank" href="https://ftmscan.com/address/0x05fd70ba0530c9514bd8ee07bb1af81217c7e788">Spectrr Finance</a>! An interest-free lending and borrowing like decentralised platform.
+Welcome to <a target="_blank" href="https://ftmscan.com/address/0x60f15a77c39c75918c673b64772dd7849b0b8aaa">Spectrr Finance</a>! An interest-free lending and borrowing like decentralised platform.
 Here, you can make _offers_, where you sell or buy tokens at an exchange rate and repayment period of your choice.
 This guide aims to give a tour of the functionalities of the Spectrr Finance website.
 

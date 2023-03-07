@@ -3,7 +3,7 @@ const CHAIN_RPC_URL = "https://rpc.ankr.com/fantom";
 const SUBGRAPH_API_URL =
   "https://api.thegraph.com/subgraphs/name/supergrayfly/spectrrfi";
 const CHAIN_ID = "0xfa";
-const ADDR_SPECTRR = "0x05FD70BA0530C9514bD8ee07bb1Af81217C7E788";
+const ADDR_SPECTRR = "0x60f15a77c39c75918c673b64772dd7849b0b8aaa";
 const ADDR_ETHER = "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83"; // wftm
 const ADDR_BTC = "0x321162Cd933E2Be498Cd2267a90534A804051b11"; // wbtc
 const ADDR_ETH = "0x74b23882a30290451A17c44f4F05243b6b58C76d"; // weth

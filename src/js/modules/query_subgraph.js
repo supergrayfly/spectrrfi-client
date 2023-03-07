@@ -7,13 +7,13 @@ const actionsMarkupLiquidateSale =
 const actionsMarkupLiquidateBuy =
   '<button class="liquidate-offer-buy" style="line-height: 1px">Liquidate</button>';
 const actionsMarkupPostedSale =
-  '<details role="list" style="margin-bottom: 0"> <summary aria-haspopup="listbox" role="button" style="line-height: 1px; padding-bottom: 0;">Actions</summary> <ul role="listbox"class="actions-dropdown" style="background-color: #1095c1; margin-top: 3px"><li style="padding: 3px 0; margin-top: 0;"><button class="cancel-offer-sale">Cancel</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="liquidate-offer-sale">Liquidate</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="change-addr-offer-sale" style="white-space: normal; padding: 3px 0; line-height: 15px;">Change Addr.</button></li></ul></details>';
-const actionsMarkupPostedBuy =
-  '<details role="list" style="margin-bottom: 0"> <summary aria-haspopup="listbox" role="button" style="line-height: 1px; padding-bottom: 0;">Actions</summary> <ul role="listbox"class="actions-dropdown" style="background-color: #1095c1; margin-top: 3px"><li style="padding: 3px 0; margin-top: 0;"><button class="cancel-offer-buy">Cancel</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="liquidate-offer-buy">Liquidate</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="change-addr-offer-buy" style="white-space: normal; padding: 3px 0; line-height: 15px;">Change Addr.</button></li></ul></details>';
+  '<details role="list" style="margin-bottom: 0"> <summary aria-haspopup="listbox" role="button" style="line-height: 1px; padding-bottom: 0;">Actions</summary><ul role="listbox"class="actions-dropdown" style="background-color: #1095c1; margin-top: 3px"><li style="padding: 3px 0; margin-top: 0;"><button class="cancel-offer-sale">Cancel</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="liquidate-offer-sale">Liquidate</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="change-addr-offer-sale" style="white-space: normal; padding: 3px 0; line-height: 15px;">Change Addr.</button></li></ul></details>';
 const actionsMarkupAcceptedSale =
-  '<details role="list" style="margin-bottom: 0"> <summary aria-haspopup="listbox" role="button" style="line-height: 1px; padding-bottom: 0;">Actions</summary> <ul role="listbox"class="actions-dropdown" style="background-color: #1095c1; margin-top: 3px"><li style="padding: 3px 0; margin-top: 0;"><button class="repay-offer-sale">Repay</button></li><li style="padding: 3px 0;"><button class="add-collateral-offer-sale" style="white-space: normal; padding: 3px 0; line-height: 30px;">Add Collat.</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="forfeit-offer-sale">Forfeit</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="change-addr-offer-sale" style="white-space: normal; padding: 3px 0; line-height: 15px;">Change Addr.</button></li></ul></details>';
+  '<details role="list" style="margin-bottom: 0"> <summary aria-haspopup="listbox" role="button" style="line-height: 1px; padding-bottom: 0;">Actions</summary><ul role="listbox"class="actions-dropdown" style="background-color: #1095c1; margin-top: 3px"><li style="padding: 3px 0; margin-top: 0;"><button class="repay-offer-sale">Repay</button></li><li style="padding: 3px 0;"><button class="add-collateral-offer-sale" style="white-space: normal; padding: 3px 0; line-height: 30px;">Add Collat.</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="forfeit-offer-sale">Forfeit</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="change-addr-offer-sale" style="white-space: normal; padding: 3px 0; line-height: 15px;">Change Addr.</button></li></ul></details>';
+const actionsMarkupPostedBuy =
+  '<details role="list" style="margin-bottom: 0"> <summary aria-haspopup="listbox" role="button" style="line-height: 1px; padding-bottom: 0;">Actions</summary><ul role="listbox"class="actions-dropdown" style="background-color: #1095c1; margin-top: 3px"><li style="padding: 3px 0; margin-top: 0;"><button class="repay-offer-buy">Repay</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="cancel-offer-buy">Cancel</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="forfeit-offer-buy">Forfeit</button></li><li style="padding: 3px 0;"><button class="add-collateral-offer-buy" style="white-space: normal; padding: 3px 0; line-height: 30px;">Add Collat.</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="change-addr-offer-buy" style="white-space: normal; padding: 3px 0; line-height: 15px;">Change Addr.</button></li></ul></details>';
 const actionsMarkupAcceptedBuy =
-  '<details role="list" style="margin-bottom: 0"> <summary aria-haspopup="listbox" role="button" style="line-height: 1px; padding-bottom: 0">Actions</summary> <ul role="listbox"class="actions-dropdown" style="background-color: #1095c1; margin-top: 3px"><li style="padding: 3px 0; margin-top: 0;"><button class="repay-offer-buy">Repay</button></li><li style="padding: 3px 0;"><button class="add-collateral-offer-buy" style="white-space: normal; padding: 3px 0; line-height: 30px;">Add Collat.</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="forfeit-offer-buy">Forfeit</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="change-addr-offer-sale" style="white-space: normal; padding: 3px 0; line-height: 15px;">Change Addr.</button></li></ul></details>';
+  '<details role="list" style="margin-bottom: 0"><summary aria-haspopup="listbox" role="button" style="line-height: 1px; padding-bottom: 0">Actions</summary><ul role="listbox"class="actions-dropdown" style="background-color: #1095c1; margin-top: 3px"><li style="padding: 3px 0; margin-bottom: 0"><button class="liquidate-offer-buy">Liquidate</button></li><li style="padding: 3px 0; margin-bottom: 0"><button class="change-addr-offer-sale" style="white-space: normal; padding: 3px 0; line-height: 15px;">Change Addr.</button></li></ul></details>';
 
 // Query The Graph for offers
 async function getOffers(offerType, args, actionsMarkup, appendTo, tableType) {
@@ -492,16 +492,12 @@ function addEventListenerToBtnSale(
   buttonClass,
   redirectTo,
   offerIdField,
-  itemType,
   clickConfirm
 ) {
   document.querySelectorAll(buttonClass).forEach((item) => {
     item.addEventListener("click", () => {
       let offerId =
-        itemType == 0
-          ? item.parentElement.parentElement.children[0].innerText
-          : item.parentElement.parentElement.parentElement.parentElement
-              .parentElement.children[0].innerText;
+        item.closest("td").parentElement.firstElementChild.innerText;
 
       document.getElementById("goto-offers").click();
       document.getElementById(redirectTo).click();
@@ -519,16 +515,12 @@ function addEventListenerToBtnBuy(
   redirectTo,
   switchToBuy,
   offerIdField,
-  itemType,
   clickConfirm
 ) {
   document.querySelectorAll(buttonClass).forEach((item) => {
     item.addEventListener("click", () => {
       let offerId =
-        itemType == 0
-          ? item.parentElement.parentElement.children[0].innerText
-          : item.parentElement.parentElement.parentElement.parentElement
-              .parentElement.children[0].innerText;
+        item.closest("td").parentElement.firstElementChild.innerText;
 
       document.getElementById("goto-offers").click();
       document.getElementById(redirectTo).click();
