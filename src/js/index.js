@@ -1,8 +1,9 @@
-console.log("Welcome to Spectrr Finance");
+console.log("Welcome to Spectrr Finance!");
 
 // Library & data files Imports
 const contracts = require("@ethersproject/contracts");
 const utils = require("@ethersproject/units");
+const bigNumber = require("@ethersproject/bignumber").BigNumber;
 const providers = require("@ethersproject/providers");
 const axios = require("./../../node_modules/axios/dist/axios.min");
 const dataFtm = require("./modules/data_ftm_opera.js");
@@ -34,8 +35,8 @@ const ethLogo = new URL(
 );
 
 // Constants used for calculations and table generation
-const LIQUIDATION_LIMIT = 1.3;
-const COLLATERAL_RATIO = 1.6;
+const LIQUIDATION_LIMIT = 1.25;
+const COLLATERAL_RATIO = 1.5;
 const OFFERS_TBL_BIG = 16;
 const OFFERS_TBL_SML = 8;
 const FEE_PERCENT = 0.1;
@@ -2459,7 +2460,7 @@ document
         document.getElementById("applet-accept-buy").reset();
       }
     } catch (err) {
-      console.log(error);
+      console.log(err);
     } finally {
       document
         .getElementById("confirm-accept-buy")
@@ -2876,6 +2877,7 @@ document
       ).value;
       let sender = await getSenderAddr();
       let offer = await getSaleOfferInfo(offerId);
+      let repayId;
       let markup;
 
       const getRepayData = (_repayAmount, offerSellFor) => {
@@ -2908,6 +2910,7 @@ document
         }
 
         let repayData = getRepayData(repayAmount, offer.sellFor);
+        repayId = offer.sellForId;
 
         markup = `
 		      <p>Repaying Sale Offer: #${offer.id}</p>
@@ -2963,22 +2966,15 @@ document
       } else if (offer == false) {
         createResponsePrompt(`<p>Sale Offer #${offerId} does not exist</p>`);
         return;
-      } else {
-        repayData = getRepayData(repayAmount, "");
-
-        markup = `
-					<p>Repaying Sale Offer: #${offerId}</p>
-					<p>Amount Repaying: ${(repayData[0], repayData[1])}</p>
-				`;
       }
 
       if (repayAmount == "") {
-        if ((await repaySaleOffer(markup, offerId, "")) == true) {
+        if ((await repaySaleOffer(markup, offerId, "", "")) == true) {
           document.getElementById("applet-repay-sale").reset();
         }
       } else {
         if (
-          (await repaySaleOffer(markup, offerId, toWei(repayAmount))) == true
+          (await repaySaleOffer(markup, offerId, repayAmount, repayId)) == true
         ) {
           document.getElementById("applet-repay-sale").reset();
         }
@@ -3008,6 +3004,7 @@ document
       let offer = await getBuyOfferInfo(offerId);
       let markup;
       let repayData;
+      let repayId;
 
       const getRepayData = (_repayAmount, offerBuyFor) => {
         if (_repayAmount == "") {
@@ -3037,6 +3034,7 @@ document
         }
 
         repayData = getRepayData(repayAmount, offer.buyFor);
+        repayId = offer.buyingForId;
 
         markup = `
 		      <p>Repaying Buy Offer: #${offer.id}</p>
@@ -3089,22 +3087,15 @@ document
       } else if (offer == false) {
         createResponsePrompt(`<p>Buy Offer #${offerId} does not exist</p>`);
         return;
-      } else {
-        repayData = getRepayData(repayAmount, "Full Amount");
-
-        markup = `
-					<p>Repaying Buy Offer: #${offerId}</p>
-					<p>Amount Repaying: ${repayData}</p>
-				`;
       }
 
       if (repayAmount == "") {
-        if ((await repayBuyOffer(markup, offerId, "")) == true) {
+        if ((await repayBuyOffer(markup, offerId, "", "")) == true) {
           document.getElementById("applet-repay-buy").reset();
         }
       } else {
         if (
-          (await repayBuyOffer(markup, offerId, toWei(repayAmount))) == true
+          (await repayBuyOffer(markup, offerId, repayAmount, repayId)) == true
         ) {
           document.getElementById("applet-repay-buy").reset();
         }
@@ -3134,6 +3125,7 @@ document
       ).value;
       let sender = await getSenderAddr();
       let offer = await getSaleOfferInfo(offerId);
+      let amountId;
       let markup;
 
       if (offer) {
@@ -3170,6 +3162,8 @@ document
           );
           return;
         }
+
+        amountId = offer.collateralId;
 
         markup = `
     			<p>Adding Collateral to Sale Offer: #${offerId}</p>
@@ -3218,14 +3212,10 @@ document
       } else if (offer == false) {
         createResponsePrompt(`<p>Sale Offer #${offerId} does not exist</p>`);
         return;
-      } else {
-        markup = `
-    			<p>Adding Collateral to Sale Offer: #${offerId}</p>
-    			<p>Amount Adding: ${amountAdd}</p>
-    		`;
       }
+
       if (
-        (await addCollateralSaleOffer(markup, offerId, toWei(amountAdd))) ==
+        (await addCollateralSaleOffer(markup, offerId, amountAdd, amountId)) ==
         true
       ) {
         document.getElementById("applet-add-collateral-sale").reset();
@@ -3254,6 +3244,7 @@ document
         "add-collateral-buy-amount"
       ).value;
       let offer = await getBuyOfferInfo(offerId);
+      let amountId;
       let markup;
 
       if (offer) {
@@ -3288,6 +3279,8 @@ document
           );
           return;
         }
+
+        amountId = offer.collateralId;
 
         markup = `
     			<p>Adding Collateral to Buy Offer: #${offerId}</p>
@@ -3334,15 +3327,11 @@ document
       } else if (offer == false) {
         createResponsePrompt(`<p>Sale Offer #${offerId} does not exist</p>`);
         return;
-      } else {
-        markup = `
-    			<p>Adding Collateral to Sale Offer: #${offerId}</p>
-    			<p>Amount Adding: ${amountAdd}</p>
-    		`;
       }
 
       if (
-        (await addCollateralBuyOffer(markup, offerId, toWei(amountAdd))) == true
+        (await addCollateralBuyOffer(markup, offerId, amountAdd, amountId)) ==
+        true
       ) {
         document.getElementById("applet-add-collateral-buy").reset();
       }
@@ -3800,9 +3789,9 @@ async function createSaleOffer(
 
   if (
     await handleTx(markup, spectrr.createSaleOffer, [
-      toWei(sellingAmount),
+      `${sellingAmount * 10 ** getTokenDecimals(sellingId)}`,
       sellingId,
-      toWei(exchangeRate),
+      `${exchangeRate * 10 ** getTokenDecimals(sellForId)}`,
       sellForId,
       repayInSeconds,
     ])
@@ -3828,9 +3817,9 @@ async function createBuyOffer(
 
   if (
     await handleTx(markup, spectrr.createBuyOffer, [
-      toWei(buyingAmount),
+      `${buyingAmount * 10 ** getTokenDecimals(buyingId)}`,
       buyingId,
-      toWei(exchangeRate),
+      `${exchangeRate * 10 ** getTokenDecimals(buyForId)}`,
       buyForId,
       collateralId,
       repayInSeconds,
@@ -3916,7 +3905,7 @@ async function forfeitBuyOffer(markup, offerId) {
   }
 }
 
-async function repaySaleOffer(markup, offerId, repayAmount) {
+async function repaySaleOffer(markup, offerId, repayAmount, repayTokenId) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
@@ -3929,7 +3918,10 @@ async function repaySaleOffer(markup, offerId, repayAmount) {
     }
   } else {
     if (
-      await handleTx(markup, spectrr.repaySaleOfferPart, [offerId, repayAmount])
+      await handleTx(markup, spectrr.repaySaleOfferPart, [
+        offerId,
+        `${repayAmount * 10 ** getTokenDecimals(repayTokenId)}`,
+      ])
     ) {
       return true;
     } else {
@@ -3938,7 +3930,7 @@ async function repaySaleOffer(markup, offerId, repayAmount) {
   }
 }
 
-async function repayBuyOffer(markup, offerId, repayAmount) {
+async function repayBuyOffer(markup, offerId, repayAmount, repayTokenId) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
@@ -3951,7 +3943,10 @@ async function repayBuyOffer(markup, offerId, repayAmount) {
     }
   } else {
     if (
-      await handleTx(markup, spectrr.repayBuyOfferPart, [offerId, repayAmount])
+      await handleTx(markup, spectrr.repayBuyOfferPart, [
+        offerId,
+        `${repayAmount * 10 ** getTokenDecimals(repayTokenId)}`,
+      ])
     ) {
       return true;
     } else {
@@ -3960,13 +3955,16 @@ async function repayBuyOffer(markup, offerId, repayAmount) {
   }
 }
 
-async function addCollateralSaleOffer(markup, offerId, amount) {
+async function addCollateralSaleOffer(markup, offerId, amount, amountId) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
 
   if (
-    await handleTx(markup, spectrr.addCollateralSaleOffer, [offerId, amount])
+    await handleTx(markup, spectrr.addCollateralSaleOffer, [
+      offerId,
+      `${amount * 10 ** getTokenDecimals(amountId)}`,
+    ])
   ) {
     return true;
   } else {
@@ -3974,13 +3972,16 @@ async function addCollateralSaleOffer(markup, offerId, amount) {
   }
 }
 
-async function addCollateralBuyOffer(markup, offerId, amount) {
+async function addCollateralBuyOffer(markup, offerId, amount, amountId) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
 
   if (
-    await handleTx(markup, spectrr.addCollateralBuyOffer, [offerId, amount])
+    await handleTx(markup, spectrr.addCollateralBuyOffer, [
+      offerId,
+      `${amount * 10 ** getTokenDecimals(amountlId)}`,
+    ])
   ) {
     return true;
   } else {
@@ -4054,10 +4055,19 @@ async function approveAllowance(tokenId, approveAmount, markup) {
   }
 
   let token = tokenIdToContract(tokenId);
+  let multiplier = bigNumber.from(10).pow(getTokenDecimals(tokenId));
 
-  approveAmount = approveAmount == "" ? toWei("1000000") : toWei(ApproveAmount);
+  approveAmount =
+    approveAmount == ""
+      ? `${bigNumber.from(1000000).mul(multiplier)}`
+      : `${bigNumber.from(approveAmount).mul(multiplier)}`;
 
-  if (await handleTx(markup, token.approve, [addrSpectrr, approveAmount])) {
+  if (
+    await handleTx(markup, token.approve, [
+      addrSpectrr,
+      approveAmount.toString(),
+    ])
+  ) {
     return true;
   } else {
     return false;
@@ -4083,16 +4093,12 @@ async function checkAllowance(tokenId, amount) {
     return;
   }
 
-  amount = amount == "" ? 1000000 : amount;
+  let token = tokenIdToContract(tokenId);
 
-  let allowance = toEther(
-    await tokenIdToContract(tokenId).allowance(
-      await getSenderAddr(),
-      addrSpectrr
-    )
-  );
-
-  if (amount > allowance) {
+  if (
+    amount * 10 ** getTokenDecimals(tokenId) >
+    (await token.allowance(await getSenderAddr(), addrSpectrr))
+  ) {
     return false;
   } else {
     return true;
@@ -4104,11 +4110,13 @@ async function checkBalance(tokenId, amount) {
     return;
   }
 
-  let balance = toEther(
-    await tokenIdToContract(tokenId).balanceOf(await getSenderAddr())
-  );
+  let token = tokenIdToContract(tokenId);
 
-  if (amount > balance) {
+  if (
+    amount >
+    toEther(await token.balanceOf(await getSenderAddr())) *
+      10 ** (18 - getTokenDecimals(tokenId))
+  ) {
     return false;
   } else {
     return true;
@@ -4159,11 +4167,11 @@ async function tryTx(fn, args) {
     )}...</a> `;
 
     createResponsePrompt(txMarkup);
-
+    console.log(tx);
     return true;
   } catch (err) {
     console.log(err);
-    if (err.code == ("ACTION_REJECTED" || 4001)) {
+    if (err.code == "ACTION_REJECTED" || err.code == 4001) {
       createResponsePrompt("Transaction denied in wallet");
     } else if (err.code == -32603) {
       createResponsePrompt(
@@ -4184,7 +4192,7 @@ function tokenChoiceToId(tokenChoice) {
     return "2";
   } else if (tokenChoice[0] == "eth") {
     return "3";
-  } else if (tokenChoice[0] == "usdt") {
+  } else if (tokenChoice[0] == "usdc") {
     return "4";
   } else if (tokenChoice[0] == "link") {
     return "5";
@@ -4772,6 +4780,32 @@ function tokenIdToLogo(tokenId) {
     return bnbLogo;
   } else {
     throw "Invalid token Id";
+  }
+}
+
+function getTokenDecimals(tokenId) {
+  if (chainId == "0xfa") {
+    if (tokenId == 1) {
+      return 18;
+    } else if (tokenId == 2) {
+      return 8;
+    } else if (tokenId == 3) {
+      return 18;
+    } else if (tokenId == 4) {
+      return 6;
+    } else if (tokenId == 5) {
+      return 18;
+    } else if (tokenId == 6) {
+      return 18;
+    } else {
+      throw "Invalid token Id";
+    }
+  } else {
+    if (tokenId >= 1 && tokenId <= 6) {
+      return 18;
+    } else {
+      throw "Invalid token Id";
+    }
   }
 }
 

@@ -5,7 +5,7 @@ author: Supergrayfly
 
 # Spectrr Finance How to Guide
 
-Welcome to Spectrr Finance! An interest-free lending and borrowing like decentralised platform.
+Welcome to <a target="_blank" href="https://ftmscan.com/address/0x05fd70ba0530c9514bd8ee07bb1af81217c7e788">Spectrr Finance</a>! An interest-free lending and borrowing like decentralised platform.
 Here, you can make _offers_, where you sell or buy tokens at an exchange rate and repayment period of your choice.
 This guide aims to give a tour of the functionalities of the Spectrr Finance website.
 
@@ -31,7 +31,7 @@ To do so, you may install [metamask](https://metamask.io/), [exodus](https://www
 - Multichain Wrapped Ether or Ether <a target="_blank" href="https://ftmscan.com/token/0x74b23882a30290451A17c44f4F05243b6b58C76d">wETH</a>
 - Multichain Wrapped USD Coin or <a target="_blank" href="https://ftmscan.com/token/0x04068da6c83afcfa0e13ba15a6696662335d5b75">wUSDC</a>
 - Multichain Wrapped Chainlink or <a target="_blank" href="https://ftmscan.com/token/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8">wLINK</a>
-- Wrapped Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0x27f26F00e1605903645BbaBC0a73E35027Dccd45">wBNB</a>
+- Wrapped Binance Coin or <a target="_blank" href="https://ftmscan.com/token/0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454">wBNB</a>
 
 ## Trading Rules
 

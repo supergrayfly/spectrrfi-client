@@ -567,6 +567,32 @@ function tokenIdToLogo(tokenId) {
   }
 }
 
+function getTokenDecimals(tokenId) {
+  if (chainId == "0xfa") {
+    if (tokenId == 1) {
+      return 18;
+    } else if (tokenId == 2) {
+      return 8;
+    } else if (tokenId == 3) {
+      return 18;
+    } else if (tokenId == 4) {
+      return 6;
+    } else if (tokenId == 5) {
+      return 18;
+    } else if (tokenId == 6) {
+      return 18;
+    } else {
+      throw "Invalid token Id";
+    }
+  } else {
+    if (tokenId >= 1 && tokenId <= 6) {
+      return 18;
+    } else {
+      throw "Invalid token Id";
+    }
+  }
+}
+
 function isLiquidable(offerDeadline, offerRatio) {
   if (
     (offerRatio <= LIQUIDATION_LIMIT && offerRatio !== 0) ||

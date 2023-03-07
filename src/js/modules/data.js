@@ -1,8 +1,9 @@
-console.log("Welcome to Spectrr Finance");
+console.log("Welcome to Spectrr Finance!");
 
 // Library & data files Imports
 const contracts = require("@ethersproject/contracts");
 const utils = require("@ethersproject/units");
+const bigNumber = require("@ethersproject/bignumber").BigNumber;
 const providers = require("@ethersproject/providers");
 const axios = require("./../../node_modules/axios/dist/axios.min");
 const dataFtm = require("./modules/data_ftm_opera.js");
@@ -34,8 +35,8 @@ const ethLogo = new URL(
 );
 
 // Constants used for calculations and table generation
-const LIQUIDATION_LIMIT = 1.3;
-const COLLATERAL_RATIO = 1.6;
+const LIQUIDATION_LIMIT = 1.25;
+const COLLATERAL_RATIO = 1.5;
 const OFFERS_TBL_BIG = 16;
 const OFFERS_TBL_SML = 8;
 const FEE_PERCENT = 0.1;

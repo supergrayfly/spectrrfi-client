@@ -510,7 +510,7 @@ document
         document.getElementById("applet-accept-buy").reset();
       }
     } catch (err) {
-      console.log(error);
+      console.log(err);
     } finally {
       document
         .getElementById("confirm-accept-buy")
@@ -927,6 +927,7 @@ document
       ).value;
       let sender = await getSenderAddr();
       let offer = await getSaleOfferInfo(offerId);
+      let repayId;
       let markup;
 
       const getRepayData = (_repayAmount, offerSellFor) => {
@@ -959,6 +960,7 @@ document
         }
 
         let repayData = getRepayData(repayAmount, offer.sellFor);
+        repayId = offer.sellForId;
 
         markup = `
 		      <p>Repaying Sale Offer: #${offer.id}</p>
@@ -1014,22 +1016,15 @@ document
       } else if (offer == false) {
         createResponsePrompt(`<p>Sale Offer #${offerId} does not exist</p>`);
         return;
-      } else {
-        repayData = getRepayData(repayAmount, "");
-
-        markup = `
-					<p>Repaying Sale Offer: #${offerId}</p>
-					<p>Amount Repaying: ${(repayData[0], repayData[1])}</p>
-				`;
       }
 
       if (repayAmount == "") {
-        if ((await repaySaleOffer(markup, offerId, "")) == true) {
+        if ((await repaySaleOffer(markup, offerId, "", "")) == true) {
           document.getElementById("applet-repay-sale").reset();
         }
       } else {
         if (
-          (await repaySaleOffer(markup, offerId, toWei(repayAmount))) == true
+          (await repaySaleOffer(markup, offerId, repayAmount, repayId)) == true
         ) {
           document.getElementById("applet-repay-sale").reset();
         }
@@ -1059,6 +1054,7 @@ document
       let offer = await getBuyOfferInfo(offerId);
       let markup;
       let repayData;
+      let repayId;
 
       const getRepayData = (_repayAmount, offerBuyFor) => {
         if (_repayAmount == "") {
@@ -1088,6 +1084,7 @@ document
         }
 
         repayData = getRepayData(repayAmount, offer.buyFor);
+        repayId = offer.buyingForId;
 
         markup = `
 		      <p>Repaying Buy Offer: #${offer.id}</p>
@@ -1140,22 +1137,15 @@ document
       } else if (offer == false) {
         createResponsePrompt(`<p>Buy Offer #${offerId} does not exist</p>`);
         return;
-      } else {
-        repayData = getRepayData(repayAmount, "Full Amount");
-
-        markup = `
-					<p>Repaying Buy Offer: #${offerId}</p>
-					<p>Amount Repaying: ${repayData}</p>
-				`;
       }
 
       if (repayAmount == "") {
-        if ((await repayBuyOffer(markup, offerId, "")) == true) {
+        if ((await repayBuyOffer(markup, offerId, "", "")) == true) {
           document.getElementById("applet-repay-buy").reset();
         }
       } else {
         if (
-          (await repayBuyOffer(markup, offerId, toWei(repayAmount))) == true
+          (await repayBuyOffer(markup, offerId, repayAmount, repayId)) == true
         ) {
           document.getElementById("applet-repay-buy").reset();
         }
@@ -1185,6 +1175,7 @@ document
       ).value;
       let sender = await getSenderAddr();
       let offer = await getSaleOfferInfo(offerId);
+      let amountId;
       let markup;
 
       if (offer) {
@@ -1221,6 +1212,8 @@ document
           );
           return;
         }
+
+        amountId = offer.collateralId;
 
         markup = `
     			<p>Adding Collateral to Sale Offer: #${offerId}</p>
@@ -1269,14 +1262,10 @@ document
       } else if (offer == false) {
         createResponsePrompt(`<p>Sale Offer #${offerId} does not exist</p>`);
         return;
-      } else {
-        markup = `
-    			<p>Adding Collateral to Sale Offer: #${offerId}</p>
-    			<p>Amount Adding: ${amountAdd}</p>
-    		`;
       }
+
       if (
-        (await addCollateralSaleOffer(markup, offerId, toWei(amountAdd))) ==
+        (await addCollateralSaleOffer(markup, offerId, amountAdd, amountId)) ==
         true
       ) {
         document.getElementById("applet-add-collateral-sale").reset();
@@ -1305,6 +1294,7 @@ document
         "add-collateral-buy-amount"
       ).value;
       let offer = await getBuyOfferInfo(offerId);
+      let amountId;
       let markup;
 
       if (offer) {
@@ -1339,6 +1329,8 @@ document
           );
           return;
         }
+
+        amountId = offer.collateralId;
 
         markup = `
     			<p>Adding Collateral to Buy Offer: #${offerId}</p>
@@ -1385,15 +1377,11 @@ document
       } else if (offer == false) {
         createResponsePrompt(`<p>Sale Offer #${offerId} does not exist</p>`);
         return;
-      } else {
-        markup = `
-    			<p>Adding Collateral to Sale Offer: #${offerId}</p>
-    			<p>Amount Adding: ${amountAdd}</p>
-    		`;
       }
 
       if (
-        (await addCollateralBuyOffer(markup, offerId, toWei(amountAdd))) == true
+        (await addCollateralBuyOffer(markup, offerId, amountAdd, amountId)) ==
+        true
       ) {
         document.getElementById("applet-add-collateral-buy").reset();
       }

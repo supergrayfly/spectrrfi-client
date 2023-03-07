@@ -13,9 +13,9 @@ async function createSaleOffer(
 
   if (
     await handleTx(markup, spectrr.createSaleOffer, [
-      toWei(sellingAmount),
+      `${sellingAmount * 10 ** getTokenDecimals(sellingId)}`,
       sellingId,
-      toWei(exchangeRate),
+      `${exchangeRate * 10 ** getTokenDecimals(sellForId)}`,
       sellForId,
       repayInSeconds,
     ])
@@ -41,9 +41,9 @@ async function createBuyOffer(
 
   if (
     await handleTx(markup, spectrr.createBuyOffer, [
-      toWei(buyingAmount),
+      `${buyingAmount * 10 ** getTokenDecimals(buyingId)}`,
       buyingId,
-      toWei(exchangeRate),
+      `${exchangeRate * 10 ** getTokenDecimals(buyForId)}`,
       buyForId,
       collateralId,
       repayInSeconds,
@@ -129,7 +129,7 @@ async function forfeitBuyOffer(markup, offerId) {
   }
 }
 
-async function repaySaleOffer(markup, offerId, repayAmount) {
+async function repaySaleOffer(markup, offerId, repayAmount, repayTokenId) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
@@ -142,7 +142,10 @@ async function repaySaleOffer(markup, offerId, repayAmount) {
     }
   } else {
     if (
-      await handleTx(markup, spectrr.repaySaleOfferPart, [offerId, repayAmount])
+      await handleTx(markup, spectrr.repaySaleOfferPart, [
+        offerId,
+        `${repayAmount * 10 ** getTokenDecimals(repayTokenId)}`,
+      ])
     ) {
       return true;
     } else {
@@ -151,7 +154,7 @@ async function repaySaleOffer(markup, offerId, repayAmount) {
   }
 }
 
-async function repayBuyOffer(markup, offerId, repayAmount) {
+async function repayBuyOffer(markup, offerId, repayAmount, repayTokenId) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
@@ -164,7 +167,10 @@ async function repayBuyOffer(markup, offerId, repayAmount) {
     }
   } else {
     if (
-      await handleTx(markup, spectrr.repayBuyOfferPart, [offerId, repayAmount])
+      await handleTx(markup, spectrr.repayBuyOfferPart, [
+        offerId,
+        `${repayAmount * 10 ** getTokenDecimals(repayTokenId)}`,
+      ])
     ) {
       return true;
     } else {
@@ -173,13 +179,16 @@ async function repayBuyOffer(markup, offerId, repayAmount) {
   }
 }
 
-async function addCollateralSaleOffer(markup, offerId, amount) {
+async function addCollateralSaleOffer(markup, offerId, amount, amountId) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
 
   if (
-    await handleTx(markup, spectrr.addCollateralSaleOffer, [offerId, amount])
+    await handleTx(markup, spectrr.addCollateralSaleOffer, [
+      offerId,
+      `${amount * 10 ** getTokenDecimals(amountId)}`,
+    ])
   ) {
     return true;
   } else {
@@ -187,13 +196,16 @@ async function addCollateralSaleOffer(markup, offerId, amount) {
   }
 }
 
-async function addCollateralBuyOffer(markup, offerId, amount) {
+async function addCollateralBuyOffer(markup, offerId, amount, amountId) {
   if ((await checkEthereumAndWallet()) == false) {
     return;
   }
 
   if (
-    await handleTx(markup, spectrr.addCollateralBuyOffer, [offerId, amount])
+    await handleTx(markup, spectrr.addCollateralBuyOffer, [
+      offerId,
+      `${amount * 10 ** getTokenDecimals(amountlId)}`,
+    ])
   ) {
     return true;
   } else {
@@ -267,10 +279,19 @@ async function approveAllowance(tokenId, approveAmount, markup) {
   }
 
   let token = tokenIdToContract(tokenId);
+  let multiplier = bigNumber.from(10).pow(getTokenDecimals(tokenId));
 
-  approveAmount = approveAmount == "" ? toWei("1000000") : toWei(ApproveAmount);
+  approveAmount =
+    approveAmount == ""
+      ? `${bigNumber.from(1000000).mul(multiplier)}`
+      : `${bigNumber.from(approveAmount).mul(multiplier)}`;
 
-  if (await handleTx(markup, token.approve, [addrSpectrr, approveAmount])) {
+  if (
+    await handleTx(markup, token.approve, [
+      addrSpectrr,
+      approveAmount.toString(),
+    ])
+  ) {
     return true;
   } else {
     return false;
@@ -296,16 +317,12 @@ async function checkAllowance(tokenId, amount) {
     return;
   }
 
-  amount = amount == "" ? 1000000 : amount;
+  let token = tokenIdToContract(tokenId);
 
-  let allowance = toEther(
-    await tokenIdToContract(tokenId).allowance(
-      await getSenderAddr(),
-      addrSpectrr
-    )
-  );
-
-  if (amount > allowance) {
+  if (
+    amount * 10 ** getTokenDecimals(tokenId) >
+    (await token.allowance(await getSenderAddr(), addrSpectrr))
+  ) {
     return false;
   } else {
     return true;
@@ -317,11 +334,13 @@ async function checkBalance(tokenId, amount) {
     return;
   }
 
-  let balance = toEther(
-    await tokenIdToContract(tokenId).balanceOf(await getSenderAddr())
-  );
+  let token = tokenIdToContract(tokenId);
 
-  if (amount > balance) {
+  if (
+    amount >
+    toEther(await token.balanceOf(await getSenderAddr())) *
+      10 ** (18 - getTokenDecimals(tokenId))
+  ) {
     return false;
   } else {
     return true;
@@ -372,11 +391,11 @@ async function tryTx(fn, args) {
     )}...</a> `;
 
     createResponsePrompt(txMarkup);
-
+    console.log(tx);
     return true;
   } catch (err) {
     console.log(err);
-    if (err.code == ("ACTION_REJECTED" || 4001)) {
+    if (err.code == "ACTION_REJECTED" || err.code == 4001) {
       createResponsePrompt("Transaction denied in wallet");
     } else if (err.code == -32603) {
       createResponsePrompt(
@@ -397,7 +416,7 @@ function tokenChoiceToId(tokenChoice) {
     return "2";
   } else if (tokenChoice[0] == "eth") {
     return "3";
-  } else if (tokenChoice[0] == "usdt") {
+  } else if (tokenChoice[0] == "usdc") {
     return "4";
   } else if (tokenChoice[0] == "link") {
     return "5";

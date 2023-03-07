@@ -85,27 +85,9 @@ input:invalid {
   place-content: center;
 }
 
-/*
-[data-theme="dark"] caption {
-  background: #273642;
-}
-
-[data-theme="light"] caption {
-  background: #f4f4f4;
-}
-
-[data-theme="dark"] .applet {
-  background: #202d37;
-}
-
-[data-theme="light"] .applet {
-  background: #f4f4f4;
-}
-*/
-
 #prompt-box-confirm {
   display: none;
-  grid-template-rows: 70% 30%;
+  // grid-template-rows: 70% 30%;
   align-items: center;
   justify-items: center;
   text-align: center;
@@ -152,7 +134,7 @@ input:invalid {
   text-align: center;
   position: absolute;
   height: auto;
-  width: 380px;
+  width: max-content;
   background-color: aliceblue;
   border: 2.5px dashed #6791d1;
   right: 0;
