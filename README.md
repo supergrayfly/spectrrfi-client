@@ -5,7 +5,7 @@ This webpage will be available at the spectrrfi.eth Ethereum Name Service domain
 
 ## Overview
 
-<a target="_blank" href="https://ftmscan.com/address/0x05fd70ba0530c9514bd8ee07bb1af81217c7e788">Spectrr Finance</a> is a lending and borrowing like platform. Indeed, users can sell and buy tokens (wFTM, wBTC, wETH, USDC, fBNB, and wLINK at the moment), and then repay their debt at a later pre-specified date. Naturally, to make sure that buyers repay their debts, users also need to post collateral (1.5 times the value of the debt) when buying tokens. Also, there is a 0.1% fee paid when an offer is accepted.
+<a target="_blank" href="https://ftmscan.com/address/0x60F15A77c39C75918c673b64772dd7849B0b8aAa">Spectrr Finance</a> is a lending and borrowing like platform. Indeed, users can sell and buy tokens (wFTM, wBTC, wETH, USDC, fBNB, and wLINK at the moment), and then repay their debt at a later pre-specified date. Naturally, to make sure that buyers repay their debts, users also need to post collateral (1.5 times the value of the debt) when buying tokens. Also, there is a 0.1% fee paid when an offer is accepted.
 From a technical point a view, Spectrr finance is composed of Smart Contracts (business logic on blockchain), and a Subgraph running The Graph protocol (to get the latest data from the blockchain). The Last piece is this web client that interacts with the smart contracts and presents to users the latest data from the Subgraph.
 Spectrr Finance aims to be an interest-free alternative to other interest-based lending and borrowing dApps.
 
